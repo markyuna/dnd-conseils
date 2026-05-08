@@ -13,7 +13,7 @@ type NavbarProps = {
 const navItems = [
   { label: "Services", href: "#services" },
   { label: "Méthode", href: "#methode" },
-  { label: "À propos", href: "#apropos" },
+  { label: "À propos", href: "/a-propos" },
   { label: "Contact", href: "#contact" },
 ];
 
