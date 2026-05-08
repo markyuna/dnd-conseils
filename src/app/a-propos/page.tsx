@@ -48,7 +48,7 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <Navbar variant="minimal" />
+      <Navbar variant="default" />
 
       <main className="overflow-hidden bg-[#f6f2ee] text-[#171411]">
         {/* HERO */}

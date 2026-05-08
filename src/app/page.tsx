@@ -8,12 +8,14 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
 import ContactSection from "@/components/ContactSection";
 import IncludedSection from "@/components/IncludedSection";
+import TrustSection from "@/components/TrustSection";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <HeroSection />
+      <TrustSection />
       <ServicesSection />
       <ProblemSolutionSection />
       <ProcessSection />
