@@ -1,8 +1,6 @@
-// src/app/devis/page.tsx
-
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, MessageSquareText } from "lucide-react";
@@ -51,7 +49,7 @@ const pageContent = {
   },
 };
 
-export default function DevisPage() {
+function DevisPageContent() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
   const offer = searchParams.get("offre");
@@ -63,6 +61,7 @@ export default function DevisPage() {
   }, [type]);
 
   const selectedOffer = offer ? offerLabels[offer] : null;
+
   const [selectedProjectType, setSelectedProjectType] = useState<string | null>(
     null
   );
@@ -159,6 +158,7 @@ export default function DevisPage() {
                 <p className="text-xs font-medium uppercase tracking-[0.3em] text-[#a89278]">
                   {content.formEyebrow}
                 </p>
+
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#111]">
                   {content.formTitle}
                 </h2>
@@ -249,10 +249,15 @@ export default function DevisPage() {
               />
 
               <div className="space-y-2">
-                <label className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400">
+                <label
+                  htmlFor="message"
+                  className="text-xs font-medium uppercase tracking-[0.25em] text-neutral-400"
+                >
                   Message
                 </label>
+
                 <textarea
+                  id="message"
                   name="message"
                   placeholder={
                     type === "contact"
@@ -276,6 +281,7 @@ export default function DevisPage() {
                   <CheckCircle2 size={15} className="text-[#a89278]" />
                   Données confidentielles
                 </span>
+
                 <span className="flex items-center gap-2">
                   <CheckCircle2 size={15} className="text-[#a89278]" />
                   Réponse personnalisée
@@ -286,6 +292,14 @@ export default function DevisPage() {
         </section>
       </main>
     </>
+  );
+}
+
+export default function DevisPage() {
+  return (
+    <Suspense fallback={null}>
+      <DevisPageContent />
+    </Suspense>
   );
 }
 
@@ -306,6 +320,7 @@ function Field({
       >
         {label}
       </label>
+
       <input
         id={name}
         name={name}
