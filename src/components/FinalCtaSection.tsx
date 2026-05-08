@@ -49,7 +49,7 @@ export default function FinalCtaSection() {
           className="mt-10"
         >
           <Link
-            href="#contact"
+            href="/devis?type=etude"
             className="inline-flex rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:bg-[#d3bea6]"
           >
             Demander une étude gratuite

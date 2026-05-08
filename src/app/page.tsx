@@ -7,6 +7,7 @@ import OffersSection from "@/components/OffersSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
 import ContactSection from "@/components/ContactSection";
+import IncludedSection from "@/components/IncludedSection";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <ServicesSection />
       <ProblemSolutionSection />
       <ProcessSection />
+      <IncludedSection />
       <OffersSection />
       <TestimonialsSection />
       <FinalCtaSection />
