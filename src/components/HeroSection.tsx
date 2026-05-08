@@ -70,7 +70,7 @@ export default function HeroSection() {
             </Link>
 
             <Link
-              href="/devis"
+              href="/devis?type=contact"
               className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-8 py-4 text-sm font-medium text-[#111] backdrop-blur transition hover:border-[#b49a7c] hover:bg-white"
             >
               Parler de mon projet
