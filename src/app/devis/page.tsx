@@ -51,6 +51,7 @@ const pageContent = {
 
 function DevisPageContent() {
   const searchParams = useSearchParams();
+
   const type = searchParams.get("type");
   const offer = searchParams.get("offre");
 
@@ -123,7 +124,9 @@ function DevisPageContent() {
                   <p className="text-xs uppercase tracking-[0.25em] text-[#d3bea6]">
                     Offre sélectionnée
                   </p>
-                  <p className="mt-2 text-2xl font-semibold">{selectedOffer}</p>
+                  <p className="mt-2 text-2xl font-semibold">
+                    {selectedOffer}
+                  </p>
                 </motion.div>
               )}
 
@@ -163,9 +166,7 @@ function DevisPageContent() {
                   {content.formTitle}
                 </h2>
 
-                {selectedOffer && (
-                  <input type="hidden" name="offre" value={selectedOffer} />
-                )}
+                {offer && <input type="hidden" name="offre" value={offer} />}
               </div>
 
               {selectedOffer && (

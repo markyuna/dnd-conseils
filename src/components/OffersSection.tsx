@@ -1,12 +1,12 @@
-// src/components/OffersSection.tsx
-
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const offers = [
   {
+    slug: "essentiel",
     title: "Essentiel",
     price: "À partir de 99€",
     desc: "Un premier regard expert pour clarifier votre projet et éviter les premières erreurs.",
@@ -18,6 +18,7 @@ const offers = [
     cta: "Découvrir Essentiel",
   },
   {
+    slug: "serenite",
     title: "Sérénité",
     price: "À partir de 249€",
     highlight: true,
@@ -31,6 +32,7 @@ const offers = [
     cta: "Choisir Sérénité",
   },
   {
+    slug: "premium",
     title: "Premium",
     price: "À partir de 499€",
     desc: "Un accompagnement renforcé pour piloter votre projet avec un regard expert.",
@@ -69,7 +71,7 @@ export default function OffersSection() {
         <div className="grid gap-8 md:grid-cols-3">
           {offers.map((offer, index) => (
             <motion.article
-              key={offer.title}
+              key={offer.slug}
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -88,12 +90,7 @@ export default function OffersSection() {
                 </div>
               )}
 
-              <div
-                className={[
-                  "absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent opacity-60",
-                  offer.highlight ? "opacity-100" : "",
-                ].join(" ")}
-              />
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent opacity-70" />
 
               <div className="pt-6">
                 <h3 className="text-3xl font-semibold tracking-tight">
@@ -128,9 +125,12 @@ export default function OffersSection() {
                         offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]"
                       }
                     />
+
                     <span
                       className={
-                        offer.highlight ? "text-neutral-700" : "text-neutral-300"
+                        offer.highlight
+                          ? "text-neutral-700"
+                          : "text-neutral-300"
                       }
                     >
                       {feature}
@@ -140,16 +140,21 @@ export default function OffersSection() {
               </div>
 
               <div className="mt-auto pt-10">
-                <button
+                <Link
+                  href={`/devis?offre=${offer.slug}`}
                   className={[
-                    "w-full rounded-full px-6 py-4 text-sm font-medium transition-all duration-300",
+                    "group/link flex w-full items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-medium transition-all duration-300",
                     offer.highlight
                       ? "bg-[#111] text-white hover:bg-[#9a8065]"
                       : "border border-white/15 bg-white/5 text-white hover:border-[#b49a7c] hover:bg-[#b49a7c]/15",
                   ].join(" ")}
                 >
                   {offer.cta}
-                </button>
+                  <ArrowRight
+                    size={16}
+                    className="transition group-hover/link:translate-x-1"
+                  />
+                </Link>
               </div>
             </motion.article>
           ))}
