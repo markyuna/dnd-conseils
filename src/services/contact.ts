@@ -1,41 +1,46 @@
 // src/services/contact.ts
 
-import { ID } from "appwrite";
-import { appwriteConfig, databases } from "@/lib/appwrite";
+import { supabase } from "@/lib/supabase";
 
 export type ContactRequestPayload = {
   name: string;
   email: string;
   phone?: string;
-  projectType?: string;
+  requestType: string;
   offer?: string;
+  projectType?: string;
+  propertyType?: string;
+  surface?: string;
+  lots?: string;
+  timing?: string;
+  budget?: string;
   message?: string;
-  source?: string;
 };
 
 export async function createContactRequest(payload: ContactRequestPayload) {
-  const documentData: Record<string, string> = {
-    name: payload.name,
-    email: payload.email,
-    message: payload.message ?? "",
-  };
+  const { error, data } = await supabase
+    .from("contact_requests")
+    .insert({
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone || null,
+      request_type: payload.requestType,
+      offer: payload.offer || null,
+      project_type: payload.projectType || null,
+      property_type: payload.propertyType || null,
+      surface: payload.surface || null,
+      lots: payload.lots || null,
+      timing: payload.timing || null,
+      budget: payload.budget || null,
+      message: payload.message || null,
+    })
+    .select()
+    .single();
 
-  if (payload.phone) {
-    documentData.phone = payload.phone;
+  if (error) {
+    console.error("Supabase contact request error:", error);
+    throw new Error("Impossible d’envoyer votre demande pour le moment.");
   }
 
-  if (payload.projectType) {
-    documentData.projectType = payload.projectType;
-  }
-
-  if (payload.offer) {
-    documentData.offer = payload.offer;
-  }
-
-  return databases.createDocument(
-    appwriteConfig.databaseId,
-    appwriteConfig.contactCollectionId,
-    ID.unique(),
-    documentData
-  );
+  return data;
 }
