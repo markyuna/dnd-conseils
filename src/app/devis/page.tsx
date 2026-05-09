@@ -2,7 +2,7 @@
 
 import { FormEvent, Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -13,17 +13,13 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { createContactRequest } from "@/services/contact";
+import Link from "next/link";
 
 const projectTypes = [
   "Rénovation complète",
   "Appartement",
   "Maison",
   "Extension",
-];
-
-const propertyTypes = [
-  "Maison",
-  "Appartement",
   "Local commercial",
   "Immeuble",
   "Autre",
@@ -122,10 +118,7 @@ function toggleArrayValue(value: string, current: string[]) {
 }
 
 function getRequestType(type: string | null): RequestType {
-  if (type === "etude" || type === "contact" || type === "devis") {
-    return type;
-  }
-
+  if (type === "etude" || type === "contact" || type === "devis") return type;
   return "devis";
 }
 
@@ -141,19 +134,16 @@ function DevisPageContent() {
   const [selectedProjectType, setSelectedProjectType] = useState<string | null>(
     null
   );
-  const [selectedPropertyType, setSelectedPropertyType] = useState("");
   const [selectedSurface, setSelectedSurface] = useState("");
   const [selectedLots, setSelectedLots] = useState<string[]>([]);
   const [selectedTiming, setSelectedTiming] = useState("");
   const [selectedBudget, setSelectedBudget] = useState("");
   const [selectedDocuments, setSelectedDocuments] = useState<string[]>([]);
-
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   function resetSelections() {
     setSelectedProjectType(null);
-    setSelectedPropertyType("");
     setSelectedSurface("");
     setSelectedLots([]);
     setSelectedTiming("");
@@ -169,25 +159,19 @@ function DevisPageContent() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-
     const payload = {
-      name,
-      email,
-      phone,
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
       requestType,
       offer: selectedOffer ?? "",
       projectType: selectedProjectType ?? "",
-      propertyType: selectedPropertyType,
       surface: selectedSurface,
       lots: selectedLots.join(", "),
       timing: selectedTiming,
       budget: selectedBudget,
       documents: selectedDocuments.join(", "),
-      message,
+      message: String(formData.get("message") ?? "").trim(),
     };
 
     setStatus("loading");
@@ -195,7 +179,6 @@ function DevisPageContent() {
 
     try {
       await createContactRequest(payload);
-
       form.reset();
       resetSelections();
       setStatus("success");
@@ -206,6 +189,108 @@ function DevisPageContent() {
         "Une erreur est survenue. Votre demande n’a pas pu être envoyée. Veuillez réessayer dans quelques instants."
       );
     }
+  }
+
+  if (status === "success") {
+    return (
+      <>
+        <Navbar variant="minimal" />
+
+        <main className="relative min-h-screen overflow-hidden bg-[#f6f2ee] px-6 pt-20 text-[#171412]">
+          <div className="absolute left-[-220px] top-[-220px] h-[560px] w-[560px] rounded-full bg-[#b49a7c]/25 blur-3xl" />
+          <div className="absolute bottom-[-260px] right-[-220px] h-[560px] w-[560px] rounded-full bg-[#171412]/10 blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(30deg,#171412_12%,transparent_12.5%,transparent_87%,#171412_87.5%,#171412),linear-gradient(150deg,#171412_12%,transparent_12.5%,transparent_87%,#171412_87.5%,#171412)] [background-size:56px_96px]" />
+
+          <section className="relative flex min-h-[calc(100vh-80px)] items-center justify-center py-16">
+            <motion.div
+              initial={{ opacity: 0, y: 28, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full max-w-3xl overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/80 p-8 text-center shadow-[0_40px_120px_rgba(0,0,0,0.12)] backdrop-blur-xl md:p-14"
+            >
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent" />
+              <div className="absolute left-1/2 top-[-120px] h-64 w-64 -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
+
+              <motion.div
+                initial={{ scale: 0.6, opacity: 0, rotate: -8 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                transition={{ delay: 0.18, type: "spring", stiffness: 140 }}
+                className="relative mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-[#171412] text-white shadow-2xl"
+              >
+                <CheckCircle2 size={42} />
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-[#a89278]"
+              >
+                Demande reçue
+              </motion.p>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mx-auto max-w-2xl text-4xl font-semibold leading-tight tracking-tight text-[#111] md:text-6xl"
+              >
+                Votre projet est entre de bonnes mains.
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mx-auto mt-6 max-w-xl text-base leading-8 text-neutral-600 md:text-lg"
+              >
+                Merci. Votre demande a bien été enregistrée. Nous vous
+                recontacterons rapidement avec une première orientation claire.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+              >
+                <button
+                  type="button"
+                  onClick={() => setStatus("idle")}
+                  className="rounded-full bg-[#171412] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#927b63]"
+                >
+                  Envoyer une autre demande
+                </button>
+
+                <Link
+                    href="/"
+                    className="rounded-full border border-neutral-200 bg-white/70 px-8 py-4 text-sm font-medium text-neutral-700 transition hover:border-[#a89278] hover:text-[#111]"
+                    >
+                    Retour à l’accueil
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.75 }}
+                className="mt-10 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500"
+              >
+                <span className="flex items-center gap-2">
+                  <ShieldCheck size={15} className="text-[#a89278]" />
+                  Données confidentielles
+                </span>
+
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={15} className="text-[#a89278]" />
+                  Réponse sous 48h
+                </span>
+              </motion.div>
+            </motion.div>
+          </section>
+        </main>
+      </>
+    );
   }
 
   return (
@@ -294,215 +379,176 @@ function DevisPageContent() {
           <section className="relative flex items-center overflow-hidden px-6 py-12 md:px-12 lg:px-20">
             <div className="absolute right-[-180px] top-[-180px] h-[420px] w-[420px] rounded-full bg-[#b49a7c]/20 blur-3xl" />
 
-            <motion.form
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.7 }}
-              className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-[2rem] border border-black/5 bg-white/85 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.10)] backdrop-blur-xl md:p-10"
-            >
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent" />
+            <AnimatePresence mode="wait">
+              <motion.form
+                key="devis-form"
+                onSubmit={handleSubmit}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20, scale: 0.98 }}
+                transition={{ delay: 0.18, duration: 0.7 }}
+                className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-[2rem] border border-black/5 bg-white/85 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.10)] backdrop-blur-xl md:p-10"
+              >
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent" />
 
-              {status === "success" ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex min-h-[560px] flex-col items-center justify-center text-center"
-                >
-                  <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#171412] text-white shadow-2xl">
-                    <CheckCircle2 size={38} />
+                <div className="mb-10">
+                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#a89278]/20 bg-[#f6f2ee] px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
+                    <Sparkles size={14} />
+                    {content.formEyebrow}
                   </div>
 
-                  <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-[#a89278]">
-                    Demande reçue
-                  </p>
-
-                  <h2 className="text-4xl font-semibold tracking-tight text-[#111]">
-                    Votre projet est entre de bonnes mains.
+                  <h2 className="text-3xl font-semibold tracking-tight text-[#111] md:text-4xl">
+                    {content.formTitle}
                   </h2>
 
-                  <p className="mt-5 max-w-md text-neutral-600">
-                    Merci. Votre demande a bien été enregistrée. Nous vous
-                    recontacterons rapidement avec une première orientation.
+                  <p className="mt-3 max-w-xl text-sm leading-6 text-neutral-500">
+                    Sélectionnez les informations principales. Vous pourrez
+                    ajouter les détails spécifiques dans le message.
                   </p>
+                </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setStatus("idle")}
-                    className="mt-8 rounded-full border border-neutral-200 px-7 py-3 text-sm font-medium text-neutral-700 transition hover:border-[#a89278] hover:text-[#111]"
-                  >
-                    Envoyer une autre demande
-                  </button>
-                </motion.div>
-              ) : (
-                <>
-                  <div className="mb-10">
-                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#a89278]/20 bg-[#f6f2ee] px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
-                      <Sparkles size={14} />
-                      {content.formEyebrow}
-                    </div>
-
-                    <h2 className="text-3xl font-semibold tracking-tight text-[#111] md:text-4xl">
-                      {content.formTitle}
-                    </h2>
-
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-neutral-500">
-                      Sélectionnez les informations principales. Vous pourrez
-                      ajouter les détails spécifiques dans le message.
+                {selectedOffer && (
+                  <div className="mb-8 rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5">
+                    <p className="text-sm text-neutral-600">
+                      Offre sélectionnée :{" "}
+                      <span className="font-semibold text-[#111]">
+                        {selectedOffer}
+                      </span>
                     </p>
                   </div>
+                )}
 
-                  {selectedOffer && (
-                    <div className="mb-8 rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5">
-                      <p className="text-sm text-neutral-600">
-                        Offre sélectionnée :{" "}
-                        <span className="font-semibold text-[#111]">
-                          {selectedOffer}
-                        </span>
-                      </p>
-                    </div>
-                  )}
-
-                  <FormBlock title="Vos coordonnées">
-                    <div className="grid gap-6 md:grid-cols-2">
-                      <Field
-                        label="Nom"
-                        name="name"
-                        placeholder="Ex : Jean Dupont"
-                        required
-                      />
-
-                      <Field
-                        label="Email"
-                        name="email"
-                        type="email"
-                        placeholder="Ex : contact@email.com"
-                        required
-                      />
-                    </div>
+                <FormBlock title="Vos coordonnées">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <Field
+                      label="Nom"
+                      name="name"
+                      placeholder="Ex : Jean Dupont"
+                      required
+                    />
 
                     <Field
-                      label="Téléphone"
-                      name="phone"
-                      type="tel"
-                      placeholder="Ex : 06 00 00 00 00"
+                      label="Email"
+                      name="email"
+                      type="email"
+                      placeholder="Ex : contact@email.com"
+                      required
                     />
-                  </FormBlock>
-
-                  <FormBlock title="Type de projet">
-                    <OptionGrid
-                      options={projectTypes}
-                      selected={selectedProjectType}
-                      onSelect={setSelectedProjectType}
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Type de bien">
-                    <OptionGrid
-                      options={propertyTypes}
-                      selected={selectedPropertyType}
-                      onSelect={setSelectedPropertyType}
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Surface approximative">
-                    <OptionGrid
-                      options={surfaces}
-                      selected={selectedSurface}
-                      onSelect={setSelectedSurface}
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Lots concernés">
-                    <MultiOptionGrid
-                      options={workLots}
-                      selected={selectedLots}
-                      onToggle={(value) =>
-                        setSelectedLots((current) =>
-                          toggleArrayValue(value, current)
-                        )
-                      }
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Timing souhaité">
-                    <OptionGrid
-                      options={timings}
-                      selected={selectedTiming}
-                      onSelect={setSelectedTiming}
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Budget estimatif">
-                    <OptionGrid
-                      options={budgets}
-                      selected={selectedBudget}
-                      onSelect={setSelectedBudget}
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Documents disponibles">
-                    <MultiOptionGrid
-                      options={documentsList}
-                      selected={selectedDocuments}
-                      onToggle={(value) =>
-                        setSelectedDocuments((current) =>
-                          toggleArrayValue(value, current)
-                        )
-                      }
-                    />
-                  </FormBlock>
-
-                  <FormBlock title="Message complémentaire">
-                    <Textarea
-                      label="Ce que vous souhaitez préciser"
-                      name="message"
-                      placeholder={
-                        requestType === "contact"
-                          ? "Expliquez-moi votre question, vos inquiétudes ou votre besoin..."
-                          : "Ajoutez ici les détails qui ne sont pas dans les choix : contraintes, priorités, état actuel, adresse approximative, informations importantes..."
-                      }
-                    />
-                  </FormBlock>
-
-                  {status === "error" && (
-                    <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-[#171412] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#927b63] disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {status === "loading" ? (
-                      <>
-                        <Loader2 size={18} className="animate-spin" />
-                        Envoi en cours...
-                      </>
-                    ) : (
-                      <>
-                        {content.button}
-                        <ArrowRight size={18} />
-                      </>
-                    )}
-                  </button>
-
-                  <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500">
-                    <span className="flex items-center gap-2">
-                      <ShieldCheck size={15} className="text-[#a89278]" />
-                      Données confidentielles
-                    </span>
-
-                    <span className="flex items-center gap-2">
-                      <CheckCircle2 size={15} className="text-[#a89278]" />
-                      Réponse personnalisée
-                    </span>
                   </div>
-                </>
-              )}
-            </motion.form>
+
+                  <Field
+                    label="Téléphone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Ex : 06 00 00 00 00"
+                  />
+                </FormBlock>
+
+                <FormBlock title="Type de projet / bien">
+                  <OptionGrid
+                    options={projectTypes}
+                    selected={selectedProjectType}
+                    onSelect={setSelectedProjectType}
+                  />
+                </FormBlock>
+
+                <FormBlock title="Surface approximative">
+                  <OptionGrid
+                    options={surfaces}
+                    selected={selectedSurface}
+                    onSelect={setSelectedSurface}
+                  />
+                </FormBlock>
+
+                <FormBlock title="Lots concernés">
+                  <MultiOptionGrid
+                    options={workLots}
+                    selected={selectedLots}
+                    onToggle={(value) =>
+                      setSelectedLots((current) =>
+                        toggleArrayValue(value, current)
+                      )
+                    }
+                  />
+                </FormBlock>
+
+                <FormBlock title="Timing souhaité">
+                  <OptionGrid
+                    options={timings}
+                    selected={selectedTiming}
+                    onSelect={setSelectedTiming}
+                  />
+                </FormBlock>
+
+                <FormBlock title="Budget estimatif">
+                  <OptionGrid
+                    options={budgets}
+                    selected={selectedBudget}
+                    onSelect={setSelectedBudget}
+                  />
+                </FormBlock>
+
+                <FormBlock title="Documents disponibles">
+                  <MultiOptionGrid
+                    options={documentsList}
+                    selected={selectedDocuments}
+                    onToggle={(value) =>
+                      setSelectedDocuments((current) =>
+                        toggleArrayValue(value, current)
+                      )
+                    }
+                  />
+                </FormBlock>
+
+                <FormBlock title="Message complémentaire">
+                  <Textarea
+                    label="Ce que vous souhaitez préciser"
+                    name="message"
+                    placeholder={
+                      requestType === "contact"
+                        ? "Expliquez-moi votre question, vos inquiétudes ou votre besoin..."
+                        : "Ajoutez ici les détails qui ne sont pas dans les choix : contraintes, priorités, état actuel, adresse approximative, informations importantes..."
+                    }
+                  />
+                </FormBlock>
+
+                {status === "error" && (
+                  <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                    {errorMessage}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-[#171412] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#927b63] disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    <>
+                      {content.button}
+                      <ArrowRight size={18} />
+                    </>
+                  )}
+                </button>
+
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500">
+                  <span className="flex items-center gap-2">
+                    <ShieldCheck size={15} className="text-[#a89278]" />
+                    Données confidentielles
+                  </span>
+
+                  <span className="flex items-center gap-2">
+                    <CheckCircle2 size={15} className="text-[#a89278]" />
+                    Réponse personnalisée
+                  </span>
+                </div>
+              </motion.form>
+            </AnimatePresence>
           </section>
         </section>
       </main>
