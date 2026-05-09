@@ -181,26 +181,62 @@ function DevisPageContent() {
                 </div>
               )}
 
-              <div className="mb-8 flex flex-wrap gap-3">
-                {projectTypes.map((projectType) => {
-                  const isSelected = selectedProjectType === projectType;
+              <div className="mb-10">
+                <p className="mb-6 text-xs font-medium uppercase tracking-[0.3em] text-[#a89278]">
+                  Vos coordonnées
+                </p>
 
-                  return (
-                    <button
-                      key={projectType}
-                      type="button"
-                      onClick={() => setSelectedProjectType(projectType)}
-                      className={[
-                        "rounded-full border px-4 py-2 text-sm transition",
-                        isSelected
-                          ? "border-[#a89278] bg-[#a89278] text-white"
-                          : "border-neutral-200 text-neutral-600 hover:border-[#a89278] hover:bg-[#f6f2ee] hover:text-[#111]",
-                      ].join(" ")}
-                    >
-                      {projectType}
-                    </button>
-                  );
-                })}
+                <div className="grid gap-6 md:grid-cols-2">
+                  <Field
+                    label="Nom"
+                    name="name"
+                    placeholder="Ex : Jean Dupont"
+                    required
+                  />
+
+                  <Field
+                    label="Email"
+                    name="email"
+                    type="email"
+                    placeholder="Ex : contact@email.com"
+                    required
+                  />
+                </div>
+
+                <Field
+                  label="Téléphone"
+                  name="phone"
+                  type="tel"
+                  placeholder="Ex : 06 00 00 00 00"
+                />
+              </div>
+
+              <div className="mb-8">
+                <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-[#a89278]">
+                  Type de projet
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+                  {projectTypes.map((projectType) => {
+                    const isSelected = selectedProjectType === projectType;
+
+                    return (
+                      <button
+                        key={projectType}
+                        type="button"
+                        onClick={() => setSelectedProjectType(projectType)}
+                        className={[
+                          "rounded-full border px-4 py-2 text-sm transition",
+                          isSelected
+                            ? "border-[#a89278] bg-[#a89278] text-white"
+                            : "border-neutral-200 text-neutral-600 hover:border-[#a89278] hover:bg-[#f6f2ee] hover:text-[#111]",
+                        ].join(" ")}
+                      >
+                        {projectType}
+                      </button>
+                    );
+                  })}
+                </div>
 
                 {selectedProjectType && (
                   <input
@@ -217,6 +253,7 @@ function DevisPageContent() {
                   name="typeBien"
                   placeholder="Maison, appartement..."
                 />
+
                 <Field
                   label="Surface (m²)"
                   name="surface"
@@ -236,6 +273,7 @@ function DevisPageContent() {
                   name="timing"
                   placeholder="Ex : dans 3 mois"
                 />
+
                 <Field
                   label="Budget estimatif"
                   name="budget"
@@ -308,10 +346,14 @@ function Field({
   label,
   name,
   placeholder,
+  type = "text",
+  required = false,
 }: {
   label: string;
   name: string;
   placeholder: string;
+  type?: string;
+  required?: boolean;
 }) {
   return (
     <div className="space-y-2">
@@ -325,6 +367,8 @@ function Field({
       <input
         id={name}
         name={name}
+        type={type}
+        required={required}
         placeholder={placeholder}
         className="w-full border-b border-neutral-200 bg-transparent py-4 text-sm text-neutral-800 outline-none transition placeholder:text-neutral-300 focus:border-[#a89278]"
       />
