@@ -112,6 +112,7 @@ const pageContent = {
   },
 };
 
+type RequestType = "etude" | "contact" | "devis";
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 function toggleArrayValue(value: string, current: string[]) {
@@ -120,19 +121,22 @@ function toggleArrayValue(value: string, current: string[]) {
     : [...current, value];
 }
 
+function getRequestType(type: string | null): RequestType {
+  if (type === "etude" || type === "contact" || type === "devis") {
+    return type;
+  }
+
+  return "devis";
+}
+
 function DevisPageContent() {
   const searchParams = useSearchParams();
 
-  const type = searchParams.get("type");
+  const requestType = getRequestType(searchParams.get("type"));
   const offer = searchParams.get("offre");
 
-  const content = useMemo(() => {
-    if (type === "etude") return pageContent.etude;
-    if (type === "contact") return pageContent.contact;
-    return pageContent.devis;
-  }, [type]);
-
-  const selectedOffer = offer ? offerLabels[offer] : null;
+  const content = useMemo(() => pageContent[requestType], [requestType]);
+  const selectedOffer = offer ? offerLabels[offer] ?? offer : null;
 
   const [selectedProjectType, setSelectedProjectType] = useState<string | null>(
     null
@@ -160,22 +164,30 @@ function DevisPageContent() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (status === "loading") return;
+
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
     const payload = {
-      name: String(formData.get("name") ?? "").trim(),
-      email: String(formData.get("email") ?? "").trim(),
-      phone: String(formData.get("phone") ?? "").trim(),
-      offre: String(formData.get("offre") ?? "").trim(),
-      typeProjet: selectedProjectType ?? "",
-      typeBien: selectedPropertyType,
+      name,
+      email,
+      phone,
+      requestType,
+      offer: selectedOffer ?? "",
+      projectType: selectedProjectType ?? "",
+      propertyType: selectedPropertyType,
       surface: selectedSurface,
       lots: selectedLots.join(", "),
       timing: selectedTiming,
       budget: selectedBudget,
       documents: selectedDocuments.join(", "),
-      message: String(formData.get("message") ?? "").trim(),
+      message,
     };
 
     setStatus("loading");
@@ -184,23 +196,11 @@ function DevisPageContent() {
     try {
       await createContactRequest(payload);
 
-      const emailResponse = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!emailResponse.ok) {
-        throw new Error("Email sending failed");
-      }
-
       form.reset();
       resetSelections();
       setStatus("success");
     } catch (error) {
-      console.error(error);
+      console.error("Contact request error:", error);
       setStatus("error");
       setErrorMessage(
         "Une erreur est survenue. Votre demande n’a pas pu être envoyée. Veuillez réessayer dans quelques instants."
@@ -322,8 +322,8 @@ function DevisPageContent() {
                   </h2>
 
                   <p className="mt-5 max-w-md text-neutral-600">
-                    Merci. Votre demande a bien été enregistrée et un email de
-                    confirmation vient d’être envoyé.
+                    Merci. Votre demande a bien été enregistrée. Nous vous
+                    recontacterons rapidement avec une première orientation.
                   </p>
 
                   <button
@@ -350,10 +350,6 @@ function DevisPageContent() {
                       Sélectionnez les informations principales. Vous pourrez
                       ajouter les détails spécifiques dans le message.
                     </p>
-
-                    {offer && (
-                      <input type="hidden" name="offre" value={offer} />
-                    )}
                   </div>
 
                   {selectedOffer && (
@@ -462,7 +458,7 @@ function DevisPageContent() {
                       label="Ce que vous souhaitez préciser"
                       name="message"
                       placeholder={
-                        type === "contact"
+                        requestType === "contact"
                           ? "Expliquez-moi votre question, vos inquiétudes ou votre besoin..."
                           : "Ajoutez ici les détails qui ne sont pas dans les choix : contraintes, priorités, état actuel, adresse approximative, informations importantes..."
                       }
