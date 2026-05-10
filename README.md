@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏗️ DND Conseils — Premium Web Experience
 
-## Getting Started
+![DND Conseils Mockup](./public/screenshots/mockup.png)
 
-First, run the development server:
+## ✨ Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**DND Conseils** is a premium landing page designed for a construction and renovation consulting service.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The goal is simple:  
+👉 **Build trust, educate users, and convert high-quality leads** before they commit to costly construction projects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The interface combines:
+- Modern editorial design  
+- Smooth animations  
+- Conversion-focused UX  
+- Elegant and professional visual identity  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🚀 Live Demo
 
-To learn more about Next.js, take a look at the following resources:
+👉 https://dnd-conseils.vercel.app/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Project Goals
 
-## Deploy on Vercel
+This project was designed to:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Help users avoid costly mistakes in construction projects  
+- Position the service as an independent expert  
+- Generate qualified leads (quotes / contact requests)  
+- Create a sense of clarity, trust, and control  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🧠 UX Concept
+
+The UX strategy is built around 3 core principles:
+
+### 1. Instant clarity
+A strong hero section with a direct message:
+
+> “Avoid costly mistakes in your construction projects.”
+
+---
+
+### 2. Visual proof
+An interactive **Before / After** comparison:
+
+- Reinforces credibility  
+- Demonstrates real transformation  
+- Increases engagement  
+
+---
+
+### 3. Progressive conversion
+Multiple CTAs based on user intent:
+
+- Free study  
+- First consultation  
+- Advanced project request  
+
+---
+
+## 🧩 Features
+
+- ⚡ Smooth animations powered by Framer Motion  
+- 📱 Fully responsive design  
+- 🎨 Premium agency-level UI  
+- 🔄 Interactive Before / After slider  
+- 🧭 Clean and intuitive navigation  
+- 📩 Lead generation system (quote requests)  
+- 🧱 Scalable architecture  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router)  
+- **Styling:** Tailwind CSS  
+- **Animations:** Framer Motion  
+- **Icons:** Lucide React  
+- **Deployment:** Vercel  
+
+---
+
+
+---
+
+## 🎨 Design System
+
+### Colors
+
+- Background: `#F6F2EE`  
+- Primary: `#0B0B0B`  
+- Accent: `#B49A7C`  
+
+### Typography
+
+- Headings: **Poppins**  
+- Body: **Inter**  
+
+---
+
+## 📸 Screenshots
+
+/public/screenshots/mockup.png
+
+
