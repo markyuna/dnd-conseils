@@ -19,88 +19,127 @@ const solutions = [
 
 export default function ProblemSolutionSection() {
   return (
-    <section className="relative overflow-hidden bg-[#f8f5f2] py-28 text-[#1a1a1a]">
-      <div className="absolute left-1/2 top-[-220px] h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-[#b49a7c]/15 blur-3xl" />
+    <section className="relative overflow-hidden bg-[#f8f5f2] py-24 text-[#1a1a1a]">
+      {/* glow */}
+      <div className="absolute left-1/2 top-[-200px] h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-6xl px-6">
-        <div className="mb-16 max-w-3xl">
-          <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#b49a7c]">
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-14 max-w-3xl"
+        >
+          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-[#b49a7c]">
             Pourquoi se faire accompagner
           </p>
 
-          <h2 className="text-4xl font-semibold tracking-tight md:text-6xl">
-            Vos travaux peuvent vite devenir une source de stress.
+          <h2 className="text-4xl font-semibold tracking-[-0.04em] md:text-6xl">
+            <span className="bg-gradient-to-r from-[#111] via-[#9a8065] to-[#b49a7c] bg-clip-text text-transparent">
+              Vos travaux peuvent vite devenir un problème.
+            </span>
           </h2>
 
-          <p className="mt-6 text-lg leading-8 text-black/55">
-            Sans accompagnement, un projet peut entraîner des surcoûts,
-            des retards et des décisions difficiles à corriger.
+          <p className="mt-6 text-base leading-7 text-black/55">
+            Sans méthode ni accompagnement, les erreurs coûtent cher et sont
+            souvent difficiles à corriger une fois le chantier lancé.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        {/* GRID */}
+        <div className="grid gap-4 md:grid-cols-2">
+          {/* PROBLEMS */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="rounded-[2rem] border border-black/10 bg-white/60 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)] backdrop-blur"
+            transition={{ duration: 0.6 }}
+            className="group relative overflow-hidden rounded-[2rem] border border-black/10 bg-[#111] p-6 text-white shadow-[0_20px_60px_rgba(0,0,0,0.2)]"
           >
-            <div className="mb-8 flex items-center gap-3">
-              <div className="rounded-full bg-red-500/10 p-3 text-red-500">
-                <AlertTriangle size={22} />
+            {/* subtle glow */}
+            <div className="absolute right-[-80px] top-[-80px] h-[220px] w-[220px] rounded-full bg-red-500/10 blur-3xl" />
+
+            <div className="mb-6 flex items-center gap-3">
+              <div className="rounded-xl bg-white/10 p-3 text-red-400">
+                <AlertTriangle size={20} />
               </div>
-              <h3 className="text-2xl font-medium">Sans accompagnement</h3>
+              <h3 className="text-lg font-medium tracking-tight">
+                Sans accompagnement
+              </h3>
             </div>
 
-            <div className="space-y-4">
-              {problems.map((item) => (
-                <div
+            <div className="space-y-3">
+              {problems.map((item, index) => (
+                <motion.div
                   key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[#f8f5f2] p-4 text-black/65"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/70"
                 >
-                  <span className="h-2 w-2 rounded-full bg-red-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
                   {item}
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
+          {/* SOLUTIONS */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="rounded-[2rem] border border-[#b49a7c]/30 bg-white p-8 text-[#1a1a1a] shadow-[0_30px_80px_rgba(180,154,124,0.18)]"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="group relative overflow-hidden rounded-[2rem] border border-[#b49a7c]/30 bg-white p-6 shadow-[0_30px_80px_rgba(180,154,124,0.18)]"
           >
-            <div className="mb-8 flex items-center gap-3">
-              <div className="rounded-full bg-emerald-500/10 p-3 text-emerald-600">
-                <CheckCircle2 size={22} />
+            <div className="absolute right-[-80px] top-[-80px] h-[220px] w-[220px] rounded-full bg-[#b49a7c]/20 blur-3xl" />
+
+            <div className="mb-6 flex items-center gap-3">
+              <div className="rounded-xl bg-[#b49a7c]/10 p-3 text-[#9a8065]">
+                <CheckCircle2 size={20} />
               </div>
-              <h3 className="text-2xl font-medium">Avec DND Conseils</h3>
+              <h3 className="text-lg font-medium tracking-tight">
+                Avec DND Conseils
+              </h3>
             </div>
 
-            <div className="space-y-4">
-              {solutions.map((item) => (
-                <div
+            <div className="space-y-3">
+              {solutions.map((item, index) => (
+                <motion.div
                   key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[#f8f5f2] p-4 text-black/70"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="flex items-center gap-3 rounded-xl border border-black/5 bg-[#f8f5f2] px-4 py-3 text-sm text-black/70"
                 >
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#b49a7c]" />
                   {item}
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
 
-        <div className="mt-14 rounded-[2rem] border border-[#b49a7c]/25 bg-[#efe9e3] p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.05)]">
-          <p className="text-2xl font-medium md:text-3xl">
-            Un mauvais choix en travaux peut coûter des milliers d’euros.
+        {/* IMPACT BLOCK */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="relative mt-12 overflow-hidden rounded-[2rem] border border-[#b49a7c]/30 bg-white px-8 py-10 text-center shadow-[0_20px_60px_rgba(0,0,0,0.05)]"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(180,154,124,0.12),transparent)]" />
+
+          <p className="relative text-2xl font-semibold tracking-[-0.03em] md:text-3xl">
+            Un mauvais choix peut coûter des milliers d’euros.
           </p>
-          <p className="mt-3 text-black/50">
-            Un bon accompagnement peut vous les faire économiser.
+
+          <p className="relative mt-3 text-sm text-black/50">
+            Un bon accompagnement vous permet de les éviter.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

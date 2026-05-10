@@ -1,5 +1,8 @@
+// src/components/ProcessSection.tsx
+
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -12,22 +15,22 @@ import {
 const steps = [
   {
     title: "Premier échange",
-    desc: "On comprend votre projet, vos priorités, vos contraintes et vos premières inquiétudes.",
+    desc: "On clarifie votre projet, vos priorités, vos contraintes et les premiers points de vigilance.",
     icon: Handshake,
   },
   {
     title: "Étude du projet",
-    desc: "Analyse des devis, du budget, des risques techniques et des points à vérifier.",
+    desc: "Analyse des devis, du budget, des risques techniques et des éléments à vérifier avant décision.",
     icon: FileSearch,
   },
   {
     title: "Plan d’action",
-    desc: "Vous recevez des recommandations claires pour avancer avec les bonnes décisions.",
+    desc: "Vous recevez des recommandations concrètes pour avancer avec méthode et confiance.",
     icon: ClipboardList,
   },
   {
     title: "Suivi jusqu’à réalisation",
-    desc: "Un accompagnement possible pendant les travaux pour garder le contrôle.",
+    desc: "Un accompagnement possible pendant les travaux pour garder le contrôle à chaque étape.",
     icon: Route,
   },
 ];
@@ -36,80 +39,129 @@ export default function ProcessSection() {
   return (
     <section
       id="methode"
-      className="relative overflow-hidden bg-[#f6f2ee] py-32"
+      className="relative overflow-hidden bg-[#f6f2ee] py-24"
     >
-      {/* Background glow */}
-      <div className="absolute left-[-220px] top-[-220px] h-[560px] w-[560px] rounded-full bg-[#b49a7c]/20 blur-3xl" />
-      <div className="absolute bottom-[-260px] right-[-220px] h-[620px] w-[620px] rounded-full bg-black/5 blur-3xl" />
+      <div className="absolute left-[-220px] top-[-220px] h-[520px] w-[520px] rounded-full bg-[#b49a7c]/20 blur-3xl" />
+      <div className="absolute bottom-[-260px] right-[-220px] h-[580px] w-[580px] rounded-full bg-black/5 blur-3xl" />
 
-      {/* Grid subtle */}
-      <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(90deg,#111_1px,transparent_1px),linear-gradient(#111_1px,transparent_1px)] [background-size:64px_64px]" />
+      <div className="absolute inset-0 opacity-[0.035] [background-image:linear-gradient(90deg,#111_1px,transparent_1px),linear-gradient(#111_1px,transparent_1px)] [background-size:72px_72px]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <div className="mb-20 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <motion.div
+          initial={{ opacity: 0, y: 26 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+        >
           <div>
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#9a8065] backdrop-blur">
               Méthode
             </p>
 
-            <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.055em] text-[#111] md:text-6xl">
-              Un processus simple pour éviter les erreurs coûteuses.
+            <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.055em] md:text-6xl">
+              <span className="bg-gradient-to-r from-[#111] via-[#9a8065] to-[#b49a7c] bg-clip-text text-transparent">
+                Un processus simple pour éviter les erreurs coûteuses.
+              </span>
             </h2>
           </div>
 
-          <p className="max-w-2xl text-lg leading-8 text-neutral-600 lg:ml-auto">
+          <p className="max-w-xl text-base leading-7 text-neutral-600 lg:ml-auto">
             Chaque étape est pensée pour clarifier votre projet, sécuriser vos
-            choix et vous aider à avancer avec plus de sérénité.
+            choix et avancer avec plus de sérénité.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Line */}
-          <div className="absolute left-8 top-0 hidden h-full w-px bg-gradient-to-b from-[#b49a7c] via-black/10 to-transparent lg:block" />
+        <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <motion.div
+            initial={{ opacity: 0, x: -28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative min-h-[520px] overflow-hidden rounded-[2rem] border border-black/10 bg-[#111] p-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.18)] md:p-8"
+          >
+            <Image
+              src="/methode/methode.png"
+              alt="Architecture minimaliste avec jeux d’ombre et de lumière"
+              fill
+              priority={false}
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover opacity-35 mix-blend-luminosity transition duration-700 group-hover:scale-105"
+            />
 
-          <div className="grid gap-5">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(180,154,124,0.28),transparent_38%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,0,0,0.15),transparent,rgba(180,154,124,0.12))]" />
+
+            <div className="relative flex h-full flex-col justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#d8c4ad]">
+                  Le fil conducteur
+                </p>
+
+                <h3 className="mt-5 max-w-md text-3xl font-semibold tracking-[-0.055em] md:text-5xl">
+                  Une vision claire avant chaque décision.
+                </h3>
+              </div>
+
+              <p className="mt-10 max-w-md text-sm leading-7 text-white/70">
+                L’objectif est simple : transformer un projet flou en décisions
+                lisibles, avec les bons arbitrages au bon moment.
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="relative grid gap-3">
+            <div className="absolute left-6 top-6 hidden h-[calc(100%-48px)] w-px bg-gradient-to-b from-[#b49a7c] via-black/10 to-transparent md:block" />
+
             {steps.map((step, index) => {
               const Icon = step.icon;
 
               return (
                 <motion.article
                   key={step.title}
-                  initial={{ opacity: 0, y: 34 }}
+                  initial={{ opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={{ once: true, margin: "-70px" }}
                   transition={{
-                    duration: 0.65,
-                    delay: index * 0.08,
+                    duration: 0.6,
+                    delay: index * 0.07,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group relative grid gap-6 rounded-[2rem] border border-black/10 bg-white/70 p-6 backdrop-blur-xl transition duration-500 hover:border-[#b49a7c]/40 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] md:grid-cols-[0.35fr_1fr_auto] md:items-center md:p-8 lg:ml-16"
+                  className="group relative overflow-hidden rounded-[1.5rem] border border-black/10 bg-white/75 p-5 backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-[#b49a7c]/45 hover:bg-white hover:shadow-[0_18px_55px_rgba(0,0,0,0.075)] md:ml-12"
                 >
-                  {/* Left */}
-                  <div className="flex items-center gap-4">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-black/10 bg-white shadow-sm text-[#9a8065]">
-                      <Icon className="h-6 w-6" />
-                    </span>
+                  <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(180,154,124,0.12),transparent)] opacity-0 transition duration-700 group-hover:opacity-100" />
+                  <div className="absolute right-[-60px] top-[-60px] h-[160px] w-[160px] rounded-full bg-[#b49a7c]/0 blur-3xl transition duration-500 group-hover:bg-[#b49a7c]/18" />
 
-                    <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#9a8065]">
-                      0{index + 1}
+                  <div className="relative grid gap-4 md:grid-cols-[auto_1fr_auto] md:items-center">
+                    <div className="flex items-center gap-4">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/10 bg-white text-[#9a8065] shadow-sm transition duration-500 group-hover:scale-105 group-hover:rotate-3 group-hover:border-[#b49a7c]/40">
+                        <Icon className="h-5 w-5" />
+                      </span>
+
+                      <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#9a8065] md:hidden">
+                        0{index + 1}
+                      </span>
+                    </div>
+
+                    <div>
+                      <div className="mb-2 hidden text-[10px] font-semibold uppercase tracking-[0.24em] text-black/30 md:block">
+                        Étape 0{index + 1}
+                      </div>
+
+                      <h3 className="text-xl font-semibold tracking-[-0.035em] text-[#111]">
+                        {step.title}
+                      </h3>
+
+                      <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
+                        {step.desc}
+                      </p>
+                    </div>
+
+                    <span className="hidden h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white text-[#9a8065] transition duration-500 group-hover:border-[#b49a7c]/40 group-hover:bg-[#111] group-hover:text-white md:inline-flex">
+                      <ArrowRight className="h-4 w-4 transition duration-500 group-hover:translate-x-0.5" />
                     </span>
                   </div>
-
-                  {/* Content */}
-                  <div>
-                    <h3 className="text-2xl font-semibold tracking-[-0.035em] text-[#111]">
-                      {step.title}
-                    </h3>
-
-                    <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
-                      {step.desc}
-                    </p>
-                  </div>
-
-                  {/* Arrow */}
-                  <ArrowRight className="hidden h-5 w-5 text-[#9a8065] transition group-hover:translate-x-1 md:block" />
                 </motion.article>
               );
             })}
