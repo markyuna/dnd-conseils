@@ -267,17 +267,7 @@ export default function HeroSection() {
                   </motion.div>
                 </div>
 
-                <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/62 via-black/14 to-transparent p-4 sm:p-6">
-                  <div className="rounded-[1.35rem] border border-white/18 bg-white/12 p-4 text-white backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5">
-                    <p className="text-sm font-semibold">
-                      Un regard expert avant de lancer vos travaux.
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-white/72">
-                      Comparez, anticipez les risques et prenez les bonnes
-                      décisions avant de signer.
-                    </p>
-                  </div>
-                </div>
+              
 
                 <div className="absolute bottom-5 left-1/2 z-40 flex -translate-x-1/2 gap-2">
                   {imageSets.map((_, index) => (
