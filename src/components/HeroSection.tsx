@@ -90,11 +90,11 @@ export default function HeroSection() {
               duration: 0.85,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto max-w-5xl text-5xl font-semibold leading-[0.92] tracking-[-0.065em] text-[#111] sm:text-6xl md:text-7xl lg:mx-0 lg:text-[7.15rem]"
+            className="mx-auto max-w-5xl text-4xl font-semibold leading-[0.95] tracking-[-0.055em] text-[#111] sm:text-5xl md:text-6xl lg:mx-0 lg:text-[5.65rem]"
           >
-            Évitez les erreurs coûteuses
+            Notre méthode,
             <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-              dans vos travaux.
+              l’esprit tranquille.
             </span>
           </motion.h1>
 
@@ -108,9 +108,8 @@ export default function HeroSection() {
             }}
             className="mx-auto mt-7 max-w-2xl text-base leading-8 text-black/55 sm:text-lg lg:mx-0"
           >
-            Un accompagnement indépendant pour sécuriser votre projet, choisir
-            les bons artisans et garder le contrôle sur votre budget avant de
-            vous engager.
+            Notre méthode, c’est l’assurance d’un travail de qualité au juste
+            prix, avec l’esprit tranquille à chaque étape de votre projet.
           </motion.p>
 
           <motion.div
@@ -172,11 +171,9 @@ export default function HeroSection() {
 
             <div className="relative">
               <div className="mb-5 flex items-center justify-between gap-4 px-1 sm:px-2">
-                <div>
-                  <h2 className="mt-2 text-2xl font-semibold tracking-[-0.05em] text-[#111] sm:text-3xl">
-                    Visualisez le potentiel.
-                  </h2>
-                </div>
+                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.05em] text-[#111] sm:text-3xl">
+                  Visualisez le potentiel.
+                </h2>
 
                 <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/10 bg-[#f8f5f2] shadow-sm sm:inline-flex">
                   <Sparkles className="h-5 w-5 text-[#9a8065]" />
@@ -266,8 +263,6 @@ export default function HeroSection() {
                     </span>
                   </motion.div>
                 </div>
-
-              
 
                 <div className="absolute bottom-5 left-1/2 z-40 flex -translate-x-1/2 gap-2">
                   {imageSets.map((_, index) => (
