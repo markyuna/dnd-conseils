@@ -92,9 +92,9 @@ export default function HeroSection() {
             }}
             className="mx-auto max-w-5xl text-4xl font-semibold leading-[0.95] tracking-[-0.055em] text-[#111] sm:text-5xl md:text-6xl lg:mx-0 lg:text-[5.65rem]"
           >
-            Notre méthode,
+            Une methode pour
             <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-              l’esprit tranquille.
+              maîtriser vos traveaux.
             </span>
           </motion.h1>
 
@@ -108,8 +108,7 @@ export default function HeroSection() {
             }}
             className="mx-auto mt-7 max-w-2xl text-base leading-8 text-black/55 sm:text-lg lg:mx-0"
           >
-            Notre méthode, c’est l’assurance d’un travail de qualité au juste
-            prix, avec l’esprit tranquille à chaque étape de votre projet.
+            Un regard indépendant pour éviter les depasements de budget. Avancez avec clarté, confiance et sérénité.
           </motion.p>
 
           <motion.div
@@ -127,7 +126,7 @@ export default function HeroSection() {
               className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#1a1a1a] px-8 py-4 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-0.5"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#b49a7c] to-[#8b7259] opacity-0 transition duration-300 group-hover:opacity-100" />
-              <span className="relative">Demander une étude gratuite</span>
+              <span className="relative">Demander un diagnostic gratuite</span>
               <ArrowRight className="relative h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
 
@@ -172,7 +171,7 @@ export default function HeroSection() {
             <div className="relative">
               <div className="mb-5 flex items-center justify-between gap-4 px-1 sm:px-2">
                 <h2 className="mt-2 text-2xl font-semibold tracking-[-0.05em] text-[#111] sm:text-3xl">
-                  Visualisez le potentiel.
+                  Visualisez votre potentiel.
                 </h2>
 
                 <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/10 bg-[#f8f5f2] shadow-sm sm:inline-flex">

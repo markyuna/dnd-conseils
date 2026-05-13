@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -84,12 +85,8 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} DND Conseil. Tous droits réservés.</p>
 
           <div className="flex gap-6">
-            <a href="#" className="transition hover:text-white">
-              Mentions légales
-            </a>
-            <a href="#" className="transition hover:text-white">
-              Confidentialité
-            </a>
+            <Link href="/mentions-legales" className="transition hover:text-white">Mentions légales</Link>
+            <Link href="/confidentialite" className="transition hover:text-white">Confidentialité</Link>
           </div>
         </motion.div>
       </div>

@@ -1,8 +1,11 @@
+// src/app/devis/page.tsx
+
 "use client";
 
 import { FormEvent, Suspense, useMemo, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -13,7 +16,6 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { createContactRequest } from "@/services/contact";
-import Link from "next/link";
 
 const projectTypes = [
   "Rénovation complète",
@@ -79,14 +81,14 @@ const offerLabels: Record<string, string> = {
 };
 
 const pageContent = {
-  etude: {
-    eyebrow: "Étude gratuite",
-    title: "Analysez votre projet avant de vous engager.",
+  diagnostic: {
+    eyebrow: "Diagnostic gratuit",
+    title: "Diagnostiquez votre projet avant de vous engager.",
     description:
-      "Nous commençons par comprendre votre besoin, vos contraintes et vos objectifs afin de vous orienter vers les bonnes décisions.",
-    formEyebrow: "Demande d’étude",
+      "Nous analysons votre besoin, vos contraintes et vos objectifs afin de vous orienter vers les bonnes décisions avant le lancement des travaux.",
+    formEyebrow: "Demande de diagnostic",
     formTitle: "Décrivez votre besoin",
-    button: "Demander mon étude gratuite",
+    button: "Demander mon diagnostic gratuit",
   },
   contact: {
     eyebrow: "Premier échange",
@@ -108,7 +110,7 @@ const pageContent = {
   },
 };
 
-type RequestType = "etude" | "contact" | "devis";
+type RequestType = "diagnostic" | "contact" | "devis";
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 function toggleArrayValue(value: string, current: string[]) {
@@ -118,7 +120,12 @@ function toggleArrayValue(value: string, current: string[]) {
 }
 
 function getRequestType(type: string | null): RequestType {
-  if (type === "etude" || type === "contact" || type === "devis") return type;
+  if (type === "diagnostic" || type === "contact" || type === "devis") {
+    return type;
+  }
+
+  if (type === "etude") return "diagnostic";
+
   return "devis";
 }
 
@@ -263,10 +270,10 @@ function DevisPageContent() {
                 </button>
 
                 <Link
-                    href="/"
-                    className="rounded-full border border-neutral-200 bg-white/70 px-8 py-4 text-sm font-medium text-neutral-700 transition hover:border-[#a89278] hover:text-[#111]"
-                    >
-                    Retour à l’accueil
+                  href="/"
+                  className="rounded-full border border-neutral-200 bg-white/70 px-8 py-4 text-sm font-medium text-neutral-700 transition hover:border-[#a89278] hover:text-[#111]"
+                >
+                  Retour à l’accueil
                 </Link>
               </motion.div>
 
