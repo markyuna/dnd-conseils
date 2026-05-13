@@ -39,8 +39,8 @@ export default function TestimonialsSection() {
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
-            Notre rôle est simple : vous aider à prendre les bonnes décisions
-            avant que les erreurs ne coûtent cher.
+            Notre rôle est simple : vous aider à prendre les bonnes décisions 
+            avant que les imprévus n’impactent votre projet.
           </p>
         </div>
 

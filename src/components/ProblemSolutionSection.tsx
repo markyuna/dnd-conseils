@@ -7,7 +7,7 @@ const problems = [
   "Budget mal estimé",
   "Artisans peu fiables",
   "Retards de chantier",
-  "Mauvaises décisions techniques",
+  "Décisions mal encadrées",
 ];
 
 const solutions = [

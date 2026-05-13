@@ -63,8 +63,8 @@ export default function OffersSection() {
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
-            Des formules pensées pour sécuriser vos décisions, éviter les
-            mauvaises surprises et avancer avec plus de clarté.
+            Des formules pensées pour sécuriser vos décisions, 
+            limiter les zones d’incertitude et avancer avec plus de clarté.
           </p>
         </div>
 
