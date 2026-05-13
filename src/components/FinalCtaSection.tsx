@@ -37,8 +37,8 @@ export default function FinalCtaSection() {
           transition={{ delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-400"
         >
-          Un mauvais choix peut coûter des milliers d’euros. Faites-vous
-          accompagner avant de vous engager.
+          Des choix bien anticipés peuvent vous faire économiser des milliers d’euros. 
+          Faites-vous accompagner avant de vous engager.
         </motion.p>
 
         <motion.div
