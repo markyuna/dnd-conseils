@@ -197,15 +197,17 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="mt-6 text-lg leading-8 text-neutral-600">
-                  Beaucoup de particuliers avancent dans leurs travaux sans
-                  vision claire : mauvais choix d’artisans, budget mal anticipé,
-                  décisions prises trop vite ou manque de recul technique.
+                  Beaucoup de particuliers avancent dans leurs travaux sans 
+                  vision suffisamment claire : choix d’artisans, budget à cadrer, 
+                  décisions prises dans l’urgence ou manque de visibilité technique.
+
+Mon rôle est de vous apporter un regard extérieur, de structurer votre réflexion et de vous permettre d’avancer avec plus de sérénité, de maîtrise et de confiance.
                 </p>
 
                 <p className="mt-4 text-lg leading-8 text-neutral-600">
                   Mon rôle est de vous apporter un regard extérieur, de
                   structurer votre réflexion et de vous permettre d’avancer avec
-                  plus de sérénité, de maîtrise et de confiance.
+                  plus de sérénité.
                 </p>
 
                 <div className="mt-10 flex items-center gap-4">
@@ -425,7 +427,7 @@ export default function AboutPage() {
                 href="/devis?type=etude"
                 className="group mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-[#171411] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d6bf9a]"
               >
-                Demander une étude
+                Demander un diagnostic
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </Link>
             </div>
