@@ -2,8 +2,9 @@
 
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const offers = [
   {
@@ -17,6 +18,7 @@ const offers = [
       "Recommandations concrètes",
     ],
     note: "Idéal pour un premier avis",
+    cta: "Demander l’offre Essentiel",
   },
   {
     slug: "serenite",
@@ -31,6 +33,7 @@ const offers = [
       "Suivi par email",
     ],
     note: "Formule recommandée",
+    cta: "Choisir la formule Sérénité",
   },
   {
     slug: "premium",
@@ -44,12 +47,16 @@ const offers = [
       "Accompagnement stratégique",
     ],
     note: "Pour les projets avancés",
+    cta: "Demander l’offre Premium",
   },
 ];
 
 export default function OffersSection() {
   return (
-    <section className="relative overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28">
+    <section
+      id="offres"
+      className="relative overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28"
+    >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
         <div className="absolute bottom-[-160px] right-[-120px] h-[420px] w-[420px] rounded-full bg-white/10 blur-3xl" />
@@ -94,7 +101,7 @@ export default function OffersSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               className={[
-                "group relative flex min-h-[540px] flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
+                "group relative flex min-h-[560px] flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
                 offer.highlight
                   ? "border-[#b49a7c]/70 bg-white text-[#111] shadow-[0_34px_100px_rgba(180,154,124,0.28)]"
                   : "border-white/10 bg-white/[0.055] text-white shadow-[0_24px_90px_rgba(0,0,0,0.18)] hover:border-[#b49a7c]/45 hover:bg-white/[0.075]",
@@ -164,16 +171,28 @@ export default function OffersSection() {
               </div>
 
               <div className="mt-auto pt-10">
-                <div
+                <p
                   className={[
-                    "flex w-full items-center justify-center rounded-full border px-6 py-4 text-center text-sm font-semibold",
-                    offer.highlight
-                      ? "border-black/10 bg-[#111] text-white"
-                      : "border-white/15 bg-white/5 text-white",
+                    "mb-4 text-center text-xs font-medium",
+                    offer.highlight ? "text-black/45" : "text-white/45",
                   ].join(" ")}
                 >
                   {offer.note}
-                </div>
+                </p>
+
+                <Link
+                  href={`/devis?offre=${offer.slug}`}
+                  aria-label={`Demander l’offre ${offer.title}`}
+                  className={[
+                    "group/link flex w-full items-center justify-center gap-2 rounded-full border px-6 py-4 text-center text-sm font-semibold transition-all duration-300",
+                    offer.highlight
+                      ? "border-black/10 bg-[#111] text-white hover:bg-[#2a211b]"
+                      : "border-white/15 bg-white/5 text-white hover:border-[#b49a7c]/45 hover:bg-[#b49a7c]/15",
+                  ].join(" ")}
+                >
+                  {offer.cta}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                </Link>
               </div>
             </motion.article>
           ))}

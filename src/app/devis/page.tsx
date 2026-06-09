@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+
 import Navbar from "@/components/Navbar";
 import { createContactRequest } from "@/services/contact";
 
@@ -74,10 +75,25 @@ const documentsList = [
   "Aucun document",
 ];
 
-const offerLabels: Record<string, string> = {
-  essentiel: "Essentiel",
-  serenite: "Sérénité",
-  premium: "Premium",
+const offerLabels: Record<
+  string,
+  {
+    title: string;
+    price: string;
+  }
+> = {
+  essentiel: {
+    title: "Essentiel",
+    price: "À partir de 99€",
+  },
+  serenite: {
+    title: "Sérénité",
+    price: "À partir de 249€",
+  },
+  premium: {
+    title: "Premium",
+    price: "À partir de 499€",
+  },
 };
 
 const pageContent = {
@@ -129,14 +145,22 @@ function getRequestType(type: string | null): RequestType {
   return "devis";
 }
 
+function getValidOfferSlug(offer: string | null) {
+  if (!offer) return "";
+
+  return offerLabels[offer] ? offer : "";
+}
+
 function DevisPageContent() {
   const searchParams = useSearchParams();
 
   const requestType = getRequestType(searchParams.get("type"));
-  const offer = searchParams.get("offre");
+  const selectedOfferSlug = getValidOfferSlug(searchParams.get("offre"));
 
   const content = useMemo(() => pageContent[requestType], [requestType]);
-  const selectedOffer = offer ? offerLabels[offer] ?? offer : null;
+  const selectedOffer = selectedOfferSlug
+    ? offerLabels[selectedOfferSlug]
+    : null;
 
   const [selectedProjectType, setSelectedProjectType] = useState<string | null>(
     null
@@ -171,13 +195,17 @@ function DevisPageContent() {
       email: String(formData.get("email") ?? "").trim(),
       phone: String(formData.get("phone") ?? "").trim(),
       requestType,
-      offer: selectedOffer ?? "",
+      request_type: requestType,
+      offer: selectedOfferSlug,
       projectType: selectedProjectType ?? "",
+      project_type: selectedProjectType ?? "",
+      typeBien: "",
+      type_bien: "",
       surface: selectedSurface,
-      lots: selectedLots.join(", "),
+      lots: selectedLots,
       timing: selectedTiming,
       budget: selectedBudget,
-      documents: selectedDocuments.join(", "),
+      documents: selectedDocuments,
       message: String(formData.get("message") ?? "").trim(),
     };
 
@@ -186,11 +214,13 @@ function DevisPageContent() {
 
     try {
       await createContactRequest(payload);
+
       form.reset();
       resetSelections();
       setStatus("success");
     } catch (error) {
       console.error("Contact request error:", error);
+
       setStatus("error");
       setErrorMessage(
         "Une erreur est survenue. Votre demande n’a pas pu être envoyée. Veuillez réessayer dans quelques instants."
@@ -357,8 +387,13 @@ function DevisPageContent() {
                   <p className="text-xs uppercase tracking-[0.25em] text-[#d3bea6]">
                     Offre sélectionnée
                   </p>
+
                   <p className="mt-2 text-2xl font-semibold">
-                    {selectedOffer}
+                    {selectedOffer.title}
+                  </p>
+
+                  <p className="mt-1 text-sm text-white/55">
+                    {selectedOffer.price}
                   </p>
                 </motion.div>
               )}
@@ -416,12 +451,25 @@ function DevisPageContent() {
 
                 {selectedOffer && (
                   <div className="mb-8 rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5">
-                    <p className="text-sm text-neutral-600">
-                      Offre sélectionnée :{" "}
+                    <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
+                      Offre sélectionnée
+                    </p>
+
+                    <p className="mt-2 text-sm text-neutral-600">
+                      Vous êtes sur la formule{" "}
                       <span className="font-semibold text-[#111]">
-                        {selectedOffer}
+                        {selectedOffer.title}
+                      </span>{" "}
+                      <span className="text-neutral-400">
+                        — {selectedOffer.price}
                       </span>
                     </p>
+
+                    <input
+                      type="hidden"
+                      name="offer"
+                      value={selectedOfferSlug}
+                    />
                   </div>
                 )}
 

@@ -1,53 +1,53 @@
 // src/services/contact.ts
 
-import { supabase } from "@/lib/supabase";
-
-export type ContactRequestPayload = {
+type ContactRequestPayload = {
   name: string;
   email: string;
   phone?: string;
-  requestType: string;
+  requestType?: string;
+  request_type?: string;
   offer?: string;
   projectType?: string;
+  project_type?: string;
+  typeBien?: string;
+  type_bien?: string;
   surface?: string;
-  lots?: string;
+  lots?: string[];
   timing?: string;
   budget?: string;
-  documents?: string;
+  documents?: string[];
   message?: string;
 };
 
+type ContactRequestResponse = {
+  success: boolean;
+  leadId?: string;
+  error?: string;
+  details?: string;
+};
+
 export async function createContactRequest(payload: ContactRequestPayload) {
-  const row = {
-    name: payload.name,
-    email: payload.email,
-    phone: payload.phone || null,
-    request_type: payload.requestType,
-    offer: payload.offer || null,
-    project_type: payload.projectType || null,
-    surface: payload.surface || null,
-    lots: payload.lots || null,
-    timing: payload.timing || null,
-    budget: payload.budget || null,
-    documents: payload.documents || null,
-    message: payload.message || null,
-  };
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
-  const { error } = await supabase.from("contact_requests").insert(row);
+  const data = (await response.json().catch(() => null)) as
+    | ContactRequestResponse
+    | null;
 
-  if (error) {
-    console.error("Supabase contact request error:", {
-      message: error.message,
-      details: error.details,
-      hint: error.hint,
-      code: error.code,
-      row,
-    });
+  if (!response.ok || !data?.success) {
+    console.error("Contact request API error:", data);
 
     throw new Error(
-      error.message || "Impossible d’envoyer votre demande pour le moment."
+      data?.details ||
+        data?.error ||
+        "Impossible d’envoyer la demande pour le moment."
     );
   }
 
-  return true;
+  return data;
 }
