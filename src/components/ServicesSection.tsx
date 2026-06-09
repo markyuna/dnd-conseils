@@ -56,13 +56,13 @@ export default function ServicesSection() {
           <div>
             <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/75 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#9a8065] shadow-[0_12px_35px_rgba(0,0,0,0.04)] backdrop-blur-xl">
               <BadgeCheck className="h-4 w-4" />
-              Services
+              Accompagnement
             </div>
 
             <h2 className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-[#111] md:text-6xl">
-              C'est que vous obtenait
+              Ce que vous obtenez
               <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-                concrtetement
+                concrètement.
               </span>
             </h2>
           </div>
