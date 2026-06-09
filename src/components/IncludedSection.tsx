@@ -10,7 +10,7 @@ const items = [
   {
     title: "Des explications claires",
     desc: "Comprendre les étapes clés, les acteurs, les risques fréquents et les points de vigilance avant de vous engager.",
-    image: "/include/01.png",
+    image: "/include/conseil-explication-claires-01.webp",
     icon: MonitorPlay,
   },
   {
