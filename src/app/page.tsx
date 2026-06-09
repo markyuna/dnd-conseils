@@ -1,28 +1,35 @@
+// src/app/page.tsx
+
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import ProcessSection from "@/components/ProcessSection";
+import IncludedSection from "@/components/IncludedSection";
+import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
 import ContactSection from "@/components/ContactSection";
-import IncludedSection from "@/components/IncludedSection";
-import TrustSection from "@/components/TrustSection";
 
 export default function Home() {
   return (
-    <main>
+    <main className="min-h-screen bg-[#f7f4ee] text-[#171412]">
       <Navbar />
+
       <HeroSection />
-      <TrustSection />
-      <ServicesSection />
+
       <ProblemSolutionSection />
+
       <ProcessSection />
-      <IncludedSection />
+
+      <section>
+        <IncludedSection />
+        <ServicesSection />
+      </section>
+
       <OffersSection />
-      <TestimonialsSection />
+
       <FinalCtaSection />
+
       <ContactSection />
     </main>
   );

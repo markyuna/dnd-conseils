@@ -1,21 +1,22 @@
+// src/components/OffersSection.tsx
+
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 const offers = [
   {
     slug: "essentiel",
     title: "Essentiel",
     price: "À partir de 99€",
-    desc: "Un premier regard expert pour clarifier votre projet et éviter les premières erreurs.",
+    desc: "Un premier regard extérieur pour clarifier votre projet et éviter les premières erreurs.",
     features: [
       "Analyse rapide du projet",
       "Conseils personnalisés",
       "Recommandations concrètes",
     ],
-    cta: "Découvrir Essentiel",
+    note: "Idéal pour un premier avis",
   },
   {
     slug: "serenite",
@@ -25,81 +26,105 @@ const offers = [
     desc: "Un accompagnement structuré pour avancer avec méthode, confiance et sérénité.",
     features: [
       "Analyse complète du projet",
-      "Aide au choix des artisans",
+      "Analyse des devis et intervenants",
       "Plan d’action personnalisé",
       "Suivi par email",
     ],
-    cta: "Choisir Sérénité",
+    note: "Formule recommandée",
   },
   {
     slug: "premium",
     title: "Premium",
     price: "À partir de 499€",
-    desc: "Un accompagnement renforcé pour piloter votre projet avec un regard expert.",
+    desc: "Un accompagnement renforcé pour garder une vision claire à chaque étape du projet.",
     features: [
       "Suivi complet du projet",
-      "Coordination des intervenants",
+      "Coordination des échanges",
       "Conseils prioritaires",
       "Accompagnement stratégique",
     ],
-    cta: "Opter pour Premium",
+    note: "Pour les projets avancés",
   },
 ];
 
 export default function OffersSection() {
   return (
-    <section className="relative overflow-hidden bg-[#080706] py-32 text-white">
-      <div className="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
-      <div className="absolute bottom-[-160px] right-[-120px] h-[420px] w-[420px] rounded-full bg-white/10 blur-3xl" />
+    <section className="relative overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
+        <div className="absolute bottom-[-160px] right-[-120px] h-[420px] w-[420px] rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:76px_76px]" />
+      </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="mx-auto mb-20 max-w-3xl text-center">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-[#b49a7c]">
+      <div className="relative mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mb-16 max-w-4xl text-center"
+        >
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#b49a7c]">
             Nos offres
           </p>
 
-          <h2 className="text-4xl font-semibold tracking-tight md:text-6xl">
-            Choisissez le niveau d’accompagnement adapté à votre projet.
+          <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-6xl">
+            Choisissez le niveau d’accompagnement
+            <span className="block bg-gradient-to-r from-[#d8c4ad] via-white to-[#b49a7c] bg-clip-text text-transparent">
+              adapté à votre projet.
+            </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-400">
-            Des formules pensées pour sécuriser vos décisions, 
-            limiter les zones d’incertitude et avancer avec plus de clarté.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/55 sm:text-lg">
+            Des formules pensées pour sécuriser vos décisions, limiter les zones
+            d’incertitude et avancer avec plus de clarté.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {offers.map((offer, index) => (
             <motion.article
               key={offer.slug}
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: index * 0.12 }}
-              whileHover={{ y: -10 }}
+              transition={{
+                duration: 0.65,
+                delay: index * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className={[
-                "group relative flex min-h-[560px] flex-col overflow-hidden rounded-[2rem] border p-8 transition-all duration-500",
+                "group relative flex min-h-[540px] flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
                 offer.highlight
-                  ? "border-[#b49a7c]/70 bg-white text-[#111] shadow-[0_30px_90px_rgba(180,154,124,0.25)]"
-                  : "border-white/10 bg-white/[0.045] text-white hover:border-[#b49a7c]/50",
+                  ? "border-[#b49a7c]/70 bg-white text-[#111] shadow-[0_34px_100px_rgba(180,154,124,0.28)]"
+                  : "border-white/10 bg-white/[0.055] text-white shadow-[0_24px_90px_rgba(0,0,0,0.18)] hover:border-[#b49a7c]/45 hover:bg-white/[0.075]",
               ].join(" ")}
             >
               {offer.highlight && (
-                <div className="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-2xl bg-[#a89278] px-6 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white">
+                <div className="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-2xl bg-[#a89278] px-6 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
                   Recommandé
                 </div>
               )}
 
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent opacity-70" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent opacity-70" />
 
               <div className="pt-6">
-                <h3 className="text-3xl font-semibold tracking-tight">
+                <p
+                  className={[
+                    "mb-4 text-[10px] font-semibold uppercase tracking-[0.24em]",
+                    offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]",
+                  ].join(" ")}
+                >
+                  Offre 0{index + 1}
+                </p>
+
+                <h3 className="text-3xl font-semibold tracking-[-0.04em]">
                   {offer.title}
                 </h3>
 
                 <p
                   className={[
-                    "mt-4 text-4xl font-semibold tracking-tight",
+                    "mt-4 text-4xl font-semibold tracking-[-0.04em]",
                     offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]",
                   ].join(" ")}
                 >
@@ -109,29 +134,28 @@ export default function OffersSection() {
                 <p
                   className={[
                     "mt-6 text-base leading-7",
-                    offer.highlight ? "text-neutral-600" : "text-neutral-400",
+                    offer.highlight ? "text-black/58" : "text-white/55",
                   ].join(" ")}
                 >
                   {offer.desc}
                 </p>
               </div>
 
-              <div className="mt-10 space-y-4">
+              <div className="mt-9 space-y-4">
                 {offer.features.map((feature) => (
                   <div key={feature} className="flex gap-3">
                     <CheckCircle2
-                      size={20}
-                      className={
-                        offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]"
-                      }
+                      className={[
+                        "mt-0.5 h-5 w-5 shrink-0",
+                        offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]",
+                      ].join(" ")}
                     />
 
                     <span
-                      className={
-                        offer.highlight
-                          ? "text-neutral-700"
-                          : "text-neutral-300"
-                      }
+                      className={[
+                        "text-sm leading-6",
+                        offer.highlight ? "text-black/68" : "text-white/68",
+                      ].join(" ")}
                     >
                       {feature}
                     </span>
@@ -140,21 +164,16 @@ export default function OffersSection() {
               </div>
 
               <div className="mt-auto pt-10">
-                <Link
-                  href={`/devis?offre=${offer.slug}`}
+                <div
                   className={[
-                    "group/link flex w-full items-center justify-center gap-3 rounded-full px-6 py-4 text-sm font-medium transition-all duration-300",
+                    "flex w-full items-center justify-center rounded-full border px-6 py-4 text-center text-sm font-semibold",
                     offer.highlight
-                      ? "bg-[#111] text-white hover:bg-[#9a8065]"
-                      : "border border-white/15 bg-white/5 text-white hover:border-[#b49a7c] hover:bg-[#b49a7c]/15",
+                      ? "border-black/10 bg-[#111] text-white"
+                      : "border-white/15 bg-white/5 text-white",
                   ].join(" ")}
                 >
-                  {offer.cta}
-                  <ArrowRight
-                    size={16}
-                    className="transition group-hover/link:translate-x-1"
-                  />
-                </Link>
+                  {offer.note}
+                </div>
               </div>
             </motion.article>
           ))}

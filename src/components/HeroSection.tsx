@@ -1,10 +1,11 @@
+// src/components/HeroSection.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 
 const trustItems = [
   "Conseiller indépendant",
@@ -14,42 +15,28 @@ const trustItems = [
 
 const imageSets = [
   {
-    avant: "/avant-apres/set1-avant.png",
-    apres: "/avant-apres/set1-apres.png",
-  },
-  {
-    avant: "/avant-apres/set2-avant.png",
-    apres: "/avant-apres/set2-apres.png",
-  },
-  {
-    avant: "/avant-apres/set3-avant.png",
-    apres: "/avant-apres/set3-apres.png",
+    avant: "/avant-apres/chantier-tendu.webp",
+    apres: "/avant-apres/conseil-serein.webp",
   },
 ];
 
 export default function HeroSection() {
-  const [sliderPosition, setSliderPosition] = useState(48);
+  const [sliderPosition, setSliderPosition] = useState(50);
   const [currentSet, setCurrentSet] = useState(0);
 
   useEffect(() => {
     const introTimeout = window.setTimeout(() => {
-      setSliderPosition(66);
-    }, 850);
+      setSliderPosition(42);
+    }, 650);
 
-    return () => window.clearTimeout(introTimeout);
-  }, []);
+    const outroTimeout = window.setTimeout(() => {
+      setSliderPosition(58);
+    }, 1350);
 
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setCurrentSet((prev) => (prev + 1) % imageSets.length);
-      setSliderPosition(34);
-
-      window.setTimeout(() => {
-        setSliderPosition(68);
-      }, 350);
-    }, 6500);
-
-    return () => window.clearInterval(interval);
+    return () => {
+      window.clearTimeout(introTimeout);
+      window.clearTimeout(outroTimeout);
+    };
   }, []);
 
   const handleMove = (clientX: number, element: HTMLDivElement) => {
@@ -92,9 +79,9 @@ export default function HeroSection() {
             }}
             className="mx-auto max-w-5xl text-4xl font-semibold leading-[0.95] tracking-[-0.055em] text-[#111] sm:text-5xl md:text-6xl lg:mx-0 lg:text-[5.65rem]"
           >
-            Une methode pour
+            Une méthode pour
             <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-              maîtriser vos traveaux.
+              maîtriser vos travaux.
             </span>
           </motion.h1>
 
@@ -108,40 +95,15 @@ export default function HeroSection() {
             }}
             className="mx-auto mt-7 max-w-2xl text-base leading-8 text-black/55 sm:text-lg lg:mx-0"
           >
-            Un regard indépendant pour éviter les depasements de budget. Avancez avec clarté, confiance et sérénité.
+            Un regard indépendant pour clarifier vos choix, anticiper les
+            risques et éviter que votre chantier ne devienne une source de
+            stress.
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.38,
-              duration: 0.65,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start"
-          >
-            <Link
-              href="/devis?type=etude"
-              className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#1a1a1a] px-8 py-4 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-0.5"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-[#b49a7c] to-[#8b7259] opacity-0 transition duration-300 group-hover:opacity-100" />
-              <span className="relative">Demander un diagnostic gratuite</span>
-              <ArrowRight className="relative h-4 w-4 transition group-hover:translate-x-1" />
-            </Link>
-
-            <Link
-              href="/devis?type=contact"
-              className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white/70 px-8 py-4 text-sm font-semibold text-[#111] shadow-[0_12px_35px_rgba(0,0,0,0.04)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#b49a7c] hover:bg-white"
-            >
-              Parler de mon projet
-            </Link>
-          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.54, duration: 0.6 }}
+            transition={{ delay: 0.38, duration: 0.6 }}
             className="mt-9 flex flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-black/55 lg:justify-start"
           >
             {trustItems.map((item) => (
@@ -171,7 +133,7 @@ export default function HeroSection() {
             <div className="relative">
               <div className="mb-5 flex items-center justify-between gap-4 px-1 sm:px-2">
                 <h2 className="mt-2 text-2xl font-semibold tracking-[-0.05em] text-[#111] sm:text-3xl">
-                  Visualisez votre potentiel.
+                  Le bon accompagnement change tout.
                 </h2>
 
                 <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/10 bg-[#f8f5f2] shadow-sm sm:inline-flex">
@@ -181,7 +143,7 @@ export default function HeroSection() {
 
               <div
                 role="slider"
-                aria-label="Comparaison avant après"
+                aria-label="Comparaison entre un chantier sans accompagnement et un projet accompagné"
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round(sliderPosition)}
@@ -198,7 +160,16 @@ export default function HeroSection() {
                 onTouchMove={(event) =>
                   handleMove(event.touches[0].clientX, event.currentTarget)
                 }
-                className="group relative h-[430px] cursor-ew-resize touch-pan-y overflow-hidden rounded-[1.7rem] bg-[#ddd2c8] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.55)] sm:h-[500px] sm:rounded-[2.2rem] lg:h-[560px]"
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowLeft") {
+                    setSliderPosition((prev) => Math.max(prev - 6, 8));
+                  }
+
+                  if (event.key === "ArrowRight") {
+                    setSliderPosition((prev) => Math.min(prev + 6, 92));
+                  }
+                }}
+                className="group relative h-[430px] cursor-ew-resize touch-pan-y overflow-hidden rounded-[1.7rem] bg-[#ddd2c8] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.55)] outline-none ring-0 focus-visible:ring-2 focus-visible:ring-[#b49a7c]/45 sm:h-[500px] sm:rounded-[2.2rem] lg:h-[560px]"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -211,9 +182,9 @@ export default function HeroSection() {
                   >
                     <Image
                       src={imageSets[currentSet].apres}
-                      alt="Projet après rénovation"
+                      alt="Couple serein avec un conseiller autour d’une table"
                       fill
-                      priority={currentSet === 0}
+                      priority
                       className="object-cover"
                       sizes="(min-width: 1024px) 48vw, 100vw"
                     />
@@ -224,23 +195,23 @@ export default function HeroSection() {
                     >
                       <Image
                         src={imageSets[currentSet].avant}
-                        alt="Projet avant rénovation"
+                        alt="Couple tendu dans un chantier en désordre"
                         fill
-                        priority={currentSet === 0}
+                        priority
                         className="max-w-none object-cover"
                         sizes="(min-width: 1024px) 48vw, 100vw"
                       />
-                      <div className="absolute inset-0 bg-black/18" />
+                      <div className="absolute inset-0 bg-black/20" />
                     </div>
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="absolute left-4 top-4 z-30 rounded-full border border-white/35 bg-black/35 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-xl sm:left-5 sm:top-5 sm:text-xs">
-                  Avant
+                <div className="absolute left-4 top-4 z-30 max-w-[calc(50%-1rem)] rounded-full border border-white/35 bg-black/45 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl sm:left-5 sm:top-5 sm:text-xs">
+                  Sans accompagnement
                 </div>
 
-                <div className="absolute right-4 top-4 z-30 rounded-full border border-white/45 bg-white/80 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#1a1a1a] backdrop-blur-xl sm:right-5 sm:top-5 sm:text-xs">
-                  Après
+                <div className="absolute right-4 top-4 z-30 max-w-[calc(50%-1rem)] rounded-full border border-white/45 bg-white/85 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1a1a1a] backdrop-blur-xl sm:right-5 sm:top-5 sm:text-xs">
+                  Avec DND Conseils
                 </div>
 
                 <div
@@ -263,25 +234,27 @@ export default function HeroSection() {
                   </motion.div>
                 </div>
 
-                <div className="absolute bottom-5 left-1/2 z-40 flex -translate-x-1/2 gap-2">
-                  {imageSets.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      aria-label={`Voir le projet ${index + 1}`}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setCurrentSet(index);
-                        setSliderPosition(66);
-                      }}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        index === currentSet
-                          ? "w-7 bg-white"
-                          : "w-3 bg-white/45 hover:bg-white/70"
-                      }`}
-                    />
-                  ))}
-                </div>
+                {imageSets.length > 1 && (
+                  <div className="absolute bottom-5 left-1/2 z-40 flex -translate-x-1/2 gap-2">
+                    {imageSets.map((_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        aria-label={`Voir la comparaison ${index + 1}`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setCurrentSet(index);
+                          setSliderPosition(58);
+                        }}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                          index === currentSet
+                            ? "w-7 bg-white"
+                            : "w-3 bg-white/45 hover:bg-white/70"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
               <p className="mt-4 px-2 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-black/35 sm:text-xs">
