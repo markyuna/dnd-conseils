@@ -60,9 +60,9 @@ export default function ServicesSection() {
             </div>
 
             <h2 className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-[#111] md:text-6xl">
-              Sécurisez vos travaux
+              C'est que vous obtenait
               <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-                avec une méthode claire.
+                concrtetement
               </span>
             </h2>
           </div>
