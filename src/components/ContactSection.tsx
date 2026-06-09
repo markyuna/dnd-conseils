@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 const trustItems = [
-  "Réponse sous 48h",
+  "Réponse sous 2h ouvrées",
   "Sans engagement",
   "Conseils personnalisés",
 ];
@@ -113,7 +113,7 @@ export default function ContactSection() {
                 <ValueItem
                   icon={<Clock className="h-5 w-5" />}
                   title="Retour rapide"
-                  text="Une première réponse sous 48h."
+                  text="Une première réponse sous 2h ouvrées."
                 />
                 <ValueItem
                   icon={<ShieldCheck className="h-5 w-5" />}
