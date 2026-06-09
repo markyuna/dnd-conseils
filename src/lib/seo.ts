@@ -2,9 +2,26 @@
 
 import type { Metadata } from "next";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://dnd-conseils.vercel.app";
+const rawSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://dnd-conseils.vercel.app";
+
+const siteUrl = rawSiteUrl.replace(/\/$/, "");
+
+function normalizePath(path: string) {
+  if (!path) return "";
+  return path.startsWith("/") ? path : `/${path}`;
+}
+
+function absoluteUrl(pathOrUrl: string) {
+  if (pathOrUrl.startsWith("http")) return pathOrUrl;
+  return `${siteUrl}${normalizePath(pathOrUrl)}`;
+}
+
+function uniqueKeywords(keywords: string[]) {
+  return Array.from(new Set(keywords.map((keyword) => keyword.trim()))).filter(
+    Boolean
+  );
+}
 
 export const seoConfig = {
   siteName: "DND Conseils",
@@ -54,13 +71,15 @@ export function generateSeo({
     : seoConfig.defaultTitle;
 
   const finalDescription = description || seoConfig.defaultDescription;
-  const finalUrl = `${seoConfig.siteUrl}${path}`;
-  const finalImage = `${seoConfig.siteUrl}${image || seoConfig.defaultImage}`;
+  const finalUrl = absoluteUrl(path);
+  const finalImage = absoluteUrl(image || seoConfig.defaultImage);
 
   return {
     title: finalTitle,
     description: finalDescription,
-    keywords: [...seoConfig.keywords, ...keywords],
+
+    keywords: uniqueKeywords([...seoConfig.keywords, ...keywords]),
+
     authors: [{ name: seoConfig.author }],
     creator: seoConfig.author,
     publisher: seoConfig.siteName,
@@ -116,4 +135,8 @@ export function generateSeo({
       images: [finalImage],
     },
   };
+}
+
+export function getAbsoluteUrl(pathOrUrl: string) {
+  return absoluteUrl(pathOrUrl);
 }

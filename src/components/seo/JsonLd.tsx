@@ -1,7 +1,9 @@
 // src/components/seo/JsonLd.tsx
 
+type JsonLdData = Record<string, unknown> | Record<string, unknown>[];
+
 type JsonLdProps = {
-  data: Record<string, unknown> | Record<string, unknown>[];
+  data: JsonLdData;
 };
 
 export default function JsonLd({ data }: JsonLdProps) {

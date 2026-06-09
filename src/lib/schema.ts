@@ -1,14 +1,24 @@
 // src/lib/schema.ts
 
-import { seoConfig } from "@/lib/seo";
+import { getAbsoluteUrl, seoConfig } from "@/lib/seo";
+
+type BreadcrumbItem = {
+  name: string;
+  path: string;
+};
+
+type FaqItem = {
+  question: string;
+  answer: string;
+};
 
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "DND Conseils",
+    name: seoConfig.siteName,
     url: seoConfig.siteUrl,
-    logo: `${seoConfig.siteUrl}/logo.png`,
+    logo: getAbsoluteUrl("/logo.png"),
     description:
       "DND Conseils accompagne les particuliers avant leurs travaux de rénovation avec un regard indépendant, structuré et stratégique.",
     sameAs: [],
@@ -19,9 +29,9 @@ export function professionalServiceSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "DND Conseils",
+    name: seoConfig.siteName,
     url: seoConfig.siteUrl,
-    image: `${seoConfig.siteUrl}${seoConfig.defaultImage}`,
+    image: getAbsoluteUrl(seoConfig.defaultImage),
     description:
       "Conseil indépendant pour particuliers avant travaux de rénovation, analyse de projet, étude gratuite et accompagnement à la décision.",
     areaServed: [
@@ -49,22 +59,12 @@ export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "DND Conseils",
+    name: seoConfig.siteName,
     url: seoConfig.siteUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${seoConfig.siteUrl}/recherche?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
-export function breadcrumbSchema(
-  items: {
-    name: string;
-    path: string;
-  }[]
-) {
+export function breadcrumbSchema(items: BreadcrumbItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -72,17 +72,12 @@ export function breadcrumbSchema(
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${seoConfig.siteUrl}${item.path}`,
+      item: getAbsoluteUrl(item.path),
     })),
   };
 }
 
-export function faqSchema(
-  questions: {
-    question: string;
-    answer: string;
-  }[]
-) {
+export function faqSchema(questions: FaqItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

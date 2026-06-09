@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import ProcessSection from "@/components/ProcessSection";
-import IncludedSection from "@/components/IncludedSection";
 import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
@@ -22,7 +21,7 @@ export default function Home() {
       <ProcessSection />
 
       <section>
-        <IncludedSection />
+       
         <ServicesSection />
       </section>
 

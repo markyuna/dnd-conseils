@@ -4,26 +4,22 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FileText, MonitorPlay, Video } from "lucide-react";
 
 const items = [
   {
     title: "Des explications claires",
     desc: "Comprendre les étapes clés, les acteurs, les risques fréquents et les points de vigilance avant de vous engager.",
-    image: "/include/conseil-explication-claires-01.webp",
-    icon: MonitorPlay,
+    image: "/include/01.png",
   },
   {
     title: "Des supports concrets",
     desc: "Fiches projet, grille de besoins, points de contrôle, analyse de devis et documents utiles pour structurer vos décisions.",
     image: "/include/02.png",
-    icon: FileText,
   },
   {
     title: "Un accompagnement humain",
     desc: "Transformer vos idées en décisions claires grâce à des échanges adaptés à votre projet, votre budget et vos priorités.",
     image: "/include/03.png",
-    icon: Video,
   },
 ];
 
@@ -58,56 +54,42 @@ export default function IncludedSection() {
         </motion.div>
 
         <div className="grid gap-5 md:grid-cols-3">
-          {items.map((item, index) => {
-            const Icon = item.icon;
+          {items.map((item, index) => (
+            <motion.article
+              key={item.title}
+              initial={{ opacity: 0, y: 34 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{
+                duration: 0.65,
+                delay: index * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="group relative overflow-hidden rounded-[2rem] border border-black/10 bg-white/82 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.055)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-[#b49a7c]/40 hover:bg-white hover:shadow-[0_32px_100px_rgba(0,0,0,0.1)]"
+            >
+              <div className="pointer-events-none absolute right-[-90px] top-[-90px] h-[240px] w-[240px] rounded-full bg-[#b49a7c]/0 blur-3xl transition duration-500 group-hover:bg-[#b49a7c]/16" />
 
-            return (
-              <motion.article
-                key={item.title}
-                initial={{ opacity: 0, y: 34 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.65,
-                  delay: index * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group relative overflow-hidden rounded-[2rem] border border-black/10 bg-white/82 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.055)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-[#b49a7c]/40 hover:bg-white hover:shadow-[0_32px_100px_rgba(0,0,0,0.1)]"
-              >
-                <div className="pointer-events-none absolute right-[-90px] top-[-90px] h-[240px] w-[240px] rounded-full bg-[#b49a7c]/0 blur-3xl transition duration-500 group-hover:bg-[#b49a7c]/16" />
+              <div className="relative h-56 overflow-hidden rounded-[1.55rem] bg-[#f6f2ee] sm:h-64">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+              </div>
 
-                <div className="relative h-56 overflow-hidden rounded-[1.55rem] bg-[#f6f2ee] sm:h-64">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                  />
+              <div className="relative px-4 pb-5 pt-7">
+                <h3 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-[#111]">
+                  {item.title}
+                </h3>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/38 via-black/5 to-transparent" />
-
-                  <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/35 bg-white/82 shadow-[0_18px_45px_rgba(0,0,0,0.12)] backdrop-blur-xl">
-                    <Icon className="h-5 w-5 text-[#9a8065]" />
-                  </div>
-
-                  <span className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-white/82 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#9a8065] backdrop-blur-xl">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                <div className="relative px-4 pb-5 pt-7">
-                  <h3 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-[#111]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-7 text-black/58 sm:text-base">
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.article>
-            );
-          })}
+                <p className="mt-4 text-sm leading-7 text-black/58 sm:text-base">
+                  {item.desc}
+                </p>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>
