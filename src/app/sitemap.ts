@@ -3,17 +3,20 @@
 import type { MetadataRoute } from "next";
 
 import { seoConfig } from "@/lib/seo";
+import { seoServicePages } from "@/lib/seo-pages";
+
+type ChangeFrequency =
+  | "always"
+  | "hourly"
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly"
+  | "never";
 
 type SitemapRoute = {
   path: string;
-  changeFrequency:
-    | "always"
-    | "hourly"
-    | "daily"
-    | "weekly"
-    | "monthly"
-    | "yearly"
-    | "never";
+  changeFrequency: ChangeFrequency;
   priority: number;
 };
 
@@ -58,42 +61,30 @@ const staticRoutes: SitemapRoute[] = [
   },
 ];
 
-const serviceRoutes: SitemapRoute[] = [
-  {
-    path: "/conseil-travaux",
-    changeFrequency: "monthly",
-    priority: 0.9,
-  },
-  {
-    path: "/accompagnement-renovation",
-    changeFrequency: "monthly",
-    priority: 0.9,
-  },
-  {
-    path: "/etude-gratuite-travaux",
-    changeFrequency: "monthly",
-    priority: 0.88,
-  },
-  {
-    path: "/analyse-devis-travaux",
-    changeFrequency: "monthly",
-    priority: 0.88,
-  },
-  {
-    path: "/renovation-appartement",
-    changeFrequency: "monthly",
-    priority: 0.85,
-  },
-  {
-    path: "/renovation-maison",
-    changeFrequency: "monthly",
-    priority: 0.85,
-  },
-];
+const seoRoutes: SitemapRoute[] = seoServicePages.map((page) => ({
+  path: `/${page.slug}`,
+  changeFrequency: "monthly",
+  priority: 0.88,
+}));
+
+function uniqueRoutes(routes: SitemapRoute[]) {
+  const seen = new Set<string>();
+
+  return routes.filter((route) => {
+    const normalizedPath = route.path === "" ? "/" : route.path;
+
+    if (seen.has(normalizedPath)) {
+      return false;
+    }
+
+    seen.add(normalizedPath);
+    return true;
+  });
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const routes = [...staticRoutes, ...serviceRoutes];
+  const routes = uniqueRoutes([...staticRoutes, ...seoRoutes]);
 
   return routes.map((route) => ({
     url: createUrl(route.path),
