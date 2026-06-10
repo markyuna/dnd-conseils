@@ -1,3 +1,5 @@
+// src/components/OffersSection.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -26,7 +28,7 @@ const offers = [
     ],
     note: "Idéal avant de signer",
     cta: "Demander le Pack Essentiel",
-    href: "/devis?type=pack-essentiel",
+    href: "/devis?offre=pack-essentiel",
     detailHref: "/tarifs#pack-essentiel",
   },
   {
@@ -44,7 +46,7 @@ const offers = [
     ],
     note: "Le meilleur équilibre",
     cta: "Choisir le Pack Sérénité",
-    href: "/devis?type=pack-serenite",
+    href: "/devis?offre=pack-serenite",
     detailHref: "/tarifs#pack-serenite",
   },
   {
@@ -61,7 +63,7 @@ const offers = [
     ],
     note: "Pour les projets avancés",
     cta: "Demander le Pack Chantier",
-    href: "/devis?type=pack-chantier",
+    href: "/devis?offre=pack-chantier",
     detailHref: "/tarifs#pack-chantier",
   },
 ];

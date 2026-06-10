@@ -7,6 +7,7 @@ import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
 import QuizAccompagnementSection from "@/components/QuizAccompagnementSection";
+import DevisAnalysisExampleSection from "@/components/DevisAnalysisExampleSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
 import ContactSection from "@/components/ContactSection";
 
@@ -26,6 +27,8 @@ export default function Home() {
       <OffersSection />
 
       <QuizAccompagnementSection />
+
+      <DevisAnalysisExampleSection />
 
       <FinalCtaSection />
 
