@@ -1,53 +1,65 @@
-// src/components/OffersSection.tsx
-
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CheckCircle2,
+  PackageCheck,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 
 const offers = [
   {
     slug: "essentiel",
-    title: "Essentiel",
-    price: "À partir de 99€",
-    desc: "Un premier regard extérieur pour clarifier votre projet et éviter les premières erreurs.",
+    title: "Pack Essentiel",
+    price: "À partir de 390 € HT",
+    eyebrow: "Pour bien démarrer",
+    desc: "Une formule claire pour structurer votre projet, analyser les premiers éléments et avancer avec une vision plus sûre.",
     features: [
-      "Analyse rapide du projet",
-      "Conseils personnalisés",
-      "Recommandations concrètes",
+      "Diagnostic projet",
+      "Analyse de 2 à 3 devis",
+      "Compte-rendu écrit",
+      "Recommandations prioritaires",
     ],
-    note: "Idéal pour un premier avis",
-    cta: "Demander l’offre Essentiel",
+    note: "Idéal avant de signer",
+    cta: "Demander le Pack Essentiel",
+    href: "/devis?type=pack-essentiel",
   },
   {
     slug: "serenite",
-    title: "Sérénité",
-    price: "À partir de 249€",
+    title: "Pack Sérénité",
+    price: "À partir de 790 € HT",
+    eyebrow: "Formule recommandée",
     highlight: true,
-    desc: "Un accompagnement structuré pour avancer avec méthode, confiance et sérénité.",
+    desc: "Un accompagnement plus structuré pour sécuriser les décisions importantes avant et pendant les premières étapes du chantier.",
     features: [
-      "Analyse complète du projet",
-      "Analyse des devis et intervenants",
-      "Plan d’action personnalisé",
-      "Suivi par email",
+      "Diagnostic complet",
+      "Analyse des devis",
+      "1 visite de chantier",
+      "Compte-rendu et conseils personnalisés",
     ],
-    note: "Formule recommandée",
-    cta: "Choisir la formule Sérénité",
+    note: "Le meilleur équilibre",
+    cta: "Choisir le Pack Sérénité",
+    href: "/devis?type=pack-serenite",
   },
   {
-    slug: "premium",
-    title: "Premium",
-    price: "À partir de 499€",
-    desc: "Un accompagnement renforcé pour garder une vision claire à chaque étape du projet.",
+    slug: "chantier",
+    title: "Pack Chantier",
+    price: "Sur devis",
+    eyebrow: "Accompagnement complet",
+    desc: "Une solution renforcée pour garder une vision claire pendant les travaux, avec suivi, coordination et conseils réguliers.",
     features: [
-      "Suivi complet du projet",
-      "Coordination des échanges",
-      "Conseils prioritaires",
-      "Accompagnement stratégique",
+      "Suivi mensuel",
+      "Visites de chantier",
+      "Comptes-rendus réguliers",
+      "Conseils et coordination",
     ],
     note: "Pour les projets avancés",
-    cta: "Demander l’offre Premium",
+    cta: "Demander le Pack Chantier",
+    href: "/devis?type=pack-chantier",
   },
 ];
 
@@ -58,9 +70,9 @@ export default function OffersSection() {
       className="relative overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
-        <div className="absolute bottom-[-160px] right-[-120px] h-[420px] w-[420px] rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:76px_76px]" />
+        <div className="absolute left-1/2 top-0 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
+        <div className="absolute bottom-[-180px] right-[-140px] h-[460px] w-[460px] rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:76px_76px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
@@ -71,21 +83,33 @@ export default function OffersSection() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mb-16 max-w-4xl text-center"
         >
-          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#b49a7c]">
-            Nos offres
-          </p>
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#d3bea6] shadow-sm">
+            <PackageCheck className="h-3.5 w-3.5" />
+            Packs clés en main
+          </div>
 
           <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-6xl">
-            Choisissez le niveau d’accompagnement
+            Un accompagnement complet,
             <span className="block bg-gradient-to-r from-[#d8c4ad] via-white to-[#b49a7c] bg-clip-text text-transparent">
               adapté à votre projet.
             </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/55 sm:text-lg">
-            Des formules pensées pour sécuriser vos décisions, limiter les zones
-            d’incertitude et avancer avec plus de clarté.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/58 sm:text-lg">
+            Pour aller plus loin qu’un simple conseil ponctuel, nos packs
+            regroupent les étapes essentielles afin de vous aider à avancer avec
+            méthode, visibilité et sérénité.
           </p>
+
+          <div className="mt-9 flex justify-center">
+            <Link
+              href="/tarifs#packs"
+              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/12 bg-white px-6 py-3 text-sm font-semibold text-[#111111] shadow-[0_18px_50px_rgba(255,255,255,0.12)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8c4ad]"
+            >
+              Voir tous les détails des packs
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -101,9 +125,9 @@ export default function OffersSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               className={[
-                "group relative flex min-h-[560px] flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
+                "group relative flex min-h-[590px] flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
                 offer.highlight
-                  ? "border-[#b49a7c]/70 bg-white text-[#111] shadow-[0_34px_100px_rgba(180,154,124,0.28)]"
+                  ? "border-[#b49a7c]/70 bg-white text-[#111111] shadow-[0_34px_100px_rgba(180,154,124,0.28)]"
                   : "border-white/10 bg-white/[0.055] text-white shadow-[0_24px_90px_rgba(0,0,0,0.18)] hover:border-[#b49a7c]/45 hover:bg-white/[0.075]",
               ].join(" ")}
             >
@@ -116,6 +140,24 @@ export default function OffersSection() {
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent opacity-70" />
 
               <div className="pt-6">
+                <div
+                  className={[
+                    "mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em]",
+                    offer.highlight
+                      ? "border-black/10 bg-black/[0.035] text-[#9a8065]"
+                      : "border-white/10 bg-white/[0.06] text-[#d3bea6]",
+                  ].join(" ")}
+                >
+                  {offer.highlight ? (
+                    <Sparkles className="h-3.5 w-3.5" />
+                  ) : index === 0 ? (
+                    <BadgeCheck className="h-3.5 w-3.5" />
+                  ) : (
+                    <ShieldCheck className="h-3.5 w-3.5" />
+                  )}
+                  {offer.eyebrow}
+                </div>
+
                 <p
                   className={[
                     "mb-4 text-[10px] font-semibold uppercase tracking-[0.24em]",
@@ -141,7 +183,7 @@ export default function OffersSection() {
                 <p
                   className={[
                     "mt-6 text-base leading-7",
-                    offer.highlight ? "text-black/58" : "text-white/55",
+                    offer.highlight ? "text-black/58" : "text-white/58",
                   ].join(" ")}
                 >
                   {offer.desc}
@@ -161,7 +203,7 @@ export default function OffersSection() {
                     <span
                       className={[
                         "text-sm leading-6",
-                        offer.highlight ? "text-black/68" : "text-white/68",
+                        offer.highlight ? "text-black/68" : "text-white/70",
                       ].join(" ")}
                     >
                       {feature}
@@ -181,17 +223,29 @@ export default function OffersSection() {
                 </p>
 
                 <Link
-                  href={`/devis?offre=${offer.slug}`}
-                  aria-label={`Demander l’offre ${offer.title}`}
+                  href={offer.href}
+                  aria-label={offer.cta}
                   className={[
                     "group/link flex w-full items-center justify-center gap-2 rounded-full border px-6 py-4 text-center text-sm font-semibold transition-all duration-300",
                     offer.highlight
-                      ? "border-black/10 bg-[#111] text-white hover:bg-[#2a211b]"
+                      ? "border-black/10 bg-[#111111] text-white hover:bg-[#2a211b]"
                       : "border-white/15 bg-white/5 text-white hover:border-[#b49a7c]/45 hover:bg-[#b49a7c]/15",
                   ].join(" ")}
                 >
                   {offer.cta}
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                </Link>
+
+                <Link
+                  href={`/tarifs#${offer.slug === "chantier" ? "packs" : "packs"}`}
+                  className={[
+                    "mt-4 flex w-full items-center justify-center text-xs font-semibold transition duration-300",
+                    offer.highlight
+                      ? "text-black/45 hover:text-black"
+                      : "text-white/42 hover:text-white",
+                  ].join(" ")}
+                >
+                  Voir le détail du pack
                 </Link>
               </div>
             </motion.article>

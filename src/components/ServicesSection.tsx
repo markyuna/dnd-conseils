@@ -1,9 +1,9 @@
-// src/components/ServicesSection.tsx
-
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
+  ArrowRight,
   BadgeCheck,
   ClipboardCheck,
   FileSearch,
@@ -14,106 +14,165 @@ import {
 const services = [
   {
     title: "Conseil avant travaux",
-    desc: "Clarifier votre projet, vos priorités, votre budget et les points de vigilance avant de vous engager.",
+    label: "L’aide au démarrage",
+    formula: "Forfait Diagnostic / Flash",
+    price: "À partir de 150 € HT",
+    desc: "Une session de 1h30 en visio ou sur place, accompagnée d’un compte-rendu écrit avec les points de vigilance à anticiper.",
     icon: ClipboardCheck,
+    href: "/tarifs#diagnostic-flash",
   },
   {
     title: "Analyse des devis et intervenants",
-    desc: "Comparer les propositions, identifier les zones floues et mieux comprendre ce qui est réellement inclus.",
+    label: "La sécurité avant de signer",
+    formula: "Forfait analyse de devis",
+    price: "À partir de 190 € HT",
+    desc: "Analyse comparative de vos devis artisans pour identifier les zones floues, les oublis, les incohérences et les risques de surcoûts.",
     icon: FileSearch,
+    href: "/tarifs#analyse-devis",
   },
   {
     title: "Suivi et coordination",
-    desc: "Garder une vision claire pendant les travaux, fluidifier les échanges et anticiper les erreurs coûteuses.",
+    label: "Le soulagement pendant le chantier",
+    formula: "Pack mensuel ou visite ponctuelle",
+    price: "À partir de 120 € HT",
+    desc: "Un accompagnement pendant les travaux avec visite de chantier, compte-rendu, points de contrôle et conseils pour avancer plus sereinement.",
     icon: ShieldCheck,
+    href: "/tarifs#suivi-chantier",
   },
   {
     title: "Optimisation du budget",
-    desc: "Prendre des décisions plus sûres pour limiter les surcoûts, les imprévus et les mauvaises surprises.",
+    label: "La recherche d’économies",
+    formula: "Forfait Audit Budgétaire",
+    price: "À partir de 250 € HT",
+    desc: "Analyse globale de votre projet, de vos devis, matériaux et priorités afin d’identifier des alternatives plus pertinentes sans perdre en qualité.",
     icon: WalletCards,
+    href: "/tarifs#audit-budgetaire",
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export default function ServicesSection() {
   return (
-    <section
-      id="services"
-      className="relative overflow-hidden bg-[#fbfaf8] px-4 pb-24 pt-4 text-[#171412] sm:px-6 lg:pb-28"
-    >
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-[-220px] top-[-220px] h-[520px] w-[520px] rounded-full bg-[#b49a7c]/10 blur-3xl" />
-        <div className="absolute bottom-[-240px] right-[-220px] h-[560px] w-[560px] rounded-full bg-black/[0.035] blur-3xl" />
-      </div>
+    <section className="relative overflow-hidden bg-[#f8f7f4] px-5 py-24 text-[#111111] sm:px-8 lg:px-12">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[460px] w-[860px] -translate-x-1/2 rounded-full bg-[#a39183]/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12 grid gap-6 border-t border-black/10 pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
-        >
-          <div>
-            <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/75 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#9a8065] shadow-[0_12px_35px_rgba(0,0,0,0.04)] backdrop-blur-xl">
-              <BadgeCheck className="h-4 w-4" />
+        <div className="mb-14 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#ded8d0] bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8b7a6b] shadow-sm">
+              <BadgeCheck className="h-3.5 w-3.5" />
               Accompagnement
             </div>
 
-            <h2 className="max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-[#111] md:text-6xl">
-              Ce que vous obtenez
-              <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-                concrètement.
-              </span>
+            <h2 className="max-w-3xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] text-[#111111] md:text-6xl">
+              Concrètement comment pouvons-nous vous aider ?
             </h2>
-          </div>
+          </motion.div>
 
-          <p className="max-w-xl text-base leading-8 text-black/55 lg:ml-auto">
-            De la première idée au suivi du chantier, DND Conseils vous aide à
-            anticiper les risques, comparer les options et garder le contrôle à
-            chaque étape.
-          </p>
-        </motion.div>
+          <motion.div
+            className="max-w-xl"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{
+              duration: 0.65,
+              delay: 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <p className="text-base leading-8 text-[#66615b] md:text-lg">
+              À chaque projet son rythme. Choisissez uniquement l&apos;étape
+              dont vous avez besoin aujourd&apos;hui pour avancer à la carte,
+              ou optez pour l’un de nos packs clés en main pour un
+              accompagnement complet et serein.
+            </p>
+
+            <Link
+              href="/tarifs#packs"
+              className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-[#111111] px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(17,17,17,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#8b7a6b]"
+            >
+              Voir les packs clés en main
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+        </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          {services.map((item, index) => {
-            const Icon = item.icon;
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            const number = String(index + 1).padStart(2, "0");
 
             return (
-              <motion.article
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-70px" }}
+              <motion.div
+                key={service.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{
-                  duration: 0.6,
-                  delay: index * 0.07,
+                  duration: 0.65,
+                  delay: index * 0.06,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative overflow-hidden rounded-[2rem] border border-black/10 bg-white/82 p-6 shadow-[0_22px_70px_rgba(0,0,0,0.055)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-[#b49a7c]/45 hover:bg-white hover:shadow-[0_30px_90px_rgba(0,0,0,0.09)] sm:p-7"
               >
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(180,154,124,0.12),transparent)] opacity-0 transition duration-700 group-hover:opacity-100" />
-                <div className="pointer-events-none absolute right-[-80px] top-[-80px] h-[210px] w-[210px] rounded-full bg-[#b49a7c]/0 blur-3xl transition duration-500 group-hover:bg-[#b49a7c]/16" />
+                <Link
+                  href={service.href}
+                  className="group relative block h-full overflow-hidden rounded-[28px] border border-[#dfdbd4] bg-white/85 p-7 shadow-[0_24px_80px_rgba(20,18,16,0.06)] transition duration-500 hover:-translate-y-1 hover:border-[#b3a494] hover:bg-white hover:shadow-[0_30px_90px_rgba(20,18,16,0.10)] sm:p-8"
+                  aria-label={`Voir le tarif pour ${service.title}`}
+                >
+                  <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
 
-                <div className="relative flex items-start justify-between gap-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/10 bg-[#f8f5f2] text-[#9a8065] shadow-sm transition duration-500 group-hover:scale-105 group-hover:border-[#b49a7c]/45">
-                    <Icon className="h-5 w-5" />
+                  <div className="mb-10 flex items-start justify-between gap-5">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#e1dbd3] bg-[#fbfaf8] text-[#8b7a6b] shadow-sm transition duration-500 group-hover:border-[#b3a494] group-hover:text-[#111111]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+
+                    <span className="rounded-full border border-[#ded8d0] bg-[#fbfaf8] px-3 py-1 text-[10px] font-semibold tracking-[0.24em] text-[#a1968c]">
+                      {number}
+                    </span>
                   </div>
 
-                  <span className="rounded-full border border-black/10 bg-[#f8f5f2]/80 px-3 py-1 text-[10px] font-semibold tracking-[0.22em] text-black/35">
-                    0{index + 1}
-                  </span>
-                </div>
+                  <div>
+                    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-[#8b7a6b]">
+                      {service.label}
+                    </p>
 
-                <div className="relative mt-8">
-                  <h3 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-[#111]">
-                    {item.title}
-                  </h3>
+                    <h3 className="mb-3 text-xl font-semibold tracking-[-0.03em] text-[#171717] transition duration-500 group-hover:text-[#8b7a6b]">
+                      {service.title}
+                    </h3>
 
-                  <p className="mt-3 max-w-xl text-sm leading-7 text-black/58 sm:text-base">
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.article>
+                    <div className="mb-5 flex flex-wrap items-center gap-3">
+                      <span className="rounded-full border border-[#e6dfd8] bg-[#fbfaf8] px-3 py-1.5 text-xs font-semibold text-[#5f574f]">
+                        {service.formula}
+                      </span>
+
+                      <span className="rounded-full bg-[#111111] px-3 py-1.5 text-xs font-semibold text-white">
+                        {service.price}
+                      </span>
+                    </div>
+
+                    <p className="max-w-xl text-sm leading-7 text-[#66615b]">
+                      {service.desc}
+                    </p>
+
+                    <div className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#8b7a6b] transition duration-500 group-hover:gap-3 group-hover:text-[#111111]">
+                      Voir le tarif de cette étape
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
