@@ -2,6 +2,7 @@
 
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -72,7 +73,7 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mb-16 max-w-4xl text-center"
+          className="mx-auto mb-14 max-w-4xl text-center"
         >
           <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#b49a7c]/25 bg-white/70 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8a6b4f] shadow-sm backdrop-blur">
             <Sparkles className="h-4 w-4" />
@@ -102,6 +103,39 @@ export default function TestimonialsSection() {
                 {item}
               </span>
             ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 34 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mb-10 overflow-hidden rounded-[2.4rem] border border-white/70 bg-white/70 p-3 shadow-[0_30px_100px_rgba(0,0,0,0.10)] backdrop-blur-xl"
+        >
+          <div className="relative h-[320px] overflow-hidden rounded-[2rem] sm:h-[420px] lg:h-[500px]">
+            <Image
+              src="/include/dnd-conseiller-clients.webp"
+              alt="Conseiller indépendant accompagnant des clients autour de plans de rénovation"
+              fill
+              priority={false}
+              sizes="(max-width: 768px) 100vw, 1200px"
+              className="object-cover"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-r from-[#171412]/55 via-[#171412]/12 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#171412]/60 to-transparent" />
+
+            <div className="absolute bottom-6 left-6 max-w-lg text-white sm:bottom-8 sm:left-8">
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#f3dfc8] backdrop-blur-xl">
+                <ShieldCheck className="h-4 w-4" />
+                Accompagnement humain
+              </p>
+
+              <h3 className="text-2xl font-semibold tracking-[-0.04em] sm:text-4xl">
+                Un regard extérieur pour décider avec plus de clarté.
+              </h3>
+            </div>
           </div>
         </motion.div>
 

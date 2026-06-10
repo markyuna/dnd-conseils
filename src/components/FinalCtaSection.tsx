@@ -8,10 +8,13 @@ import { Phone, ShieldCheck } from "lucide-react";
 export default function FinalCtaSection() {
   return (
     <section className="relative overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+
+      <div className="pointer-events-none absolute inset-0 bg-[#080706]/78" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#080706] via-transparent to-[#080706]" />
+
+      <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-[-220px] h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#b49a7c]/25 blur-3xl" />
         <div className="absolute bottom-[-240px] right-[-180px] h-[480px] w-[480px] rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:76px_76px]" />
       </div>
 
       <div className="relative mx-auto max-w-5xl text-center">

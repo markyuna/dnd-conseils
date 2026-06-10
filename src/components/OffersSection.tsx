@@ -72,13 +72,19 @@ export default function OffersSection() {
   return (
     <section
       id="offres"
-      className="relative overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28"
+      className="relative isolate overflow-hidden bg-[#080706] px-4 py-24 text-white sm:px-6 lg:py-28"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
-        <div className="absolute bottom-[-180px] right-[-140px] h-[460px] w-[460px] rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:76px_76px]" />
+      <div className="pointer-events-none absolute inset-0 -z-30 bg-[#080706]" />
+
+      <div className="pointer-events-none absolute inset-0 -z-20">
+        <div className="absolute left-1/2 top-[-260px] h-[720px] w-[720px] -translate-x-1/2 rounded-full bg-[#b49a7c]/28 blur-3xl" />
+        <div className="absolute left-[12%] top-[22%] h-[420px] w-[420px] rounded-full bg-white/8 blur-3xl" />
+        <div className="absolute bottom-[-220px] right-[-140px] h-[560px] w-[560px] rounded-full bg-[#d8c4ad]/16 blur-3xl" />
+        <div className="absolute bottom-[10%] left-[-180px] h-[480px] w-[480px] rounded-full bg-white/7 blur-3xl" />
       </div>
+
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(216,196,173,0.18),transparent_42%),radial-gradient(circle_at_80%_70%,rgba(180,154,124,0.12),transparent_38%),linear-gradient(180deg,rgba(8,7,6,0.1),rgba(8,7,6,0.94))]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.035] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:76px_76px]" />
 
       <div className="relative mx-auto max-w-7xl">
         <motion.div
@@ -86,21 +92,23 @@ export default function OffersSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mb-16 max-w-4xl text-center"
+          className="relative mx-auto mb-16 max-w-4xl text-center"
         >
-          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#d3bea6] shadow-sm">
+          <div className="pointer-events-none absolute left-1/2 top-[-80px] -z-10 h-[260px] w-[720px] -translate-x-1/2 rounded-full bg-[#d8c4ad]/18 blur-3xl" />
+
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/[0.08] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#f0dac2] shadow-[0_18px_55px_rgba(0,0,0,0.25)] backdrop-blur-xl">
             <PackageCheck className="h-3.5 w-3.5" />
             Packs clés en main
           </div>
 
-          <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-6xl">
+          <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-white drop-shadow-[0_18px_50px_rgba(255,255,255,0.08)] md:text-6xl">
             Un accompagnement complet,
-            <span className="block bg-gradient-to-r from-[#d8c4ad] via-white to-[#b49a7c] bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-[#ead6bd] via-white to-[#b49a7c] bg-clip-text text-transparent drop-shadow-[0_18px_55px_rgba(216,196,173,0.16)]">
               adapté à votre projet.
             </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/58 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
             Pour aller plus loin qu’un simple conseil ponctuel, nos packs
             regroupent les étapes essentielles afin de vous aider à avancer avec
             méthode, visibilité et sérénité.
@@ -109,7 +117,7 @@ export default function OffersSection() {
           <div className="mt-9 flex justify-center">
             <Link
               href="/tarifs#packs"
-              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/12 bg-white px-6 py-3 text-sm font-semibold text-[#111111] shadow-[0_18px_50px_rgba(255,255,255,0.12)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8c4ad]"
+              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/12 bg-white px-6 py-3 text-sm font-semibold text-[#111111] shadow-[0_18px_55px_rgba(255,255,255,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8c4ad]"
             >
               Voir tous les packs
               <ArrowRight className="h-4 w-4" />
@@ -132,25 +140,52 @@ export default function OffersSection() {
               className={[
                 "group relative flex min-h-[590px] flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
                 offer.highlight
-                  ? "border-[#b49a7c]/70 bg-white text-[#111111] shadow-[0_34px_100px_rgba(180,154,124,0.28)]"
-                  : "border-white/10 bg-white/[0.055] text-white shadow-[0_24px_90px_rgba(0,0,0,0.18)] hover:border-[#b49a7c]/45 hover:bg-white/[0.075]",
+                  ? "border-[#d8c4ad]/80 bg-white text-[#111111] shadow-[0_34px_120px_rgba(216,196,173,0.34)]"
+                  : "border-white/12 bg-white/[0.075] text-white shadow-[0_28px_100px_rgba(0,0,0,0.28)] backdrop-blur-2xl hover:border-[#d8c4ad]/55 hover:bg-white/[0.105] hover:shadow-[0_34px_120px_rgba(216,196,173,0.14)]",
               ].join(" ")}
             >
+              <div
+                className={[
+                  "pointer-events-none absolute inset-0",
+                  offer.highlight
+                    ? "bg-[radial-gradient(circle_at_50%_0%,rgba(180,154,124,0.22),transparent_42%),linear-gradient(135deg,rgba(255,255,255,0.85),rgba(246,242,238,0.92))]"
+                    : "bg-[radial-gradient(circle_at_50%_0%,rgba(216,196,173,0.18),transparent_42%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_45%)]",
+                ].join(" ")}
+              />
+
+              <div
+                className={[
+                  "pointer-events-none absolute right-[-120px] top-[-120px] h-[320px] w-[320px] rounded-full blur-3xl transition duration-700",
+                  offer.highlight
+                    ? "bg-[#b49a7c]/24"
+                    : "bg-[#d8c4ad]/0 group-hover:bg-[#d8c4ad]/18",
+                ].join(" ")}
+              />
+
+              <div
+                className={[
+                  "pointer-events-none absolute bottom-[-140px] left-[-120px] h-[280px] w-[280px] rounded-full blur-3xl transition duration-700",
+                  offer.highlight
+                    ? "bg-[#171412]/8"
+                    : "bg-white/0 group-hover:bg-white/8",
+                ].join(" ")}
+              />
+
               {offer.highlight && (
-                <div className="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-2xl bg-[#a89278] px-6 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
+                <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 rounded-b-2xl bg-[#a89278] px-6 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_14px_40px_rgba(168,146,120,0.28)]">
                   Recommandé
                 </div>
               )}
 
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent opacity-70" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-[#d8c4ad] to-transparent opacity-80" />
 
-              <div className="pt-6">
+              <div className="relative z-10 pt-6">
                 <div
                   className={[
-                    "mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em]",
+                    "mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] shadow-sm backdrop-blur-xl",
                     offer.highlight
                       ? "border-black/10 bg-black/[0.035] text-[#9a8065]"
-                      : "border-white/10 bg-white/[0.06] text-[#d3bea6]",
+                      : "border-white/12 bg-white/[0.08] text-[#f0dac2]",
                   ].join(" ")}
                 >
                   {offer.highlight ? (
@@ -166,20 +201,29 @@ export default function OffersSection() {
                 <p
                   className={[
                     "mb-4 text-[10px] font-semibold uppercase tracking-[0.24em]",
-                    offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]",
+                    offer.highlight ? "text-[#9a8065]" : "text-[#f0dac2]",
                   ].join(" ")}
                 >
                   Offre 0{index + 1}
                 </p>
 
-                <h3 className="text-3xl font-semibold tracking-[-0.04em]">
+                <h3
+                  className={[
+                    "text-3xl font-semibold tracking-[-0.04em]",
+                    offer.highlight
+                      ? "text-[#111111]"
+                      : "text-white drop-shadow-[0_14px_40px_rgba(255,255,255,0.08)]",
+                  ].join(" ")}
+                >
                   {offer.title}
                 </h3>
 
                 <p
                   className={[
                     "mt-4 text-4xl font-semibold tracking-[-0.04em]",
-                    offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]",
+                    offer.highlight
+                      ? "text-[#9a8065]"
+                      : "bg-gradient-to-r from-[#ead6bd] via-white to-[#b49a7c] bg-clip-text text-transparent drop-shadow-[0_18px_55px_rgba(216,196,173,0.2)]",
                   ].join(" ")}
                 >
                   {offer.price}
@@ -188,27 +232,35 @@ export default function OffersSection() {
                 <p
                   className={[
                     "mt-6 text-base leading-7",
-                    offer.highlight ? "text-black/58" : "text-white/58",
+                    offer.highlight ? "text-black/62" : "text-white/68",
                   ].join(" ")}
                 >
                   {offer.desc}
                 </p>
               </div>
 
-              <div className="mt-9 space-y-4">
+              <div className="relative z-10 mt-9 space-y-4">
                 {offer.features.map((feature) => (
-                  <div key={feature} className="flex gap-3">
+                  <div
+                    key={feature}
+                    className={[
+                      "flex gap-3 rounded-2xl border px-3 py-3 backdrop-blur-xl",
+                      offer.highlight
+                        ? "border-black/5 bg-black/[0.025]"
+                        : "border-white/8 bg-white/[0.045]",
+                    ].join(" ")}
+                  >
                     <CheckCircle2
                       className={[
                         "mt-0.5 h-5 w-5 shrink-0",
-                        offer.highlight ? "text-[#9a8065]" : "text-[#d3bea6]",
+                        offer.highlight ? "text-[#9a8065]" : "text-[#f0dac2]",
                       ].join(" ")}
                     />
 
                     <span
                       className={[
                         "text-sm leading-6",
-                        offer.highlight ? "text-black/68" : "text-white/70",
+                        offer.highlight ? "text-black/70" : "text-white/76",
                       ].join(" ")}
                     >
                       {feature}
@@ -217,11 +269,11 @@ export default function OffersSection() {
                 ))}
               </div>
 
-              <div className="mt-auto pt-10">
+              <div className="relative z-10 mt-auto pt-10">
                 <p
                   className={[
                     "mb-4 text-center text-xs font-medium",
-                    offer.highlight ? "text-black/45" : "text-white/45",
+                    offer.highlight ? "text-black/48" : "text-white/52",
                   ].join(" ")}
                 >
                   {offer.note}
@@ -231,10 +283,10 @@ export default function OffersSection() {
                   href={offer.href}
                   aria-label={offer.cta}
                   className={[
-                    "group/link flex w-full items-center justify-center gap-2 rounded-full border px-6 py-4 text-center text-sm font-semibold transition-all duration-300",
+                    "group/link flex w-full items-center justify-center gap-2 rounded-full border px-6 py-4 text-center text-sm font-semibold shadow-lg transition-all duration-300",
                     offer.highlight
-                      ? "border-black/10 bg-[#111111] text-white hover:bg-[#2a211b]"
-                      : "border-white/15 bg-white/5 text-white hover:border-[#b49a7c]/45 hover:bg-[#b49a7c]/15",
+                      ? "border-black/10 bg-[#111111] text-white shadow-black/15 hover:bg-[#2a211b]"
+                      : "border-white/15 bg-white/[0.08] text-white shadow-black/20 hover:border-[#d8c4ad]/55 hover:bg-[#d8c4ad]/18",
                   ].join(" ")}
                 >
                   {offer.cta}
@@ -246,8 +298,8 @@ export default function OffersSection() {
                   className={[
                     "mt-4 flex w-full items-center justify-center text-xs font-semibold transition duration-300",
                     offer.highlight
-                      ? "text-black/45 hover:text-black"
-                      : "text-white/42 hover:text-white",
+                      ? "text-black/46 hover:text-black"
+                      : "text-white/52 hover:text-white",
                   ].join(" ")}
                 >
                   Voir le détail du pack
