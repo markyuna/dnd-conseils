@@ -27,6 +27,7 @@ const offers = [
     note: "Idéal avant de signer",
     cta: "Demander le Pack Essentiel",
     href: "/devis?type=pack-essentiel",
+    detailHref: "/tarifs#pack-essentiel",
   },
   {
     slug: "serenite",
@@ -44,6 +45,7 @@ const offers = [
     note: "Le meilleur équilibre",
     cta: "Choisir le Pack Sérénité",
     href: "/devis?type=pack-serenite",
+    detailHref: "/tarifs#pack-serenite",
   },
   {
     slug: "chantier",
@@ -60,6 +62,7 @@ const offers = [
     note: "Pour les projets avancés",
     cta: "Demander le Pack Chantier",
     href: "/devis?type=pack-chantier",
+    detailHref: "/tarifs#pack-chantier",
   },
 ];
 
@@ -106,7 +109,7 @@ export default function OffersSection() {
               href="/tarifs#packs"
               className="inline-flex items-center justify-center gap-3 rounded-full border border-white/12 bg-white px-6 py-3 text-sm font-semibold text-[#111111] shadow-[0_18px_50px_rgba(255,255,255,0.12)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8c4ad]"
             >
-              Voir tous les détails des packs
+              Voir tous les packs
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -237,7 +240,7 @@ export default function OffersSection() {
                 </Link>
 
                 <Link
-                  href={`/tarifs#${offer.slug === "chantier" ? "packs" : "packs"}`}
+                  href={offer.detailHref}
                   className={[
                     "mt-4 flex w-full items-center justify-center text-xs font-semibold transition duration-300",
                     offer.highlight

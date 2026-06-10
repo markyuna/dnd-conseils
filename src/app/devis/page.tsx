@@ -137,6 +137,25 @@ const formulaLabels: Record<
   },
 };
 
+const formulaAliases: Record<string, string> = {
+  diagnostic: "diagnostic-flash",
+  flash: "diagnostic-flash",
+  "diagnostic-flash": "diagnostic-flash",
+  "analyse-devis": "analyse-devis",
+  analyse: "analyse-devis",
+  "suivi-chantier": "suivi-chantier",
+  suivi: "suivi-chantier",
+  chantier: "suivi-chantier",
+  "audit-budgetaire": "audit-budgetaire",
+  audit: "audit-budgetaire",
+  "pack-essentiel": "pack-essentiel",
+  essentiel: "essentiel",
+  "pack-serenite": "pack-serenite",
+  serenite: "serenite",
+  "pack-chantier": "pack-chantier",
+  premium: "premium",
+};
+
 const pageContent = {
   diagnostic: {
     eyebrow: "Diagnostic gratuit",
@@ -177,21 +196,29 @@ function toggleArrayValue(value: string, current: string[]) {
 }
 
 function getRequestType(type: string | null): RequestType {
-  if (type === "diagnostic" || type === "contact" || type === "devis") {
-    return type;
-  }
+  if (type === "contact") return "contact";
 
-  if (type === "etude") return "diagnostic";
+  if (type === "diagnostic" || type === "etude") return "diagnostic";
 
   return "devis";
 }
 
+function normalizeFormulaSlug(value: string | null) {
+  if (!value) return "";
+
+  const normalizedValue = formulaAliases[value] ?? value;
+
+  return formulaLabels[normalizedValue] ? normalizedValue : "";
+}
+
 function getSelectedFormulaSlug(type: string | null, offer: string | null) {
-  const slug = type && formulaLabels[type] ? type : offer;
+  const offerSlug = normalizeFormulaSlug(offer);
+  if (offerSlug) return offerSlug;
 
-  if (!slug) return "";
+  const typeSlug = normalizeFormulaSlug(type);
+  if (typeSlug) return typeSlug;
 
-  return formulaLabels[slug] ? slug : "";
+  return "";
 }
 
 function DevisPageContent() {

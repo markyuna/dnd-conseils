@@ -6,10 +6,10 @@ import {
   BadgeCheck,
   ClipboardCheck,
   FileSearch,
-  ShieldCheck,
-  WalletCards,
   PackageCheck,
+  ShieldCheck,
   Sparkles,
+  WalletCards,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -75,8 +75,10 @@ const offers = [
 
 const packs = [
   {
+    id: "pack-essentiel",
     title: "Pack Essentiel",
     price: "À partir de 390 € HT",
+    href: "/devis?type=pack-essentiel",
     desc: "Pour démarrer avec une vision claire avant de signer ou lancer les travaux.",
     items: [
       "Diagnostic projet",
@@ -86,8 +88,10 @@ const packs = [
     ],
   },
   {
+    id: "pack-serenite",
     title: "Pack Sérénité",
     price: "À partir de 790 € HT",
+    href: "/devis?type=pack-serenite",
     desc: "Pour être accompagné avant et pendant les premières étapes du chantier.",
     items: [
       "Diagnostic complet",
@@ -98,8 +102,10 @@ const packs = [
     featured: true,
   },
   {
+    id: "pack-chantier",
     title: "Pack Chantier",
     price: "Sur devis",
+    href: "/devis?type=pack-chantier",
     desc: "Pour un accompagnement plus complet sur la durée des travaux.",
     items: [
       "Suivi mensuel",
@@ -240,8 +246,9 @@ export default function TarifsPage() {
           <div className="grid gap-5 lg:grid-cols-3">
             {packs.map((pack) => (
               <article
-                key={pack.title}
-                className={`relative overflow-hidden rounded-[30px] border p-7 shadow-[0_24px_80px_rgba(20,18,16,0.06)] sm:p-8 ${
+                key={pack.id}
+                id={pack.id}
+                className={`scroll-mt-32 relative overflow-hidden rounded-[30px] border p-7 shadow-[0_24px_80px_rgba(20,18,16,0.06)] sm:p-8 ${
                   pack.featured
                     ? "border-[#111111] bg-[#111111] text-white"
                     : "border-[#dfdbd4] bg-white/85 text-[#111111]"
@@ -294,7 +301,7 @@ export default function TarifsPage() {
                 </ul>
 
                 <Link
-                  href="/devis?type=pack"
+                  href={pack.href}
                   className={`mt-8 inline-flex items-center gap-2 text-sm font-semibold transition duration-300 hover:gap-3 ${
                     pack.featured ? "text-white" : "text-[#8b7a6b]"
                   }`}
