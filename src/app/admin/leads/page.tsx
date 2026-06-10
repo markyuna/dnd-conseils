@@ -196,6 +196,7 @@ export default async function AdminLeadsPage() {
 
                   <LeadStatusActions
                     leadId={lead.id}
+                    leadName={lead.name}
                     currentStatus={lead.status || "new"}
                   />
                 </div>

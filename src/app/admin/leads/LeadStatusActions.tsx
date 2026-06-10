@@ -4,6 +4,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Trash2 } from "lucide-react";
 
 const statuses = [
   { value: "new", label: "Nouveau" },
@@ -17,18 +18,21 @@ type LeadStatus = (typeof statuses)[number]["value"];
 
 type LeadStatusActionsProps = {
   leadId: string;
+  leadName?: string | null;
   currentStatus: string;
 };
 
 export default function LeadStatusActions({
   leadId,
+  leadName,
   currentStatus,
 }: LeadStatusActionsProps) {
   const router = useRouter();
   const [loadingStatus, setLoadingStatus] = useState<LeadStatus | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   async function updateStatus(status: LeadStatus) {
-    if (status === currentStatus || loadingStatus) return;
+    if (status === currentStatus || loadingStatus || isDeleting) return;
 
     try {
       setLoadingStatus(status);
@@ -61,12 +65,48 @@ export default function LeadStatusActions({
     }
   }
 
+  async function deleteLead() {
+    if (isDeleting || loadingStatus) return;
+
+    const confirmed = window.confirm(
+      `Voulez-vous vraiment supprimer cette demande${
+        leadName?.trim() ? ` de ${leadName.trim()}` : ""
+      } ? Cette action est définitive.`
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setIsDeleting(true);
+
+      const response = await fetch(`/api/admin/leads/${leadId}`, {
+        method: "DELETE",
+      });
+
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          payload?.error || "Erreur lors de la suppression de la demande."
+        );
+      }
+
+      router.refresh();
+    } catch (error) {
+      console.error("Erreur delete lead:", error);
+      alert("Impossible de supprimer cette demande pour le moment.");
+    } finally {
+      setIsDeleting(false);
+    }
+  }
+
+  const isDisabled = Boolean(loadingStatus) || isDeleting;
+
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-wrap items-center justify-start gap-2 md:justify-end">
       {statuses.map((status) => {
         const isActive = currentStatus === status.value;
         const isLoading = loadingStatus === status.value;
-        const isDisabled = Boolean(loadingStatus);
 
         return (
           <button
@@ -89,6 +129,22 @@ export default function LeadStatusActions({
           </button>
         );
       })}
+
+      <button
+        type="button"
+        disabled={isDisabled}
+        onClick={deleteLead}
+        className={[
+          "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition",
+          "bg-red-50 text-red-700 hover:bg-red-100",
+          "focus:outline-none focus:ring-2 focus:ring-red-200 focus:ring-offset-2",
+          isDisabled ? "cursor-not-allowed opacity-60" : "",
+        ].join(" ")}
+        aria-busy={isDeleting}
+      >
+        <Trash2 className="h-3.5 w-3.5" />
+        {isDeleting ? "Suppression..." : "Supprimer"}
+      </button>
     </div>
   );
-} 
+}

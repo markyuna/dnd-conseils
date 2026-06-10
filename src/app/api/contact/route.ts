@@ -24,18 +24,20 @@ function clean(value: unknown) {
 }
 
 function normalizeDocuments(value: unknown) {
-  if (!value) return null;
+  if (!value) return "";
 
   if (Array.isArray(value)) {
-    return value.map(String).filter(Boolean);
+    return value
+      .map((item) => String(item).trim())
+      .filter(Boolean)
+      .join(", ");
   }
 
   if (typeof value === "string") {
-    const cleaned = value.trim();
-    return cleaned ? [cleaned] : null;
+    return value.trim();
   }
 
-  return [String(value)];
+  return String(value).trim();
 }
 
 function escapeHtml(value: string) {
@@ -52,6 +54,15 @@ function getOfferLabel(offer: string) {
     essentiel: "Essentiel — À partir de 99€",
     serenite: "Sérénité — À partir de 249€",
     premium: "Premium — À partir de 499€",
+
+    "diagnostic-flash": "Forfait Diagnostic / Flash",
+    "analyse-devis": "Analyse des devis",
+    "suivi-chantier": "Suivi et coordination",
+    "audit-budgetaire": "Audit Budgétaire",
+
+    "pack-essentiel": "Pack Essentiel",
+    "pack-serenite": "Pack Sérénité",
+    "pack-chantier": "Pack Chantier",
   };
 
   return labels[offer] || offer || "Non renseignée";
@@ -76,7 +87,10 @@ export async function POST(req: Request) {
     const requestType = clean(body.request_type || body.requestType || "devis");
 
     const projectType = clean(
-      body.project_type || body.projectType || body.typeProjet || body.type_projet
+      body.project_type ||
+        body.projectType ||
+        body.typeProjet ||
+        body.type_projet
     );
 
     const typeBien = clean(body.type_bien || body.typeBien);
@@ -132,15 +146,14 @@ export async function POST(req: Request) {
     const safeEmail = escapeHtml(email);
     const safePhone = escapeHtml(phone || "Non renseigné");
     const safeOffer = escapeHtml(getOfferLabel(offer));
+    const safeRequestType = escapeHtml(requestType || "Non renseigné");
     const safeProjectType = escapeHtml(projectType || "Non renseigné");
     const safeTypeBien = escapeHtml(typeBien || "Non renseigné");
     const safeSurface = escapeHtml(surface || "Non renseignée");
     const safeLots = escapeHtml(lots || "Non renseignés");
     const safeTiming = escapeHtml(timing || "Non renseigné");
     const safeBudget = escapeHtml(budget || "Non renseigné");
-    const safeDocuments = escapeHtml(
-      documents && documents.length > 0 ? documents.join(", ") : "Aucun document"
-    );
+    const safeDocuments = escapeHtml(documents || "Aucun document");
     const safeMessage = escapeHtml(message || "Aucun message");
 
     if (resend) {
@@ -155,7 +168,7 @@ export async function POST(req: Request) {
             <p><strong>Email :</strong> ${safeEmail}</p>
             <p><strong>Téléphone :</strong> ${safePhone}</p>
             <p><strong>Offre :</strong> ${safeOffer}</p>
-            <p><strong>Type de demande :</strong> ${escapeHtml(requestType)}</p>
+            <p><strong>Type de demande :</strong> ${safeRequestType}</p>
             <p><strong>Type de projet :</strong> ${safeProjectType}</p>
             <p><strong>Type de bien :</strong> ${safeTypeBien}</p>
             <p><strong>Surface :</strong> ${safeSurface}</p>
