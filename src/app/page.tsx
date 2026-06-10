@@ -8,6 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import OffersSection from "@/components/OffersSection";
 import QuizAccompagnementSection from "@/components/QuizAccompagnementSection";
 import DevisAnalysisExampleSection from "@/components/DevisAnalysisExampleSection";
+import ChantierRiskCalculatorSection from "@/components/ChantierRiskCalculatorSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
 import ContactSection from "@/components/ContactSection";
 
@@ -29,6 +30,8 @@ export default function Home() {
       <QuizAccompagnementSection />
 
       <DevisAnalysisExampleSection />
+
+      <ChantierRiskCalculatorSection />
 
       <FinalCtaSection />
 
