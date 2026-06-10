@@ -11,10 +11,11 @@ type NavbarProps = {
 };
 
 const navItems = [
-  { label: "Services", href: "#services" },
-  { label: "Méthode", href: "#methode" },
+  { label: "Services", href: "/#services" },
+  { label: "Méthode", href: "/#methode" },
+  { label: "Tarifs", href: "/tarifs" },
   { label: "À propos", href: "/a-propos" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar({ variant = "default" }: NavbarProps) {

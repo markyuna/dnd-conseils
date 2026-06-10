@@ -75,24 +75,65 @@ const documentsList = [
   "Aucun document",
 ];
 
-const offerLabels: Record<
+const formulaLabels: Record<
   string,
   {
     title: string;
     price: string;
+    type: "formule" | "pack";
   }
 > = {
+  "diagnostic-flash": {
+    title: "Forfait Diagnostic / Flash",
+    price: "150 € à 250 € HT",
+    type: "formule",
+  },
+  "analyse-devis": {
+    title: "Forfait analyse de devis",
+    price: "190 € à 290 € HT",
+    type: "formule",
+  },
+  "suivi-chantier": {
+    title: "Suivi et coordination",
+    price: "120 € à 600 € HT",
+    type: "formule",
+  },
+  "audit-budgetaire": {
+    title: "Forfait Audit Budgétaire",
+    price: "250 € à 450 € HT",
+    type: "formule",
+  },
+  "pack-essentiel": {
+    title: "Pack Essentiel",
+    price: "À partir de 390 € HT",
+    type: "pack",
+  },
+  "pack-serenite": {
+    title: "Pack Sérénité",
+    price: "À partir de 790 € HT",
+    type: "pack",
+  },
+  "pack-chantier": {
+    title: "Pack Chantier",
+    price: "Sur devis",
+    type: "pack",
+  },
+
+  // Compatibilité avec les anciens liens déjà présents dans le projet
   essentiel: {
-    title: "Essentiel",
-    price: "À partir de 99€",
+    title: "Pack Essentiel",
+    price: "À partir de 390 € HT",
+    type: "pack",
   },
   serenite: {
-    title: "Sérénité",
-    price: "À partir de 249€",
+    title: "Pack Sérénité",
+    price: "À partir de 790 € HT",
+    type: "pack",
   },
   premium: {
-    title: "Premium",
-    price: "À partir de 499€",
+    title: "Pack Chantier",
+    price: "Sur devis",
+    type: "pack",
   },
 };
 
@@ -145,22 +186,47 @@ function getRequestType(type: string | null): RequestType {
   return "devis";
 }
 
-function getValidOfferSlug(offer: string | null) {
-  if (!offer) return "";
+function getSelectedFormulaSlug(type: string | null, offer: string | null) {
+  const slug = type && formulaLabels[type] ? type : offer;
 
-  return offerLabels[offer] ? offer : "";
+  if (!slug) return "";
+
+  return formulaLabels[slug] ? slug : "";
 }
 
 function DevisPageContent() {
   const searchParams = useSearchParams();
 
   const requestType = getRequestType(searchParams.get("type"));
-  const selectedOfferSlug = getValidOfferSlug(searchParams.get("offre"));
+  const selectedFormulaSlug = getSelectedFormulaSlug(
+    searchParams.get("type"),
+    searchParams.get("offre")
+  );
 
   const content = useMemo(() => pageContent[requestType], [requestType]);
-  const selectedOffer = selectedOfferSlug
-    ? offerLabels[selectedOfferSlug]
+  const selectedFormula = selectedFormulaSlug
+    ? formulaLabels[selectedFormulaSlug]
     : null;
+
+  const pageTitle = selectedFormula
+    ? `Demander ${selectedFormula.title}`
+    : content.title;
+
+  const pageDescription = selectedFormula
+    ? "Remplissez ce formulaire pour que je puisse comprendre votre situation et revenir vers vous avec une réponse adaptée à la formule sélectionnée."
+    : content.description;
+
+  const formTitle = selectedFormula
+    ? selectedFormula.type === "pack"
+      ? "Votre demande de pack"
+      : "Votre demande de formule"
+    : content.formTitle;
+
+  const buttonLabel = selectedFormula
+    ? selectedFormula.type === "pack"
+      ? "Demander ce pack"
+      : "Demander cette formule"
+    : content.button;
 
   const [selectedProjectType, setSelectedProjectType] = useState<string | null>(
     null
@@ -190,13 +256,19 @@ function DevisPageContent() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    const message = String(formData.get("message") ?? "").trim();
+
+    const formulaMessage = selectedFormula
+      ? `Formule sélectionnée : ${selectedFormula.title} — ${selectedFormula.price}`
+      : "";
+
     const payload = {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
       phone: String(formData.get("phone") ?? "").trim(),
       requestType,
       request_type: requestType,
-      offer: selectedOfferSlug,
+      offer: selectedFormulaSlug,
       projectType: selectedProjectType ?? "",
       project_type: selectedProjectType ?? "",
       typeBien: "",
@@ -206,7 +278,7 @@ function DevisPageContent() {
       timing: selectedTiming,
       budget: selectedBudget,
       documents: selectedDocuments,
-      message: String(formData.get("message") ?? "").trim(),
+      message: [formulaMessage, message].filter(Boolean).join("\n\n"),
     };
 
     setStatus("loading");
@@ -285,6 +357,27 @@ function DevisPageContent() {
                 recontacterons rapidement avec une première orientation claire.
               </motion.p>
 
+              {selectedFormula && (
+                <motion.div
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.56 }}
+                  className="mx-auto mt-8 max-w-md rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5"
+                >
+                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
+                    Formule demandée
+                  </p>
+
+                  <p className="mt-2 text-base font-semibold text-[#111]">
+                    {selectedFormula.title}
+                  </p>
+
+                  <p className="mt-1 text-sm text-neutral-500">
+                    {selectedFormula.price}
+                  </p>
+                </motion.div>
+              )}
+
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -356,7 +449,11 @@ function DevisPageContent() {
                 transition={{ delay: 0.08 }}
                 className="mb-5 text-xs font-medium uppercase tracking-[0.35em] text-[#b49a7c]"
               >
-                {content.eyebrow}
+                {selectedFormula
+                  ? selectedFormula.type === "pack"
+                    ? "Demande de pack"
+                    : "Demande de formule"
+                  : content.eyebrow}
               </motion.p>
 
               <motion.h1
@@ -365,7 +462,7 @@ function DevisPageContent() {
                 transition={{ delay: 0.14 }}
                 className="text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl"
               >
-                {content.title}
+                {pageTitle}
               </motion.h1>
 
               <motion.p
@@ -374,10 +471,10 @@ function DevisPageContent() {
                 transition={{ delay: 0.22 }}
                 className="mt-8 max-w-md text-lg leading-8 text-neutral-400"
               >
-                {content.description}
+                {pageDescription}
               </motion.p>
 
-              {selectedOffer && (
+              {selectedFormula && (
                 <motion.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -385,15 +482,17 @@ function DevisPageContent() {
                   className="mt-8 rounded-3xl border border-[#b49a7c]/30 bg-[#b49a7c]/10 p-5 backdrop-blur"
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-[#d3bea6]">
-                    Offre sélectionnée
+                    {selectedFormula.type === "pack"
+                      ? "Pack sélectionné"
+                      : "Formule sélectionnée"}
                   </p>
 
                   <p className="mt-2 text-2xl font-semibold">
-                    {selectedOffer.title}
+                    {selectedFormula.title}
                   </p>
 
                   <p className="mt-1 text-sm text-white/55">
-                    {selectedOffer.price}
+                    {selectedFormula.price}
                   </p>
                 </motion.div>
               )}
@@ -436,11 +535,15 @@ function DevisPageContent() {
                 <div className="mb-10">
                   <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#a89278]/20 bg-[#f6f2ee] px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
                     <Sparkles size={14} />
-                    {content.formEyebrow}
+                    {selectedFormula
+                      ? selectedFormula.type === "pack"
+                        ? "Pack sélectionné"
+                        : "Formule sélectionnée"
+                      : content.formEyebrow}
                   </div>
 
                   <h2 className="text-3xl font-semibold tracking-tight text-[#111] md:text-4xl">
-                    {content.formTitle}
+                    {formTitle}
                   </h2>
 
                   <p className="mt-3 max-w-xl text-sm leading-6 text-neutral-500">
@@ -449,26 +552,28 @@ function DevisPageContent() {
                   </p>
                 </div>
 
-                {selectedOffer && (
+                {selectedFormula && (
                   <div className="mb-8 rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5">
                     <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
-                      Offre sélectionnée
+                      {selectedFormula.type === "pack"
+                        ? "Pack demandé"
+                        : "Formule demandée"}
                     </p>
 
                     <p className="mt-2 text-sm text-neutral-600">
-                      Vous êtes sur la formule{" "}
+                      Vous êtes sur{" "}
                       <span className="font-semibold text-[#111]">
-                        {selectedOffer.title}
+                        {selectedFormula.title}
                       </span>{" "}
                       <span className="text-neutral-400">
-                        — {selectedOffer.price}
+                        — {selectedFormula.price}
                       </span>
                     </p>
 
                     <input
                       type="hidden"
                       name="offer"
-                      value={selectedOfferSlug}
+                      value={selectedFormulaSlug}
                     />
                   </div>
                 )}
@@ -560,9 +665,11 @@ function DevisPageContent() {
                     label="Ce que vous souhaitez préciser"
                     name="message"
                     placeholder={
-                      requestType === "contact"
-                        ? "Expliquez-moi votre question, vos inquiétudes ou votre besoin..."
-                        : "Ajoutez ici les détails qui ne sont pas dans les choix : contraintes, priorités, état actuel, adresse approximative, informations importantes..."
+                      selectedFormula
+                        ? `Ajoutez ici les détails utiles pour votre demande : contexte, adresse approximative, contraintes, priorités ou questions concernant ${selectedFormula.title}...`
+                        : requestType === "contact"
+                          ? "Expliquez-moi votre question, vos inquiétudes ou votre besoin..."
+                          : "Ajoutez ici les détails qui ne sont pas dans les choix : contraintes, priorités, état actuel, adresse approximative, informations importantes..."
                     }
                   />
                 </FormBlock>
@@ -585,7 +692,7 @@ function DevisPageContent() {
                     </>
                   ) : (
                     <>
-                      {content.button}
+                      {buttonLabel}
                       <ArrowRight size={18} />
                     </>
                   )}

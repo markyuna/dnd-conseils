@@ -57,7 +57,10 @@ const fadeUp = {
 
 export default function ServicesSection() {
   return (
-    <section className="relative overflow-hidden bg-[#f8f7f4] px-5 py-24 text-[#111111] sm:px-8 lg:px-12">
+    <section
+      id="services"
+      className="relative scroll-mt-28 overflow-hidden bg-[#f8f7f4] px-5 py-24 text-[#111111] sm:px-8 lg:px-12"
+    >
       <div className="pointer-events-none absolute left-1/2 top-0 h-[460px] w-[860px] -translate-x-1/2 rounded-full bg-[#a39183]/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl">
