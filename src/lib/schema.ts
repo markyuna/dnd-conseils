@@ -21,6 +21,8 @@ export function organizationSchema() {
     logo: getAbsoluteUrl("/logo.png"),
     description:
       "DND Conseils accompagne les particuliers avant leurs travaux de rénovation avec un regard indépendant, structuré et stratégique.",
+    telephone: "+33604522405",
+    email: "dndconseil75@gmail.com",
     sameAs: [],
   };
 }

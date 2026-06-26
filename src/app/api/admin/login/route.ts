@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  if (!body || typeof body !== "object") {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
 
   const password = String(body.password ?? "").trim();
   const adminPassword = String(process.env.ADMIN_PASSWORD ?? "").trim();
@@ -25,7 +28,7 @@ export async function POST(req: Request) {
   response.cookies.set("dnd_admin", "true", {
     httpOnly: true,
     sameSite: "lax",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     path: "/",
     maxAge: 60 * 60 * 24,
   });
