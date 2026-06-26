@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   ClipboardCheck,
   FileSearch,
+  PackageCheck,
   ShieldCheck,
   Sparkles,
   WalletCards,
@@ -126,8 +127,18 @@ export default function TarifsPage() {
         </div>
       </section>
 
-      <section className="px-5 pb-24 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
+      <section className="px-5 pb-28 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#8b7a6b]">
+              Interventions ponctuelles
+            </p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-[-0.045em] text-[#111111] md:text-4xl">
+              Une aide ciblée, au moment précis où vous en avez besoin.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
           {offers.map((offer, index) => {
             const Icon = offer.icon;
             const number = String(index + 1).padStart(2, "0");
@@ -224,6 +235,215 @@ export default function TarifsPage() {
               </article>
             );
           })}
+          </div>
+        </div>
+      </section>
+
+      {/* Packs clés en main */}
+      <section
+        id="packs"
+        className="relative scroll-mt-24 overflow-hidden bg-[#111111] px-5 py-24 text-white sm:px-8 lg:px-12"
+      >
+        <div className="pointer-events-none absolute left-1/2 top-[-260px] h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-[-200px] right-[-160px] h-[480px] w-[480px] rounded-full bg-[#d8c4ad]/12 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mb-14 max-w-3xl">
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/[0.07] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#f0dac2]">
+              <PackageCheck className="h-3.5 w-3.5" />
+              Packs clés en main
+            </div>
+
+            <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">
+              Un accompagnement complet,{" "}
+              <span className="bg-gradient-to-r from-[#ead6bd] via-white to-[#b49a7c] bg-clip-text text-transparent">
+                de bout en bout.
+              </span>
+            </h2>
+
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/62">
+              Pour aller plus loin qu'une intervention ponctuelle, les packs
+              regroupent les étapes essentielles afin de vous aider à avancer
+              avec méthode et sérénité.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Pack Essentiel */}
+            <article
+              id="pack-essentiel"
+              className="group relative flex scroll-mt-28 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 text-white shadow-[0_28px_90px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-[#d8c4ad]/40 hover:bg-white/[0.09] sm:p-8"
+            >
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8c4ad] to-transparent opacity-70" />
+
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.07] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#f0dac2]">
+                <Sparkles className="h-3.5 w-3.5" />
+                Pour bien démarrer
+              </div>
+
+              <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">
+                Pack Essentiel
+              </h3>
+
+              <p className="mt-3 text-3xl font-semibold tracking-[-0.04em] bg-gradient-to-r from-[#ead6bd] via-white to-[#b49a7c] bg-clip-text text-transparent">
+                À partir de 390 € HT
+              </p>
+
+              <div className="mt-8 flex-1 space-y-3">
+                {[
+                  "Diagnostic projet",
+                  "Analyse de 2 à 3 devis",
+                  "Compte-rendu écrit",
+                  "Recommandations prioritaires",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-2xl border border-white/8 bg-white/[0.04] px-4 py-3"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#f0dac2]" />
+                    <span className="text-sm leading-6 text-white/72">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                <p className="mb-4 text-center text-xs font-medium text-white/48">
+                  Idéal avant de signer.
+                </p>
+                <Link
+                  href="/devis?offre=pack-essentiel"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/14 bg-white/[0.07] px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-[#d8c4ad]/50 hover:bg-white/[0.14]"
+                >
+                  Choisir ce pack
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+
+            {/* Pack Sérénité — highlighted */}
+            <article
+              id="pack-serenite"
+              className="group relative flex scroll-mt-28 flex-col overflow-hidden rounded-[2rem] border border-[#d8c4ad]/80 bg-white p-7 text-[#111111] shadow-[0_34px_120px_rgba(216,196,173,0.28)] transition-all duration-500 hover:-translate-y-1 sm:p-8"
+            >
+              <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 rounded-b-2xl bg-[#a89278] px-6 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg">
+                Recommandé
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8c4ad] to-transparent opacity-70" />
+
+              <div className="pt-6">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9a8065]">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Formule recommandée
+                </div>
+
+                <h3 className="text-2xl font-semibold tracking-[-0.04em] text-[#111111]">
+                  Pack Sérénité
+                </h3>
+
+                <p className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[#9a8065]">
+                  À partir de 790 € HT
+                </p>
+              </div>
+
+              <div className="mt-8 flex-1 space-y-3">
+                {[
+                  "Diagnostic complet",
+                  "Analyse des devis",
+                  "1 visite de chantier",
+                  "Compte-rendu et conseils personnalisés",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-2xl border border-black/5 bg-black/[0.025] px-4 py-3"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#9a8065]" />
+                    <span className="text-sm leading-6 text-black/68">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                <p className="mb-4 text-center text-xs font-medium text-black/45">
+                  Le meilleur équilibre entre suivi et maîtrise du projet.
+                </p>
+                <Link
+                  href="/devis?offre=pack-serenite"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-black/10 bg-[#111111] px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#2a211b]"
+                >
+                  Choisir ce pack
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+
+            {/* Pack Chantier */}
+            <article
+              id="pack-chantier"
+              className="group relative flex scroll-mt-28 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 text-white shadow-[0_28px_90px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-[#d8c4ad]/40 hover:bg-white/[0.09] sm:p-8"
+            >
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d8c4ad] to-transparent opacity-70" />
+
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.07] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#f0dac2]">
+                <Sparkles className="h-3.5 w-3.5" />
+                Accompagnement complet
+              </div>
+
+              <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">
+                Pack Chantier
+              </h3>
+
+              <p className="mt-3 text-3xl font-semibold tracking-[-0.04em] bg-gradient-to-r from-[#ead6bd] via-white to-[#b49a7c] bg-clip-text text-transparent">
+                Sur devis
+              </p>
+
+              <p className="mt-2 text-xs leading-5 text-white/50">
+                Tarif établi selon la durée et la complexité du chantier.
+              </p>
+
+              <div className="mt-8 flex-1 space-y-3">
+                {[
+                  "Suivi mensuel du chantier",
+                  "Visites de chantier régulières",
+                  "Comptes-rendus après chaque intervention",
+                  "Conseils et coordination des intervenants",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-2xl border border-white/8 bg-white/[0.04] px-4 py-3"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#f0dac2]" />
+                    <span className="text-sm leading-6 text-white/72">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                <p className="mb-4 text-center text-xs font-medium text-white/48">
+                  Pour les projets avancés qui nécessitent un suivi régulier.
+                </p>
+                <Link
+                  href="/devis?offre=pack-chantier"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/14 bg-white/[0.07] px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-[#d8c4ad]/50 hover:bg-white/[0.14]"
+                >
+                  Demander un devis
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-sm text-white/50">
+              Tous les tarifs sont indiqués hors taxes.{" "}
+              <Link
+                href="/devis"
+                className="font-medium text-white/75 underline underline-offset-4 hover:text-white"
+              >
+                Contactez-nous
+              </Link>{" "}
+              pour un premier échange sans engagement.
+            </p>
+          </div>
         </div>
       </section>
     </main>
