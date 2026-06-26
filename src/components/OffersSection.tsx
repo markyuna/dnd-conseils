@@ -114,15 +114,6 @@ export default function OffersSection() {
             méthode, visibilité et sérénité.
           </p>
 
-          <div className="mt-9 flex justify-center">
-            <Link
-              href="/tarifs#packs"
-              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/12 bg-white px-6 py-3 text-sm font-semibold text-[#111111] shadow-[0_18px_55px_rgba(255,255,255,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8c4ad]"
-            >
-              Voir tous les packs
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -293,17 +284,6 @@ export default function OffersSection() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
                 </Link>
 
-                <Link
-                  href={offer.detailHref}
-                  className={[
-                    "mt-4 flex w-full items-center justify-center text-xs font-semibold transition duration-300",
-                    offer.highlight
-                      ? "text-black/46 hover:text-black"
-                      : "text-white/52 hover:text-white",
-                  ].join(" ")}
-                >
-                  Voir le détail du pack
-                </Link>
               </div>
             </motion.article>
           ))}
