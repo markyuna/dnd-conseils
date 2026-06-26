@@ -29,7 +29,6 @@ const offers = [
     note: "Idéal avant de signer",
     cta: "Demander le Pack Essentiel",
     href: "/devis?offre=pack-essentiel",
-    detailHref: "/tarifs#pack-essentiel",
   },
   {
     slug: "serenite",
@@ -47,7 +46,6 @@ const offers = [
     note: "Le meilleur équilibre",
     cta: "Choisir le Pack Sérénité",
     href: "/devis?offre=pack-serenite",
-    detailHref: "/tarifs#pack-serenite",
   },
   {
     slug: "chantier",
@@ -64,7 +62,6 @@ const offers = [
     note: "Pour les projets avancés",
     cta: "Demander le Pack Chantier",
     href: "/devis?offre=pack-chantier",
-    detailHref: "/tarifs#pack-chantier",
   },
 ];
 
