@@ -61,42 +61,44 @@ export const seoServicePages: SeoServicePage[] = [
   {
     slug: "accompagnement-renovation",
     title: "Accompagnement rénovation",
-    metaTitle: "Accompagnement rénovation pour particuliers",
+    metaTitle: "Accompagnement rénovation pour particuliers | DND Conseils",
     description:
-      "Un accompagnement clair et indépendant pour mieux préparer votre projet de rénovation, structurer vos choix et éviter les mauvaises surprises.",
+      "Un accompagnement indépendant pour structurer votre projet de rénovation, préparer vos échanges avec les artisans et éviter les décisions prises trop vite.",
     eyebrow: "Rénovation maîtrisée",
-    h1: "Accompagnement rénovation pour particuliers",
+    h1: "Un accompagnement rénovation pensé pour les particuliers",
     intro:
-      "Rénover un appartement ou une maison demande des décisions importantes. DND Conseils vous accompagne pour avancer avec méthode, visibilité et confiance.",
+      "Rénover un appartement ou une maison implique des choix techniques, budgétaires et organisationnels complexes. DND Conseils vous aide à structurer chaque étape, préparer vos échanges avec les professionnels et avancer avec méthode.",
     benefits: [
-      "Structurer votre projet étape par étape",
-      "Mieux comprendre les contraintes techniques",
-      "Préparer les échanges avec les artisans",
-      "Garder une vision claire du budget et des priorités",
+      "Structurer votre projet étape par étape avant de vous lancer",
+      "Identifier les contraintes techniques à anticiper dès le départ",
+      "Préparer des échanges plus efficaces avec vos artisans",
+      "Garder une vision claire du budget, des priorités et des risques",
+      "Recevoir un regard extérieur indépendant à chaque étape clé",
+      "Éviter les décisions mal anticipées et les surcoûts évitables",
     ],
     faq: [
       {
-        question: "À quel moment contacter DND Conseils ?",
+        question: "À quel moment faut-il demander un accompagnement rénovation ?",
         answer:
-          "Idéalement avant de signer un devis ou de lancer les travaux, afin d’avoir une vision claire des points à vérifier.",
+          "Le plus tôt est le mieux — idéalement avant de contacter les artisans ou de signer quoi que ce soit. Cela permet d’identifier les points sensibles dès le début et de structurer le projet sur de bonnes bases.",
       },
       {
-        question: "L’accompagnement concerne-t-il les petits projets ?",
+        question: "L’accompagnement est-il utile pour un petit projet ?",
         answer:
-          "Oui. Même un projet simple peut bénéficier d’un regard extérieur pour éviter les oublis ou les décisions mal anticipées.",
+          "Oui. Même un projet limité (une salle de bain, une cuisine) peut comporter des décisions importantes sur les matériaux, les intervenants ou le séquençage. Un regard extérieur évite les oublis coûteux.",
       },
       {
-        question: "L’accompagnement rénovation est-il adapté aux particuliers ?",
+        question: "DND Conseils travaille-t-il avec des artisans ou est-il vraiment indépendant ?",
         answer:
-          "Oui. DND Conseils s’adresse aux particuliers qui souhaitent mieux comprendre leur projet, comparer leurs options et prendre des décisions plus sûres.",
+          "DND Conseils est totalement indépendant : aucune commission, aucun partenariat avec des entreprises de travaux. L’objectif est uniquement de vous aider à décider en connaissance de cause.",
       },
     ],
     keywords: [
-      "accompagnement rénovation",
-      "rénovation appartement",
-      "rénovation maison",
-      "conseil rénovation particulier",
-      "assistance rénovation",
+      "accompagnement rénovation particulier",
+      "aide rénovation appartement",
+      "conseil rénovation indépendant",
+      "accompagnement travaux maison",
+      "assistance projet rénovation",
     ],
   },
   {
@@ -143,42 +145,44 @@ export const seoServicePages: SeoServicePage[] = [
   {
     slug: "analyse-devis-travaux",
     title: "Analyse de devis travaux",
-    metaTitle: "Analyse de devis travaux avant signature",
+    metaTitle: "Analyse de devis travaux avant signature | DND Conseils",
     description:
-      "Faites analyser votre devis travaux avant de vous engager afin de mieux comprendre les prestations, les zones floues et les points à clarifier.",
+      "Faites analyser votre devis travaux par un expert indépendant avant de signer : zones floues, oublis, incohérences et points à négocier identifiés clairement.",
     eyebrow: "Avant signature",
-    h1: "Analyse de devis travaux avant engagement",
+    h1: "Faites analyser votre devis travaux avant de signer",
     intro:
-      "Un devis travaux peut contenir des éléments techniques difficiles à interpréter. DND Conseils vous aide à y voir plus clair avant de prendre une décision.",
+      "Un devis peut sembler complet et pourtant contenir des zones floues, des oublis ou des formulations trop vagues pour vous protéger. DND Conseils lit vos devis avec un regard technique et indépendant, et vous aide à signer en connaissance de cause.",
     benefits: [
-      "Identifier les éléments manquants ou imprécis",
-      "Comprendre les prestations proposées",
-      "Préparer les bonnes questions à poser",
-      "Limiter les risques de mauvaises surprises",
+      "Repérer les oublis et les postes sous-estimés dans le devis",
+      "Identifier les formulations imprécises qui peuvent générer des litiges",
+      "Comprendre ce qui est réellement inclus dans chaque ligne",
+      "Comparer plusieurs devis pour choisir la meilleure offre",
+      "Préparer les bonnes questions à poser à l’artisan avant signature",
+      "Réduire le risque de surcoûts et de mauvaises surprises en cours de chantier",
     ],
     faq: [
       {
-        question: "Puis-je envoyer plusieurs devis ?",
+        question: "Combien de devis pouvez-vous analyser en même temps ?",
         answer:
-          "Oui. Comparer plusieurs devis permet souvent de mieux comprendre les différences de prix, de méthode et de niveau de prestation.",
+          "Jusqu’à 3 devis par mission. Comparer plusieurs propositions est souvent très révélateur : des écarts de prix importants cachent souvent des différences de prestations que l’analyse permet de mettre en lumière.",
       },
       {
-        question: "L’analyse garantit-elle le prix final du chantier ?",
+        question: "Que reçois-je après l’analyse ?",
         answer:
-          "Non. Elle permet de mieux comprendre le devis et les risques potentiels, mais le prix final dépend du chantier, des entreprises et des aléas techniques.",
+          "Un rapport écrit clair avec les points de vigilance identifiés, les questions à poser à l’entreprise et des recommandations concrètes pour sécuriser ou renégocier le devis avant signature.",
       },
       {
-        question: "Pourquoi faire analyser un devis travaux ?",
+        question: "L’analyse est-elle utile si le devis me semble déjà clair ?",
         answer:
-          "Cela permet de repérer les zones floues, les oublis possibles, les formulations imprécises et les points à clarifier avant de signer.",
+          "Oui. Les formulations qui semblent claires pour un non-spécialiste peuvent être floues sur le plan technique ou contractuel. Un regard extérieur permet de confirmer — ou d’invalider — cette impression.",
       },
     ],
     keywords: [
       "analyse devis travaux",
-      "comparer devis travaux",
-      "devis rénovation",
-      "vérification devis travaux",
-      "avis devis travaux",
+      "vérification devis artisan",
+      "comparer devis rénovation",
+      "expert devis travaux indépendant",
+      "audit devis chantier",
     ],
   },
   {
