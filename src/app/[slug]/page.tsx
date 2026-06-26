@@ -90,7 +90,7 @@ export default async function SeoServicePage({ params }: Props) {
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
-                    href="/#contact"
+                    href="/contact"
                     className="inline-flex items-center gap-2 rounded-full border border-[#17130f]/15 bg-white px-6 py-3.5 text-sm font-semibold text-[#17130f] shadow-sm transition hover:-translate-y-0.5 hover:border-[#17130f]/25"
                   >
                     <MessageCircle className="h-4 w-4" />
