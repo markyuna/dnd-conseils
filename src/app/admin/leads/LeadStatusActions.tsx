@@ -6,15 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
 
-const statuses = [
-  { value: "new", label: "Nouveau" },
-  { value: "contacted", label: "Contacté" },
-  { value: "qualified", label: "Qualifié" },
-  { value: "won", label: "Gagné" },
-  { value: "lost", label: "Perdu" },
-] as const;
+import { LEAD_STATUSES, type LeadStatus } from "@/lib/lead-statuses";
 
-type LeadStatus = (typeof statuses)[number]["value"];
+const statuses = LEAD_STATUSES;
 
 type LeadStatusActionsProps = {
   leadId: string;

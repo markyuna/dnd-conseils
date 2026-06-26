@@ -51,18 +51,19 @@ function escapeHtml(value: string) {
 
 function getOfferLabel(offer: string) {
   const labels: Record<string, string> = {
-    essentiel: "Essentiel — À partir de 99€",
-    serenite: "Sérénité — À partir de 249€",
-    premium: "Premium — À partir de 499€",
+    "diagnostic-flash": "Forfait Diagnostic / Flash — 150 € à 250 € HT",
+    "analyse-devis": "Analyse des devis — 190 € à 290 € HT",
+    "suivi-chantier": "Suivi et coordination — 120 € à 600 € HT",
+    "audit-budgetaire": "Audit Budgétaire — 250 € à 450 € HT",
 
-    "diagnostic-flash": "Forfait Diagnostic / Flash",
-    "analyse-devis": "Analyse des devis",
-    "suivi-chantier": "Suivi et coordination",
-    "audit-budgetaire": "Audit Budgétaire",
+    "pack-essentiel": "Pack Essentiel — À partir de 390 € HT",
+    "pack-serenite": "Pack Sérénité — À partir de 790 € HT",
+    "pack-chantier": "Pack Chantier — Sur devis",
 
-    "pack-essentiel": "Pack Essentiel",
-    "pack-serenite": "Pack Sérénité",
-    "pack-chantier": "Pack Chantier",
+    // Backward-compat slugs with updated prices
+    essentiel: "Pack Essentiel — À partir de 390 € HT",
+    serenite: "Pack Sérénité — À partir de 790 € HT",
+    premium: "Pack Chantier — Sur devis",
   };
 
   return labels[offer] || offer || "Non renseignée";
