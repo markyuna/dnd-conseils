@@ -45,17 +45,12 @@ const staticRoutes: SitemapRoute[] = [
     priority: 0.95,
   },
   {
-    path: "/contact",
-    changeFrequency: "monthly",
-    priority: 0.75,
-  },
-  {
     path: "/mentions-legales",
     changeFrequency: "yearly",
     priority: 0.3,
   },
   {
-    path: "/politique-confidentialite",
+    path: "/confidentialite",
     changeFrequency: "yearly",
     priority: 0.3,
   },
