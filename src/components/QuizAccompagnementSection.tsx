@@ -178,7 +178,7 @@ const results: Record<
   analyse: {
     icon: FileSearch,
     label: "Recommandation",
-    title: "Pack Analyse Devis",
+    title: "Analyse des devis",
     description:
       "Le choix le plus adapté si vous avez déjà des devis ou des propositions à comparer avant de vous engager.",
     href: "/devis?type=analyse-devis",
@@ -191,7 +191,7 @@ const results: Record<
   suivi: {
     icon: ShieldCheck,
     label: "Recommandation",
-    title: "Pack Suivi & Coordination",
+    title: "Suivi et coordination",
     description:
       "Recommandé si les travaux approchent ou sont déjà en cours, afin de garder une vision claire et limiter les mauvaises surprises.",
     href: "/devis?type=suivi-chantier",

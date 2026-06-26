@@ -89,7 +89,7 @@ const formulaLabels: Record<
     type: "formule",
   },
   "analyse-devis": {
-    title: "Forfait analyse de devis",
+    title: "Analyse des devis",
     price: "190 € à 290 € HT",
     type: "formule",
   },
