@@ -137,24 +137,18 @@ const formulaLabels: Record<
   },
 };
 
+// Real aliases only — self-referential entries removed (formulaAliases[value] ?? value fallback handles them).
 const formulaAliases: Record<string, string> = {
   diagnostic: "diagnostic-flash",
   flash: "diagnostic-flash",
-  "diagnostic-flash": "diagnostic-flash",
-  "analyse-devis": "analyse-devis",
   analyse: "analyse-devis",
-  "suivi-chantier": "suivi-chantier",
   suivi: "suivi-chantier",
   chantier: "suivi-chantier",
-  "audit-budgetaire": "audit-budgetaire",
   audit: "audit-budgetaire",
-  "pack-essentiel": "pack-essentiel",
-  essentiel: "essentiel",
-  "pack-serenite": "pack-serenite",
-  serenite: "serenite",
-  "pack-chantier": "pack-chantier",
-  premium: "premium",
 };
+
+// requestType keywords must never trigger formula prefill when used as the ?type= param.
+const REQUEST_TYPE_KEYWORDS = new Set(["diagnostic", "contact", "devis", "etude"]);
 
 const pageContent = {
   diagnostic: {
@@ -215,8 +209,12 @@ function getSelectedFormulaSlug(type: string | null, offer: string | null) {
   const offerSlug = normalizeFormulaSlug(offer);
   if (offerSlug) return offerSlug;
 
-  const typeSlug = normalizeFormulaSlug(type);
-  if (typeSlug) return typeSlug;
+  // Don't treat requestType keywords as formula slugs — ?type=diagnostic must show
+  // the "Diagnostic gratuit" page variant, not prefill the Forfait Diagnostic formula.
+  if (type && !REQUEST_TYPE_KEYWORDS.has(type)) {
+    const typeSlug = normalizeFormulaSlug(type);
+    if (typeSlug) return typeSlug;
+  }
 
   return "";
 }

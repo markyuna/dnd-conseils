@@ -2,12 +2,17 @@
 
 import { NextResponse } from "next/server";
 
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: Request) {
+  if (!(await isAdminAuthenticated())) {
+    return NextResponse.json({ error: "Non autorisé." }, { status: 401 });
+  }
+
   try {
     const { data, error } = await supabaseAdmin
       .from("contact_requests")

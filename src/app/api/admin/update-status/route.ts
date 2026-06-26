@@ -1,34 +1,18 @@
 // src/app/api/admin/update-status/route.ts
 
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { isLeadStatus, LEAD_STATUSES } from "@/lib/lead-statuses";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const allowedStatuses = ["new", "contacted", "qualified", "won", "lost"] as const;
-
-type LeadStatus = (typeof allowedStatuses)[number];
-
-function isAllowedStatus(status: unknown): status is LeadStatus {
-  return (
-    typeof status === "string" &&
-    allowedStatuses.includes(status as LeadStatus)
-  );
-}
-
 export async function POST(req: Request) {
   try {
-    const cookieStore = await cookies();
-    const isAdmin = cookieStore.get("dnd_admin")?.value === "true";
-
-    if (!isAdmin) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+    if (!(await isAdminAuthenticated())) {
+      return NextResponse.json({ error: "Non autorisé." }, { status: 401 });
     }
 
     const body = await req.json().catch(() => null);
@@ -52,11 +36,11 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!isAllowedStatus(status)) {
+    if (!isLeadStatus(status)) {
       return NextResponse.json(
         {
           error: "Invalid status",
-          allowedStatuses,
+          allowedStatuses: LEAD_STATUSES.map((s) => s.value),
         },
         { status: 400 }
       );
@@ -64,9 +48,7 @@ export async function POST(req: Request) {
 
     const { data, error } = await supabaseAdmin
       .from("contact_requests")
-      .update({
-        status,
-      })
+      .update({ status })
       .eq("id", id)
       .select("id, status")
       .single();
@@ -74,16 +56,10 @@ export async function POST(req: Request) {
     if (error) {
       console.error("Erreur Supabase update-status:", error);
 
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({
-      success: true,
-      lead: data,
-    });
+    return NextResponse.json({ success: true, lead: data });
   } catch (error) {
     console.error("Erreur API update-status:", error);
 

@@ -1,8 +1,8 @@
 // src/app/api/admin/leads/[id]/route.ts
 
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export const runtime = "nodejs";
@@ -16,10 +16,7 @@ type RouteContext = {
 
 export async function DELETE(_request: Request, { params }: RouteContext) {
   try {
-    const cookieStore = await cookies();
-    const isAdmin = cookieStore.get("dnd_admin")?.value === "true";
-
-    if (!isAdmin) {
+    if (!(await isAdminAuthenticated())) {
       return NextResponse.json(
         { success: false, error: "Non autorisé." },
         { status: 401 }
@@ -35,10 +32,11 @@ export async function DELETE(_request: Request, { params }: RouteContext) {
       );
     }
 
-    const { error } = await supabaseAdmin
+    const { data, error } = await supabaseAdmin
       .from("contact_requests")
       .delete()
-      .eq("id", id);
+      .eq("id", id)
+      .select("id");
 
     if (error) {
       console.error("Erreur suppression lead Supabase:", error);
@@ -53,9 +51,14 @@ export async function DELETE(_request: Request, { params }: RouteContext) {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-    });
+    if (!data || data.length === 0) {
+      return NextResponse.json(
+        { success: false, error: "Demande introuvable." },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Erreur API delete lead:", error);
 
