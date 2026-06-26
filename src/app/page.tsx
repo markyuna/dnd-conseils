@@ -26,15 +26,15 @@ export default function Home() {
 
       <ProcessSection />
 
-      <ServicesSection />
-
-      <OffersSection />
-
       <QuizAccompagnementSection />
 
       <DevisAnalysisExampleSection />
 
       <ChantierRiskCalculatorSection />
+
+      <ServicesSection />
+
+      <OffersSection />
 
       <FinalCtaSection />
 
