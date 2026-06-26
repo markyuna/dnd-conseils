@@ -11,7 +11,6 @@ import QuizAccompagnementSection from "@/components/QuizAccompagnementSection";
 import DevisAnalysisExampleSection from "@/components/DevisAnalysisExampleSection";
 import ChantierRiskCalculatorSection from "@/components/ChantierRiskCalculatorSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
-import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
   return (
@@ -37,8 +36,6 @@ export default function Home() {
       <OffersSection />
 
       <FinalCtaSection />
-
-      <ContactSection />
     </main>
   );
 }

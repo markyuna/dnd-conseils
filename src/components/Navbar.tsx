@@ -15,7 +15,7 @@ const navItems = [
   { label: "Méthode", href: "/#methode" },
   { label: "Nos packs", href: "/#offres" },
   { label: "À propos", href: "/a-propos" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar({ variant = "default" }: NavbarProps) {
