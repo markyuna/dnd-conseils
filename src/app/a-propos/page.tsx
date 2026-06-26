@@ -16,43 +16,6 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
-const expertise = [
-  {
-    icon: Compass,
-    title: "Analyse stratégique",
-    text: "Clarifier vos objectifs, vos contraintes et les décisions prioritaires avant d’engager des travaux.",
-  },
-  {
-    icon: Building2,
-    title: "Lecture chantier",
-    text: "Identifier les points techniques, les risques et les incohérences pour éviter les mauvaises surprises.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Décisions sécurisées",
-    text: "Vous aider à avancer avec méthode, visibilité et sérénité à chaque étape du projet.",
-  },
-];
-
-const method = [
-  {
-    title: "Écouter",
-    text: "Comprendre votre besoin réel, votre contexte, votre budget et vos priorités.",
-  },
-  {
-    title: "Analyser",
-    text: "Étudier la faisabilité, les contraintes techniques et les points sensibles du projet.",
-  },
-  {
-    title: "Structurer",
-    text: "Vous transmettre des conseils clairs, hiérarchisés et directement actionnables.",
-  },
-  {
-    title: "Accompagner",
-    text: "Vous aider à prendre les bonnes décisions avant et pendant les étapes importantes.",
-  },
-];
-
 const values = [
   {
     icon: Eye,
@@ -62,111 +25,130 @@ const values = [
   {
     icon: BadgeCheck,
     title: "Rigueur",
-    text: "Une approche structurée pour réduire les zones d’incertitude.",
+    text: "Une approche structurée pour réduire les zones d'incertitude.",
   },
   {
     icon: Sparkles,
     title: "Réactivité",
-    text: "Des réponses rapides pour vous permettre d’avancer au bon moment.",
+    text: "Des réponses rapides pour vous permettre d'avancer au bon moment.",
   },
   {
     icon: Handshake,
-    title: "Confiance",
-    text: "Un accompagnement humain, indépendant et orienté vers vos intérêts.",
+    title: "Indépendance",
+    text: "Aucun partenariat avec des artisans. Uniquement vos intérêts.",
   },
 ];
 
-const stats = [
-  "Vision terrain",
-  "Conseils indépendants",
-  "Approche personnalisée",
+const expertise = [
+  {
+    icon: Compass,
+    number: "01",
+    title: "Analyse stratégique",
+    text: "Clarifier vos objectifs, vos contraintes et les décisions prioritaires avant d'engager des travaux.",
+  },
+  {
+    icon: Building2,
+    number: "02",
+    title: "Lecture chantier",
+    text: "Identifier les points techniques, les risques et les incohérences pour éviter les mauvaises surprises.",
+  },
+  {
+    icon: ShieldCheck,
+    number: "03",
+    title: "Décisions sécurisées",
+    text: "Vous aider à avancer avec méthode, visibilité et sérénité à chaque étape du projet.",
+  },
 ];
+
+const method = [
+  { title: "Écouter", text: "Comprendre votre besoin réel, votre contexte, votre budget et vos priorités." },
+  { title: "Analyser", text: "Étudier la faisabilité, les contraintes techniques et les points sensibles du projet." },
+  { title: "Structurer", text: "Vous transmettre des conseils clairs, hiérarchisés et directement actionnables." },
+  { title: "Accompagner", text: "Vous aider à prendre les bonnes décisions avant et pendant les étapes importantes." },
+];
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+};
 
 export default function AboutPage() {
   return (
     <>
       <Navbar variant="default" />
 
-      <main className="overflow-hidden bg-[#f6f2ee] text-[#171411]">
-        {/* HERO */}
-        <section className="relative min-h-screen overflow-hidden pt-28">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(180,154,124,0.32),transparent_32%),radial-gradient(circle_at_82%_8%,rgba(255,255,255,0.95),transparent_28%),linear-gradient(135deg,#f6f2ee_0%,#efe6dc_100%)]" />
-          <div className="absolute left-1/2 top-20 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/50 blur-3xl" />
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#f6f2ee] to-transparent" />
+      <main className="overflow-hidden bg-[#f6f2ee] text-[#17130f]">
 
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-24 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        {/* ── HERO ── */}
+        <section className="relative min-h-[90vh] overflow-hidden pt-28 pb-0">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_10%,rgba(180,154,124,0.28),transparent_40%),radial-gradient(ellipse_at_85%_5%,rgba(255,255,255,0.9),transparent_30%)]" />
+
+          <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-0 sm:px-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+            {/* Left */}
             <motion.div
-              initial={{ opacity: 0, y: 34 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10"
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="pb-16 lg:pb-24"
             >
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em] text-[#8f7658] shadow-sm backdrop-blur-xl">
-                <Sparkles className="h-4 w-4" />
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/65 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#8b7a6b] shadow-sm backdrop-blur-xl">
+                <Sparkles className="h-3.5 w-3.5" />
                 À propos
               </div>
 
-              <h1 className="max-w-3xl text-4xl font-light leading-[1.02] tracking-[-0.045em] md:text-5xl lg:text-6xl">
+              <h1 className="max-w-xl text-4xl font-semibold leading-[1.03] tracking-[-0.05em] md:text-5xl lg:text-6xl">
                 Une expertise travaux pensée pour décider avec clarté.
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-8 text-neutral-600">
-                DND Conseils accompagne les particuliers dans leurs projets de
-                rénovation, d’extension et d’aménagement avec une approche
-                humaine, indépendante et orientée résultat.
+              <p className="mt-6 max-w-md text-lg leading-8 text-[#6f6257]">
+                DND Conseils accompagne les particuliers dans leurs projets de rénovation, d'extension et d'aménagement avec une approche humaine, indépendante et orientée résultat.
               </p>
 
-              <div className="mt-10 grid gap-3 sm:grid-cols-3">
-                {stats.map((item) => (
-                  <div
+              <div className="mt-10 flex flex-wrap gap-3">
+                {["Vision terrain", "Conseil indépendant", "Approche personnalisée"].map((item) => (
+                  <span
                     key={item}
-                    className="rounded-2xl border border-black/5 bg-white/50 px-4 py-4 text-sm font-medium text-neutral-700 shadow-sm backdrop-blur-xl"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#d8cfc5] bg-white/70 px-4 py-2 text-sm font-medium text-[#4a4038] shadow-sm backdrop-blur"
                   >
-                    <CheckCircle2 className="mb-2 h-4 w-4 text-[#b49a7c]" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#b49a7c]" />
                     {item}
-                  </div>
+                  </span>
                 ))}
               </div>
             </motion.div>
 
+            {/* Right — photo */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 30 }}
+              initial={{ opacity: 0, scale: 0.96, y: 24 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{
-                duration: 0.9,
-                delay: 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="relative"
+              transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative self-end"
             >
-              <div className="absolute -inset-8 rounded-[3.5rem] bg-[#b49a7c]/25 blur-3xl" />
-
-              <div className="relative overflow-hidden rounded-[3rem] border border-white/70 bg-white/35 p-3 shadow-[0_35px_100px_rgba(23,20,17,0.2)] backdrop-blur-xl">
-                <div className="relative h-[520px] overflow-hidden rounded-[2.35rem] md:h-[620px]">
+              <div className="pointer-events-none absolute -inset-6 rounded-[3rem] bg-[#b49a7c]/20 blur-3xl" />
+              <div className="relative overflow-hidden rounded-t-[2.5rem] border border-white/70 border-b-0 bg-white/30 p-3 pb-0 shadow-[0_35px_100px_rgba(23,19,15,0.18)] backdrop-blur-xl">
+                <div className="relative h-[480px] overflow-hidden rounded-t-[2rem] md:h-[580px]">
                   <Image
                     src="/apropos/denis.png"
-                    alt="Expert en conseils travaux sur chantier"
+                    alt="Denis — Conseiller indépendant en travaux, DND Conseils"
                     fill
                     priority
-                    sizes="(max-width: 1024px) 100vw, 54vw"
-                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-top"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-
-                  <div className="absolute inset-x-5 top-5 flex justify-end">
-                    <div className="rounded-full border border-white/25 bg-white/20 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-xl">
+                  <div className="absolute inset-x-4 top-4 flex justify-end">
+                    <div className="rounded-full border border-white/20 bg-white/15 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-xl">
                       Conseil indépendant
                     </div>
                   </div>
 
-                  <div className="absolute bottom-5 left-5 right-5 rounded-[1.8rem] border border-white/25 bg-white/18 p-6 text-white shadow-2xl backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.28em] text-white/70">
-                      Accompagnement sur mesure
-                    </p>
-                    <p className="mt-3 max-w-md text-2xl font-light leading-tight md:text-3xl">
-                      Une vision terrain pour transformer l’incertitude en
-                      décisions claires.
+                  <div className="absolute inset-x-4 bottom-4 rounded-[1.5rem] border border-white/20 bg-black/40 p-5 text-white backdrop-blur-xl">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/60">Denis — Fondateur</p>
+                    <p className="mt-2 text-xl font-semibold leading-tight tracking-[-0.03em]">
+                      Une vision terrain pour transformer l'incertitude en décisions claires.
                     </p>
                   </div>
                 </div>
@@ -175,183 +157,88 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* SIGNATURE */}
-        <section className="relative px-6 py-20 md:px-10">
+        {/* ── SIGNATURE ── */}
+        <section className="relative px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-5xl">
             <motion.div
-              initial={{ opacity: 0, y: 26 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.7 }}
-              className="relative overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/70 p-8 shadow-[0_30px_90px_rgba(23,20,17,0.06)] backdrop-blur-xl md:p-14"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeUp}
+              className="relative overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/80 p-8 shadow-[0_28px_80px_rgba(23,19,15,0.07)] backdrop-blur-xl md:p-12"
             >
-              <div className="absolute right-[-100px] top-[-100px] h-72 w-72 rounded-full bg-[#b49a7c]/20 blur-3xl" />
+              <div className="pointer-events-none absolute right-[-80px] top-[-80px] h-64 w-64 rounded-full bg-[#b49a7c]/18 blur-3xl" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c]/60 to-transparent" />
 
-              <div className="relative">
-                <p className="text-sm uppercase tracking-[0.28em] text-[#9a7d5c]">
-                  Une approche personnelle
-                </p>
+              <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
+                <div>
+                  <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#9a7d5c]">
+                    Une approche personnelle
+                  </p>
+                  <h2 className="max-w-2xl text-3xl font-semibold leading-tight tracking-[-0.04em] md:text-4xl">
+                    Derrière chaque projet, il y a des décisions importantes.
+                  </h2>
+                  <p className="mt-6 max-w-2xl text-base leading-8 text-[#6a5f54]">
+                    Beaucoup de particuliers avancent dans leurs travaux sans vision suffisamment claire : choix d'artisans, budget à cadrer, décisions prises dans l'urgence ou manque de visibilité technique. Mon rôle est de vous apporter un regard extérieur, de structurer votre réflexion et de vous permettre d'avancer avec plus de sérénité, de maîtrise et de confiance.
+                  </p>
 
-                <h2 className="mt-5 max-w-3xl text-3xl font-light leading-tight tracking-[-0.04em] md:text-4xl">
-                  Derrière chaque projet, il y a des décisions importantes.
-                </h2>
-
-                <p className="mt-6 text-lg leading-8 text-neutral-600">
-                  Beaucoup de particuliers avancent dans leurs travaux sans 
-                  vision suffisamment claire : choix d’artisans, budget à cadrer, 
-                  décisions prises dans l’urgence ou manque de visibilité technique.
-
-Mon rôle est de vous apporter un regard extérieur, de structurer votre réflexion et de vous permettre d’avancer avec plus de sérénité, de maîtrise et de confiance.
-                </p>
-
-                <p className="mt-4 text-lg leading-8 text-neutral-600">
-                  Mon rôle est de vous apporter un regard extérieur, de
-                  structurer votre réflexion et de vous permettre d’avancer avec
-                  plus de sérénité.
-                </p>
-
-                <div className="mt-10 flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#171411] text-sm font-medium text-white">
-                    D
+                  <div className="mt-8 flex items-center gap-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#17130f] text-sm font-semibold text-white shadow-lg">
+                      D
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-[#17130f]">Denis</p>
+                      <p className="text-sm text-[#7a7068]">Conseiller indépendant en travaux</p>
+                    </div>
                   </div>
+                </div>
 
-                  <div>
-                    <p className="text-sm font-medium">Denis</p>
-                    <p className="text-sm text-neutral-500">
-                      Conseiller indépendant en travaux
-                    </p>
-                  </div>
+                <div className="hidden lg:flex lg:shrink-0 lg:flex-col lg:gap-3">
+                  {["10 ans de terrain", "100% indépendant", "Particuliers uniquement"].map((item) => (
+                    <div key={item} className="rounded-2xl border border-[#e8e2da] bg-[#faf7f4] px-5 py-3 text-sm font-medium text-[#4a4038]">
+                      {item}
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* PRESENTATION */}
-        <section className="relative px-6 py-24 md:px-10">
-          <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 26 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.65 }}
-              className="sticky top-28 hidden lg:block"
-            >
-              <p className="text-sm uppercase tracking-[0.28em] text-[#9a7d5c]">
-                Notre approche
-              </p>
-
-              <h2 className="mt-4 text-5xl font-light leading-[0.98] tracking-[-0.05em]">
-                Comprendre.
-                <br />
-                Prioriser.
-                <br />
-                Sécuriser.
-              </h2>
-            </motion.div>
-
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.65 }}
-                className="relative overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/75 p-8 shadow-[0_28px_80px_rgba(23,20,17,0.08)] backdrop-blur-xl md:p-12"
-              >
-                <div className="absolute right-[-80px] top-[-80px] h-56 w-56 rounded-full bg-[#b49a7c]/20 blur-3xl" />
-
-                <BadgeCheck className="mb-7 h-9 w-9 text-[#b49a7c]" />
-
-                <h3 className="max-w-3xl text-4xl font-light tracking-[-0.04em]">
-                  Une lecture claire du bâtiment avant de vous engager.
-                </h3>
-
-                <p className="mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
-                  Un projet travaux comporte souvent beaucoup de zones floues :
-                  budget, artisans, matériaux, délais, faisabilité, priorités.
-                  L’objectif est de vous apporter un regard extérieur pour
-                  comprendre les vrais enjeux et avancer sans subir votre
-                  projet.
-                </p>
-              </motion.div>
-
-              <div className="grid gap-5 md:grid-cols-2">
-                {values.map((value, index) => {
-                  const Icon = value.icon;
-
-                  return (
-                    <motion.div
-                      key={value.title}
-                      initial={{ opacity: 0, y: 24 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.35 }}
-                      transition={{ duration: 0.55, delay: index * 0.08 }}
-                      className="group rounded-[2rem] border border-black/5 bg-white/55 p-7 shadow-sm backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:bg-white hover:shadow-[0_24px_70px_rgba(23,20,17,0.08)]"
-                    >
-                      <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#171411] text-white transition duration-300 group-hover:bg-[#b49a7c]">
-                        <Icon className="h-5 w-5" />
-                      </div>
-
-                      <h4 className="text-2xl font-light">{value.title}</h4>
-                      <p className="mt-3 leading-7 text-neutral-600">
-                        {value.text}
-                      </p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* EXPERTISE */}
-        <section className="relative bg-white px-6 py-28 md:px-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_15%,rgba(180,154,124,0.14),transparent_30%)]" />
-
-          <div className="relative mx-auto max-w-7xl">
-            <div className="mb-16 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        {/* ── EXPERTISE ── */}
+        <section className="relative px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <p className="text-sm uppercase tracking-[0.28em] text-[#9a7d5c]">
-                  Expertise
-                </p>
-
-                <h2 className="mt-4 max-w-3xl text-4xl font-light leading-tight tracking-[-0.05em] md:text-6xl">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#9a7d5c]">Expertise</p>
+                <h2 className="max-w-lg text-3xl font-semibold leading-tight tracking-[-0.045em] md:text-4xl">
                   Un accompagnement précis, du premier doute à la bonne décision.
                 </h2>
               </div>
-
-              <p className="max-w-md text-lg leading-8 text-neutral-500">
-                Une approche premium ne signifie pas compliquée. Elle signifie
-                claire, structurée, rassurante et utile.
+              <p className="max-w-sm text-base leading-7 text-[#6a5f54]">
+                Une approche claire, structurée et rassurante à chaque étape de votre projet.
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-3">
-              {expertise.map((item, index) => {
+            <div className="grid gap-5 md:grid-cols-3">
+              {expertise.map((item, i) => {
                 const Icon = item.icon;
-
                 return (
                   <motion.div
                     key={item.title}
-                    initial={{ opacity: 0, y: 34 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="group relative overflow-hidden rounded-[2.25rem] border border-black/5 bg-[#f8f4ef] p-8 shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_85px_rgba(23,20,17,0.12)]"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-60px" }}
+                    variants={fadeUp} transition={{ duration: 0.7, ease, delay: i * 0.08 }}
+                    className="group relative overflow-hidden rounded-[2rem] border border-[#e8e2da] bg-white p-7 shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(23,19,15,0.1)]"
                   >
-                    <div className="absolute right-[-70px] top-[-70px] h-44 w-44 rounded-full bg-[#b49a7c]/20 blur-3xl opacity-0 transition duration-500 group-hover:opacity-100" />
-
-                    <div className="relative mb-9 flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm transition duration-300 group-hover:bg-[#171411] group-hover:text-white">
-                      <Icon className="h-6 w-6" />
+                    <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-40 w-40 rounded-full bg-[#b49a7c]/15 blur-3xl opacity-0 transition duration-500 group-hover:opacity-100" />
+                    <span className="mb-6 block text-[11px] font-semibold tracking-[0.22em] text-[#b49a7c]">{item.number}</span>
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#17130f] text-white shadow-md transition duration-300 group-hover:bg-[#b49a7c]">
+                      <Icon className="h-5 w-5" />
                     </div>
-
-                    <h3 className="relative text-2xl font-light">
-                      {item.title}
-                    </h3>
-
-                    <p className="relative mt-4 leading-7 text-neutral-600">
-                      {item.text}
-                    </p>
+                    <h3 className="text-xl font-semibold tracking-[-0.03em]">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-[#6a5f54]">{item.text}</p>
                   </motion.div>
                 );
               })}
@@ -359,80 +246,102 @@ Mon rôle est de vous apporter un regard extérieur, de structurer votre réflex
           </div>
         </section>
 
-        {/* METHODE */}
-        <section className="relative px-6 py-28 md:px-10">
-          <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-            <div>
-              <p className="text-sm uppercase tracking-[0.28em] text-[#9a7d5c]">
-                Méthode
-              </p>
+        {/* ── VALEURS + METHODE ── */}
+        <section className="relative bg-[#17130f] px-4 py-24 text-white sm:px-6">
+          <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#b49a7c]/10 blur-3xl" />
 
-              <h2 className="mt-4 max-w-xl text-4xl font-light leading-tight tracking-[-0.05em] md:text-6xl">
-                Une méthode simple, lisible et efficace.
-              </h2>
-
-              <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
-                Chaque étape sert un objectif : vous donner une vision plus
-                claire, réduire les risques et faciliter vos choix.
+          <div className="relative mx-auto max-w-7xl">
+            <div className="mb-14 grid gap-8 lg:grid-cols-2 lg:items-end">
+              <div>
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#b49a7c]">Valeurs & méthode</p>
+                <h2 className="text-3xl font-semibold leading-tight tracking-[-0.045em] md:text-4xl">
+                  Ce qui guide chaque intervention.
+                </h2>
+              </div>
+              <p className="text-base leading-8 text-white/52 lg:text-right">
+                Des principes clairs et une méthode éprouvée pour vous donner une vision utile à chaque étape.
               </p>
             </div>
 
-            <div className="space-y-4">
-              {method.map((step, index) => (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, x: 28 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 0.55, delay: index * 0.08 }}
-                  className="group grid gap-5 rounded-[2rem] border border-black/5 bg-white/65 p-6 shadow-sm backdrop-blur-xl transition duration-300 hover:bg-white hover:shadow-[0_22px_70px_rgba(23,20,17,0.08)] sm:grid-cols-[72px_1fr]"
-                >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#171411] text-sm font-medium text-white transition group-hover:bg-[#b49a7c]">
-                    0{index + 1}
-                  </div>
+            <div className="grid gap-8 lg:grid-cols-2">
+              {/* Values */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                {values.map((v, i) => {
+                  const Icon = v.icon;
+                  return (
+                    <motion.div
+                      key={v.title}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-60px" }}
+                      variants={fadeUp} transition={{ duration: 0.7, ease, delay: i * 0.07 }}
+                      className="rounded-[1.75rem] border border-white/8 bg-white/[0.05] p-6 backdrop-blur"
+                    >
+                      <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
+                        <Icon className="h-4.5 w-4.5 text-[#d8c4ad]" />
+                      </div>
+                      <h3 className="text-lg font-semibold">{v.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-white/55">{v.text}</p>
+                    </motion.div>
+                  );
+                })}
+              </div>
 
-                  <div>
-                    <h3 className="text-2xl font-light">{step.title}</h3>
-                    <p className="mt-2 leading-7 text-neutral-600">
-                      {step.text}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {/* Method */}
+              <div className="space-y-3">
+                {method.map((step, i) => (
+                  <motion.div
+                    key={step.title}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-60px" }}
+                    variants={fadeUp} transition={{ duration: 0.7, ease, delay: i * 0.07 }}
+                    className="flex items-start gap-5 rounded-[1.75rem] border border-white/8 bg-white/[0.05] p-5 backdrop-blur"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#b49a7c] text-[11px] font-bold text-[#17130f]">
+                      0{i + 1}
+                    </span>
+                    <div>
+                      <h3 className="font-semibold">{step.title}</h3>
+                      <p className="mt-1 text-sm leading-6 text-white/55">{step.text}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="px-6 pb-12 md:px-10">
-          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[3rem] bg-[#171411] px-6 py-20 text-center text-white shadow-[0_35px_100px_rgba(23,20,17,0.28)] md:px-16">
-            <div className="absolute left-[-120px] top-[-120px] h-80 w-80 rounded-full bg-[#b49a7c]/25 blur-3xl" />
-            <div className="absolute bottom-[-140px] right-[-100px] h-96 w-96 rounded-full bg-white/10 blur-3xl" />
-
-            <div className="relative">
-              <p className="text-sm uppercase tracking-[0.28em] text-[#d6bf9a]">
-                Votre projet commence ici
-              </p>
-
-              <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-light leading-tight tracking-[-0.05em] md:text-6xl">
-                Parlons de votre projet avec clarté.
-              </h2>
-
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-white/65">
-                Une première étude pour comprendre votre besoin, identifier les
-                bons choix et avancer avec plus de sérénité.
-              </p>
-
+        {/* ── CTA ── */}
+        <section className="px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#9a7d5c]">
+              Votre projet commence ici
+            </p>
+            <h2 className="text-3xl font-semibold tracking-[-0.045em] md:text-4xl">
+              Parlons de votre projet avec clarté.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-[#6a5f54]">
+              Une première étude pour comprendre votre besoin, identifier les bons choix et avancer avec plus de sérénité.
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href="/devis?type=etude"
-                className="group mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-[#171411] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d6bf9a]"
+                className="inline-flex items-center gap-2 rounded-full bg-[#17130f] px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(23,19,15,0.2)] transition hover:-translate-y-0.5 hover:bg-[#8b7a6b]"
               >
-                Demander un diagnostic
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                Demander un diagnostic gratuit
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/#offres"
+                className="inline-flex items-center gap-2 rounded-full border border-[#17130f]/15 bg-white px-7 py-4 text-sm font-semibold text-[#17130f] shadow-sm transition hover:-translate-y-0.5"
+              >
+                Voir nos packs
               </Link>
             </div>
           </div>
         </section>
+
       </main>
     </>
   );
