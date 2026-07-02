@@ -103,7 +103,7 @@ export default function AboutPage() {
               </h1>
 
               <p className="mt-6 max-w-md text-lg leading-8 text-[#6f6257]">
-                DND Conseils accompagne les particuliers dans leurs projets de rénovation, d'extension et d'aménagement avec une approche humaine, indépendante et orientée résultat.
+                DND Conseils accompagne les particuliers dans leurs projets de rénovation, d&apos;extension et d&apos;aménagement avec une approche humaine, indépendante et orientée résultat.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-3">
@@ -148,7 +148,7 @@ export default function AboutPage() {
                   <div className="absolute inset-x-4 bottom-4 rounded-[1.5rem] border border-white/20 bg-black/40 p-5 text-white backdrop-blur-xl">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/60">Denis — Fondateur</p>
                     <p className="mt-2 text-xl font-semibold leading-tight tracking-[-0.03em]">
-                      Une vision terrain pour transformer l'incertitude en décisions claires.
+                      Une vision terrain pour transformer l&apos;incertitude en décisions claires.
                     </p>
                   </div>
                 </div>
@@ -179,7 +179,7 @@ export default function AboutPage() {
                     Derrière chaque projet, il y a des décisions importantes.
                   </h2>
                   <p className="mt-6 max-w-2xl text-base leading-8 text-[#6a5f54]">
-                    Beaucoup de particuliers avancent dans leurs travaux sans vision suffisamment claire : choix d'artisans, budget à cadrer, décisions prises dans l'urgence ou manque de visibilité technique. Mon rôle est de vous apporter un regard extérieur, de structurer votre réflexion et de vous permettre d'avancer avec plus de sérénité, de maîtrise et de confiance.
+                    Beaucoup de particuliers avancent dans leurs travaux sans vision suffisamment claire : choix d&apos;artisans, budget à cadrer, décisions prises dans l&apos;urgence ou manque de visibilité technique. Mon rôle est de vous apporter un regard extérieur, de structurer votre réflexion et de vous permettre d&apos;avancer avec plus de sérénité, de maîtrise et de confiance.
                   </p>
 
                   <div className="mt-8 flex items-center gap-4">

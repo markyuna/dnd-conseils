@@ -160,7 +160,7 @@ export default function ConfidentialitePage() {
             </a>
             {" "}· Retour à la{" "}
             <Link href="/" className="font-semibold text-[#8f7358] underline-offset-3 hover:underline">
-              page d'accueil
+              page d&apos;accueil
             </Link>.
           </div>
 

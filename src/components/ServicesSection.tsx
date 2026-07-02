@@ -132,8 +132,8 @@ export default function ServicesSection() {
             transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-base leading-8 text-[#66615b] md:text-lg">
-              Choisissez l'intervention ponctuelle dont vous avez besoin
-              aujourd'hui, ou optez pour un pack complet pour sécuriser votre
+              Choisissez l&apos;intervention ponctuelle dont vous avez besoin
+              aujourd&apos;hui, ou optez pour un pack complet pour sécuriser votre
               projet de bout en bout.
             </p>
 
