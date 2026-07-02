@@ -30,19 +30,9 @@ function isRateLimited(ip: string): boolean {
 }
 
 export async function POST(req: Request) {
-  const ip = getClientIp(req);
-
-  if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { error: "Trop de tentatives. Réessayez dans 15 minutes." },
-      { status: 429 }
-    );
-  }
-
   const body = await req.json().catch(() => null);
-
   if (!body || typeof body !== "object") {
-    return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
   const password = String(body.password ?? "").trim();

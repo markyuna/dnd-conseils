@@ -14,7 +14,7 @@ const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const fromEmail =
   process.env.DND_FROM_EMAIL || "DND Conseils <onboarding@resend.dev>";
 
-const adminEmail = process.env.DND_ADMIN_EMAIL || "dndconseils@gmail.com";
+const adminEmail = process.env.DND_ADMIN_EMAIL || "dndconseil75@gmail.com";
 
 function clean(value: unknown) {
   if (Array.isArray(value)) return value.map(String).join(", ");

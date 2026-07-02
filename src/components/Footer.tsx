@@ -18,7 +18,7 @@ const navigationLinks = [
       { label: "Accueil", href: "/" },
       { label: "À propos", href: "/a-propos" },
       { label: "Demander une étude", href: "/devis" },
-      { label: "Contact", href: "/contact" },
+      { label: "Contact", href: "/#contact" },
     ],
   },
   {
@@ -132,8 +132,8 @@ export default function Footer() {
 
             <FooterContactLink
               icon={<Mail className="h-4 w-4" />}
-              href="mailto:dndconseil75@gmail.fr"
-              label="dndconseil75@gmail.fr"
+              href="mailto:dndconseil75@gmail.com"
+              label="dndconseil75@gmail.com"
             />
 
             <FooterContactLink

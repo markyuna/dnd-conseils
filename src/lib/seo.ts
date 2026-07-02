@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 const rawSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://dnd-conseils.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.dnd-conseils.fr";
 
 const siteUrl = rawSiteUrl.replace(/\/$/, "");
 

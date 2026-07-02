@@ -42,11 +42,6 @@ const staticRoutes: SitemapRoute[] = [
   {
     path: "/devis",
     changeFrequency: "weekly",
-    priority: 0.95,
-  },
-  {
-    path: "/contact",
-    changeFrequency: "monthly",
     priority: 0.75,
   },
   {
@@ -55,7 +50,7 @@ const staticRoutes: SitemapRoute[] = [
     priority: 0.3,
   },
   {
-    path: "/politique-confidentialite",
+    path: "/confidentialite",
     changeFrequency: "yearly",
     priority: 0.3,
   },
@@ -64,7 +59,7 @@ const staticRoutes: SitemapRoute[] = [
 const seoRoutes: SitemapRoute[] = seoServicePages.map((page) => ({
   path: `/${page.slug}`,
   changeFrequency: "monthly",
-  priority: 0.88,
+  priority: 0.72,
 }));
 
 function uniqueRoutes(routes: SitemapRoute[]) {

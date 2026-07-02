@@ -169,7 +169,7 @@ export default function DevisAnalysisExampleSection() {
             </Link>
 
             <Link
-              href="/tarifs#analyse-devis"
+              href="/devis?type=analyse-devis"
               className="inline-flex items-center justify-center gap-3 rounded-full border border-[#15110d]/10 bg-white/70 px-6 py-4 text-sm font-semibold text-[#15110d] transition duration-300 hover:-translate-y-0.5 hover:border-[#b49a7c]/50"
             >
               Voir la formule
