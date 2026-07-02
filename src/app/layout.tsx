@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Footer from "@/components/Footer";
+import HelpBot from "@/components/HelpBot";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   organizationSchema,
@@ -68,6 +69,8 @@ export default function RootLayout({
 
           <Footer />
         </div>
+
+        <HelpBot />
       </body>
     </html>
   );
