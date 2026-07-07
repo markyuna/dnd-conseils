@@ -18,7 +18,7 @@ const navigationLinks = [
       { label: "Accueil", href: "/" },
       { label: "À propos", href: "/a-propos" },
       { label: "Demander une étude", href: "/devis" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
