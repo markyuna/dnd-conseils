@@ -16,10 +16,10 @@ const sections = [
       ["Statut", "Auto-entrepreneur"],
       ["SIRET", "[À compléter]"],
       ["Responsable de publication", "Denis — DND Conseils"],
-      ["Adresse", "[Adresse du siège social — À compléter]"],
+      ["Adresse", "134 Route de Glandelles, 77167 Bagneaux-sur-Loing"],
       ["Téléphone", "+33 6 04 52 24 05"],
       ["Email", "dndconseil75@gmail.com"],
-      ["Site", "www.dnd-conseils.fr"],
+      ["Site", "www.dndconseils.fr"],
     ],
   },
   {
