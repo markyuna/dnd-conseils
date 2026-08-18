@@ -1,9 +1,9 @@
 // src/app/admin/leads/page.tsx
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import Navbar from "@/components/Navbar";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 import LeadStatusActions from "./LeadStatusActions";
@@ -121,10 +121,7 @@ function ErrorState({ message }: { message: string }) {
 }
 
 export default async function AdminLeadsPage() {
-  const cookieStore = await cookies();
-  const isAdmin = cookieStore.get("dnd_admin")?.value === "true";
-
-  if (!isAdmin) {
+  if (!(await isAdminAuthenticated())) {
     redirect("/admin");
   }
 
