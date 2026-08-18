@@ -1,7 +1,5 @@
 # 🏗️ DND Conseils — Premium Web Experience
 
-![DND Conseils Mockup](./public/screenshots/mockup.png)
-
 ## ✨ Overview
 
 **DND Conseils** is a premium landing page designed for a construction and renovation consulting service.
@@ -19,7 +17,7 @@ The interface combines:
 
 ## 🚀 Live Demo
 
-👉 https://dnd-conseils.vercel.app/
+👉 https://www.dndconseils.fr/
 
 ---
 
@@ -85,9 +83,6 @@ Multiple CTAs based on user intent:
 
 ---
 
-
----
-
 ## 🎨 Design System
 
 ### Colors
@@ -99,12 +94,4 @@ Multiple CTAs based on user intent:
 ### Typography
 
 - Headings: **Poppins**  
-- Body: **Inter**  
-
----
-
-## 📸 Screenshots
-
-/public/screenshots/mockup.png
-
-
+- Body: **Inter**

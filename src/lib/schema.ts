@@ -23,7 +23,7 @@ export function organizationSchema() {
       "DND Conseils accompagne les particuliers avant leurs travaux de rénovation avec un regard indépendant, structuré et stratégique.",
     telephone: "+33604522405",
     email: "dndconseil75@gmail.com",
-    sameAs: [],
+    sameAs: ["https://www.instagram.com/dnd_conseil/"],
   };
 }
 
@@ -36,6 +36,9 @@ export function professionalServiceSchema() {
     image: getAbsoluteUrl(seoConfig.defaultImage),
     description:
       "Conseil indépendant pour particuliers avant travaux de rénovation, analyse de projet, étude gratuite et accompagnement à la décision.",
+    telephone: "+33604522405",
+    email: "dndconseil75@gmail.com",
+    sameAs: ["https://www.instagram.com/dnd_conseil/"],
     areaServed: [
       {
         "@type": "Country",
