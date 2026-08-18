@@ -272,3 +272,7 @@ export const seoServicePages: SeoServicePage[] = [
 export function getSeoServicePage(slug: string) {
   return seoServicePages.find((page) => page.slug === slug);
 }
+
+export function getRelatedServicePages(slug: string, count = 3) {
+  return seoServicePages.filter((page) => page.slug !== slug).slice(0, count);
+}

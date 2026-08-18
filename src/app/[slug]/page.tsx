@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import JsonLd from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { generateSeo } from "@/lib/seo";
-import { getSeoServicePage, seoServicePages } from "@/lib/seo-pages";
+import { getSeoServicePage, getRelatedServicePages, seoServicePages } from "@/lib/seo-pages";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -36,6 +36,7 @@ export default async function SeoServicePage({ params }: Props) {
   const { slug } = await params;
   const page = getSeoServicePage(slug);
   if (!page) notFound();
+  const relatedPages = getRelatedServicePages(slug);
 
   return (
     <>
@@ -177,6 +178,39 @@ export default async function SeoServicePage({ params }: Props) {
                   </h3>
                   <p className="text-sm leading-7 text-white/60">{item.answer}</p>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Related services */}
+        <section className="px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-7xl">
+            <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8b7a6b]">
+              Vous pourriez aussi consulter
+            </p>
+            <h2 className="mb-10 text-center text-2xl font-semibold tracking-[-0.03em] text-[#17130f] md:text-3xl">
+              Nos autres accompagnements
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {relatedPages.map((related) => (
+                <Link
+                  key={related.slug}
+                  href={`/${related.slug}`}
+                  className="group rounded-[1.5rem] border border-[#ede8e1] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#b49a7c]/40 hover:shadow-md"
+                >
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#8b7a6b]">
+                    {related.eyebrow}
+                  </p>
+                  <h3 className="mb-2 text-lg font-semibold leading-tight tracking-[-0.02em] text-[#17130f]">
+                    {related.title}
+                  </h3>
+                  <p className="text-sm leading-6 text-[#6f6257]">{related.description}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#8b7a6b] transition group-hover:gap-2">
+                    En savoir plus
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
               ))}
             </div>
           </div>
