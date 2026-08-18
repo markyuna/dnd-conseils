@@ -297,7 +297,7 @@ function DevisPageContent() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-[#a89278]"
+                className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-[#7d6a52]"
               >
                 Demande reçue
               </motion.p>
@@ -328,7 +328,7 @@ function DevisPageContent() {
                   transition={{ delay: 0.56 }}
                   className="mx-auto mt-8 max-w-md rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5"
                 >
-                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
+                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#7d6a52]">
                     Formule demandée
                   </p>
 
@@ -371,12 +371,12 @@ function DevisPageContent() {
                 className="mt-10 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500"
               >
                 <span className="flex items-center gap-2">
-                  <ShieldCheck size={15} className="text-[#a89278]" />
+                  <ShieldCheck size={15} className="text-[#7d6a52]" />
                   Données confidentielles
                 </span>
 
                 <span className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-[#a89278]" />
+                  <CheckCircle2 size={15} className="text-[#7d6a52]" />
                   Réponse sous 48h
                 </span>
               </motion.div>
@@ -497,7 +497,7 @@ function DevisPageContent() {
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent" />
 
                 <div className="mb-10">
-                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#a89278]/20 bg-[#f6f2ee] px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
+                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#a89278]/20 bg-[#f6f2ee] px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-[#7d6a52]">
                     <Sparkles size={14} />
                     {selectedFormula
                       ? selectedFormula.type === "pack"
@@ -518,7 +518,7 @@ function DevisPageContent() {
 
                 {selectedFormula && (
                   <div className="mb-8 rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5">
-                    <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#a89278]">
+                    <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#7d6a52]">
                       {selectedFormula.type === "pack"
                         ? "Pack demandé"
                         : "Formule demandée"}
@@ -664,12 +664,12 @@ function DevisPageContent() {
 
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500">
                   <span className="flex items-center gap-2">
-                    <ShieldCheck size={15} className="text-[#a89278]" />
+                    <ShieldCheck size={15} className="text-[#7d6a52]" />
                     Données confidentielles
                   </span>
 
                   <span className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#a89278]" />
+                    <CheckCircle2 size={15} className="text-[#7d6a52]" />
                     Réponse personnalisée
                   </span>
                 </div>
@@ -698,13 +698,13 @@ function FormBlock({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mb-10">
-      <p className="mb-6 text-xs font-medium uppercase tracking-[0.3em] text-[#a89278]">
+    <fieldset className="m-0 mb-10 border-0 p-0">
+      <legend className="mb-6 p-0 text-xs font-medium uppercase tracking-[0.3em] text-[#7d6a52]">
         {title}
-      </p>
+      </legend>
 
       <div className="space-y-6">{children}</div>
-    </div>
+    </fieldset>
   );
 }
 
@@ -718,7 +718,7 @@ function OptionGrid({
   onSelect: (value: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div role="group" className="flex flex-wrap gap-3">
       {options.map((option) => {
         const isSelected = selected === option;
 
@@ -726,12 +726,13 @@ function OptionGrid({
           <button
             key={option}
             type="button"
+            aria-pressed={isSelected}
             onClick={() => onSelect(option)}
             className={[
               "rounded-full border px-4 py-2 text-sm transition",
               isSelected
-                ? "border-[#a89278] bg-[#a89278] text-white shadow-md"
-                : "border-neutral-200 text-neutral-600 hover:border-[#a89278] hover:bg-[#f6f2ee] hover:text-[#111]",
+                ? "border-[#7d6a52] bg-[#7d6a52] text-white shadow-md"
+                : "border-neutral-200 text-neutral-600 hover:border-[#7d6a52] hover:bg-[#f6f2ee] hover:text-[#111]",
             ].join(" ")}
           >
             {option}
@@ -752,7 +753,7 @@ function MultiOptionGrid({
   onToggle: (value: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div role="group" className="flex flex-wrap gap-3">
       {options.map((option) => {
         const isSelected = selected.includes(option);
 
@@ -760,12 +761,13 @@ function MultiOptionGrid({
           <button
             key={option}
             type="button"
+            aria-pressed={isSelected}
             onClick={() => onToggle(option)}
             className={[
               "flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition",
               isSelected
-                ? "border-[#a89278] bg-[#a89278] text-white shadow-md"
-                : "border-neutral-200 text-neutral-600 hover:border-[#a89278] hover:bg-[#f6f2ee] hover:text-[#111]",
+                ? "border-[#7d6a52] bg-[#7d6a52] text-white shadow-md"
+                : "border-neutral-200 text-neutral-600 hover:border-[#7d6a52] hover:bg-[#f6f2ee] hover:text-[#111]",
             ].join(" ")}
           >
             {isSelected && <CheckCircle2 size={14} />}
