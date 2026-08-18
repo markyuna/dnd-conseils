@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 
-import { getAdminToken } from "@/lib/admin-auth";
+import { getAdminToken, timingSafeEqualStrings } from "@/lib/admin-auth";
 
 // Best-effort in-memory rate limiter (per function instance).
 // Protects against burst brute-force on single-server or local deployments.
+// Doesn't survive across serverless instances/cold starts — if that gap
+// matters for the threat model, replace with a shared store (Supabase
+// table, Upstash Redis, etc.) instead of this in-memory Map.
 const loginAttempts = new Map<string, { count: number; resetAt: number }>();
 const MAX_ATTEMPTS = 5;
 const WINDOW_MS = 15 * 60 * 1000;
@@ -53,7 +56,7 @@ export async function POST(req: Request) {
     );
   }
 
-  if (password !== adminPassword) {
+  if (!timingSafeEqualStrings(password, adminPassword)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
