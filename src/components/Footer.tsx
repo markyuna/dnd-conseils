@@ -141,6 +141,13 @@ export default function Footer() {
               href="tel:+33604522405"
               label="+33 6 04 52 24 05"
             />
+
+            <FooterContactLink
+              icon={<InstagramIcon className="h-4 w-4" />}
+              href="https://www.instagram.com/dnd_conseil/"
+              label="@dnd_conseil"
+              external
+            />
           </motion.div>
         </motion.div>
 
@@ -171,18 +178,41 @@ export default function Footer() {
   );
 }
 
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
 function FooterContactLink({
   icon,
   href,
   label,
+  external = false,
 }: {
   icon: React.ReactNode;
   href: string;
   label: string;
+  external?: boolean;
 }) {
   return (
     <motion.a
       href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       whileHover={{ x: 6 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
       className="group flex items-center justify-between border-b border-white/10 py-4 text-sm text-white/70 transition hover:border-[#b49a7c]/60 hover:text-white"
