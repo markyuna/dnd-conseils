@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
+import { offers as formulaLabels } from "@/lib/offers";
 import { createContactRequest } from "@/services/contact";
 
 const projectTypes = [
@@ -74,68 +75,6 @@ const documentsList = [
   "Permis / autorisation",
   "Aucun document",
 ];
-
-const formulaLabels: Record<
-  string,
-  {
-    title: string;
-    price: string;
-    type: "formule" | "pack";
-  }
-> = {
-  "diagnostic-flash": {
-    title: "Forfait Diagnostic / Flash",
-    price: "150 € à 250 € HT",
-    type: "formule",
-  },
-  "analyse-devis": {
-    title: "Analyse des devis",
-    price: "190 € à 290 € HT",
-    type: "formule",
-  },
-  "suivi-chantier": {
-    title: "Suivi et coordination",
-    price: "120 € à 600 € HT",
-    type: "formule",
-  },
-  "audit-budgetaire": {
-    title: "Forfait Audit Budgétaire",
-    price: "250 € à 450 € HT",
-    type: "formule",
-  },
-  "pack-essentiel": {
-    title: "Pack Essentiel",
-    price: "À partir de 390 € HT",
-    type: "pack",
-  },
-  "pack-serenite": {
-    title: "Pack Sérénité",
-    price: "À partir de 790 € HT",
-    type: "pack",
-  },
-  "pack-chantier": {
-    title: "Pack Chantier",
-    price: "Sur devis",
-    type: "pack",
-  },
-
-  // Compatibilité avec les anciens liens déjà présents dans le projet
-  essentiel: {
-    title: "Pack Essentiel",
-    price: "À partir de 390 € HT",
-    type: "pack",
-  },
-  serenite: {
-    title: "Pack Sérénité",
-    price: "À partir de 790 € HT",
-    type: "pack",
-  },
-  premium: {
-    title: "Pack Chantier",
-    price: "Sur devis",
-    type: "pack",
-  },
-};
 
 // Real aliases only — self-referential entries removed (formulaAliases[value] ?? value fallback handles them).
 const formulaAliases: Record<string, string> = {
