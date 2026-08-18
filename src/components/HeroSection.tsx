@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 
 const trustItems = [
@@ -13,16 +13,11 @@ const trustItems = [
   "Sans engagement",
 ];
 
-const imageSets = [
-  {
-    avant: "/avant-apres/chantier-tendu.webp",
-    apres: "/avant-apres/conseil-serein.webp",
-  },
-];
+const avantImage = "/avant-apres/chantier-tendu.webp";
+const apresImage = "/avant-apres/conseil-serein.webp";
 
 export default function HeroSection() {
   const [sliderPosition, setSliderPosition] = useState(50);
-  const [currentSet, setCurrentSet] = useState(0);
 
   useEffect(() => {
     const introTimeout = window.setTimeout(() => {
@@ -171,40 +166,36 @@ export default function HeroSection() {
                 }}
                 className="group relative h-[430px] cursor-ew-resize touch-pan-y overflow-hidden rounded-[1.7rem] bg-[#ddd2c8] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.55)] outline-none ring-0 focus-visible:ring-2 focus-visible:ring-[#b49a7c]/45 sm:h-[500px] sm:rounded-[2.2rem] lg:h-[560px]"
               >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSet}
-                    initial={{ opacity: 0, scale: 1.015 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.985 }}
-                    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0"
+                <motion.div
+                  initial={{ opacity: 0, scale: 1.015 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={apresImage}
+                    alt="Couple serein avec un conseiller autour d’une table"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 48vw, 100vw"
+                  />
+
+                  <div
+                    className="absolute inset-y-0 left-0 overflow-hidden"
+                    style={{ width: `${sliderPosition}%` }}
                   >
                     <Image
-                      src={imageSets[currentSet].apres}
-                      alt="Couple serein avec un conseiller autour d’une table"
+                      src={avantImage}
+                      alt="Couple tendu dans un chantier en désordre"
                       fill
                       priority
-                      className="object-cover"
+                      className="max-w-none object-cover"
                       sizes="(min-width: 1024px) 48vw, 100vw"
                     />
-
-                    <div
-                      className="absolute inset-y-0 left-0 overflow-hidden"
-                      style={{ width: `${sliderPosition}%` }}
-                    >
-                      <Image
-                        src={imageSets[currentSet].avant}
-                        alt="Couple tendu dans un chantier en désordre"
-                        fill
-                        priority
-                        className="max-w-none object-cover"
-                        sizes="(min-width: 1024px) 48vw, 100vw"
-                      />
-                      <div className="absolute inset-0 bg-black/20" />
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+                    <div className="absolute inset-0 bg-black/20" />
+                  </div>
+                </motion.div>
 
                 <div className="absolute left-4 top-4 z-30 max-w-[calc(50%-1rem)] rounded-full border border-white/35 bg-black/45 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl sm:left-5 sm:top-5 sm:text-xs">
                   Sans accompagnement
@@ -233,28 +224,6 @@ export default function HeroSection() {
                     </span>
                   </motion.div>
                 </div>
-
-                {imageSets.length > 1 && (
-                  <div className="absolute bottom-5 left-1/2 z-40 flex -translate-x-1/2 gap-2">
-                    {imageSets.map((_, index) => (
-                      <button
-                        key={index}
-                        type="button"
-                        aria-label={`Voir la comparaison ${index + 1}`}
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          setCurrentSet(index);
-                          setSliderPosition(58);
-                        }}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                          index === currentSet
-                            ? "w-7 bg-white"
-                            : "w-3 bg-white/45 hover:bg-white/70"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                )}
               </div>
 
               <p className="mt-4 px-2 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-black/35 sm:text-xs">

@@ -130,7 +130,7 @@ export default function AboutPage() {
               <div className="relative overflow-hidden rounded-t-[2.5rem] border border-white/70 border-b-0 bg-white/30 p-3 pb-0 shadow-[0_35px_100px_rgba(23,19,15,0.18)] backdrop-blur-xl">
                 <div className="relative h-[480px] overflow-hidden rounded-t-[2rem] md:h-[580px]">
                   <Image
-                    src="/apropos/denis.png"
+                    src="/apropos/denis.webp"
                     alt="Denis — Conseiller indépendant en travaux, DND Conseils"
                     fill
                     priority
