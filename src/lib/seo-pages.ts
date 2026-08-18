@@ -61,7 +61,7 @@ export const seoServicePages: SeoServicePage[] = [
   {
     slug: "accompagnement-renovation",
     title: "Accompagnement rénovation",
-    metaTitle: "Accompagnement rénovation pour particuliers | DND Conseils",
+    metaTitle: "Accompagnement rénovation pour particuliers",
     description:
       "Un accompagnement indépendant pour structurer votre projet de rénovation, préparer vos échanges avec les artisans et éviter les décisions prises trop vite.",
     eyebrow: "Rénovation maîtrisée",
@@ -145,7 +145,7 @@ export const seoServicePages: SeoServicePage[] = [
   {
     slug: "analyse-devis-travaux",
     title: "Analyse de devis travaux",
-    metaTitle: "Analyse de devis travaux avant signature | DND Conseils",
+    metaTitle: "Analyse de devis travaux avant signature",
     description:
       "Faites analyser votre devis travaux par un expert indépendant avant de signer : zones floues, oublis, incohérences et points à négocier identifiés clairement.",
     eyebrow: "Avant signature",
