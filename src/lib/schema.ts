@@ -18,7 +18,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: seoConfig.siteName,
     url: seoConfig.siteUrl,
-    logo: getAbsoluteUrl("/logo.png"),
+    logo: getAbsoluteUrl("/logo.webp"),
     description:
       "DND Conseils accompagne les particuliers avant leurs travaux de rénovation avec un regard indépendant, structuré et stratégique.",
     telephone: "+33604522405",

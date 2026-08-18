@@ -76,7 +76,7 @@ export default function Navbar({ variant = "default" }: NavbarProps) {
               onClick={() => setMenuOpen(false)}
             >
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt="DND Conseils"
                 width={150}
                 height={70}
