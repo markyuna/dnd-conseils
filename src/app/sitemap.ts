@@ -44,16 +44,6 @@ const staticRoutes: SitemapRoute[] = [
     changeFrequency: "weekly",
     priority: 0.75,
   },
-  {
-    path: "/mentions-legales",
-    changeFrequency: "yearly",
-    priority: 0.3,
-  },
-  {
-    path: "/confidentialite",
-    changeFrequency: "yearly",
-    priority: 0.3,
-  },
 ];
 
 const seoRoutes: SitemapRoute[] = seoServicePages.map((page) => ({
