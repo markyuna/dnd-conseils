@@ -77,16 +77,19 @@ function emailShell(bodyHtml: string) {
 function emailHeader(eyebrow: string) {
   return `
     <tr>
-      <td style="background-color:#1a1a1a; padding:32px 40px 28px; text-align:center; border-radius:16px 16px 0 0;">
-        <p style="margin:0; font-size:20px; font-weight:bold; letter-spacing:3px; color:#ffffff; text-transform:uppercase; font-family: Arial, Helvetica, sans-serif;">
-          DND Conseils
-        </p>
+      <td style="background-color:#f8f5f2; padding:32px 40px 28px; text-align:center; border-radius:16px 16px 0 0; border-bottom:1px solid #eee2d8;">
+        <img
+          src="${siteUrl}/logo-email.png"
+          width="160"
+          alt="DND Conseils"
+          style="display:block; margin:0 auto; max-width:160px; width:160px; height:auto; border:0;"
+        />
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:14px auto;">
           <tr>
             <td style="width:40px; height:2px; background-color:#a89278; font-size:0; line-height:0;">&nbsp;</td>
           </tr>
         </table>
-        <p style="margin:0; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#a89278; font-family: Arial, Helvetica, sans-serif;">
+        <p style="margin:0; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8a7355; font-family: Arial, Helvetica, sans-serif;">
           ${eyebrow}
         </p>
       </td>
