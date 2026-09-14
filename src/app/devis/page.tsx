@@ -254,6 +254,7 @@ function DevisPageContent() {
       form.reset();
       resetSelections();
       setStatus("success");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Contact request error:", error);
 
