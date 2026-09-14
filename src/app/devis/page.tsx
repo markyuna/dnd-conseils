@@ -269,17 +269,17 @@ function DevisPageContent() {
       <>
         <Navbar variant="minimal" />
 
-        <main className="relative min-h-screen overflow-hidden bg-[#f6f2ee] px-6 pt-20 text-[#171412]">
+        <main className="relative flex min-h-screen flex-col overflow-hidden bg-[#f6f2ee] px-4 text-[#171412] sm:px-6">
           <div className="absolute left-[-220px] top-[-220px] h-[560px] w-[560px] rounded-full bg-[#b49a7c]/25 blur-3xl" />
           <div className="absolute bottom-[-260px] right-[-220px] h-[560px] w-[560px] rounded-full bg-[#171412]/10 blur-3xl" />
           <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(30deg,#171412_12%,transparent_12.5%,transparent_87%,#171412_87.5%,#171412),linear-gradient(150deg,#171412_12%,transparent_12.5%,transparent_87%,#171412_87.5%,#171412)] [background-size:56px_96px]" />
 
-          <section className="relative flex min-h-[calc(100vh-80px)] items-center justify-center py-16">
+          <section className="relative flex flex-1 items-center justify-center py-6 sm:py-10">
             <motion.div
               initial={{ opacity: 0, y: 28, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-3xl overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/80 p-8 text-center shadow-[0_40px_120px_rgba(0,0,0,0.12)] backdrop-blur-xl md:p-14"
+              className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-black/5 bg-white/80 p-6 text-center shadow-[0_40px_120px_rgba(0,0,0,0.12)] backdrop-blur-xl sm:max-w-2xl sm:p-8 md:p-10"
             >
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b49a7c] to-transparent" />
               <div className="absolute left-1/2 top-[-120px] h-64 w-64 -translate-x-1/2 rounded-full bg-[#b49a7c]/20 blur-3xl" />
@@ -288,16 +288,16 @@ function DevisPageContent() {
                 initial={{ scale: 0.6, opacity: 0, rotate: -8 }}
                 animate={{ scale: 1, opacity: 1, rotate: 0 }}
                 transition={{ delay: 0.18, type: "spring", stiffness: 140 }}
-                className="relative mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-[#171412] text-white shadow-2xl"
+                className="relative mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#171412] text-white shadow-2xl sm:h-16 sm:w-16"
               >
-                <CheckCircle2 size={42} />
+                <CheckCircle2 size={28} />
               </motion.div>
 
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-[#7d6a52]"
+                className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-[#7d6a52] sm:text-xs"
               >
                 Demande reçue
               </motion.p>
@@ -306,7 +306,7 @@ function DevisPageContent() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="mx-auto max-w-2xl text-4xl font-semibold leading-tight tracking-tight text-[#111] md:text-6xl"
+                className="mx-auto max-w-md text-2xl font-semibold leading-tight tracking-tight text-[#111] sm:text-3xl md:text-4xl"
               >
                 Votre projet est entre de bonnes mains.
               </motion.h1>
@@ -315,7 +315,7 @@ function DevisPageContent() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="mx-auto mt-6 max-w-xl text-base leading-8 text-neutral-600 md:text-lg"
+                className="mx-auto mt-3 max-w-md text-sm leading-6 text-neutral-600 sm:text-base sm:leading-7"
               >
                 Merci. Votre demande a bien été enregistrée. Nous vous
                 recontacterons rapidement avec une première orientation claire.
@@ -326,17 +326,17 @@ function DevisPageContent() {
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.56 }}
-                  className="mx-auto mt-8 max-w-md rounded-3xl border border-[#a89278]/20 bg-[#f6f2ee] p-5"
+                  className="mx-auto mt-4 max-w-xs rounded-2xl border border-[#a89278]/20 bg-[#f6f2ee] p-4"
                 >
-                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#7d6a52]">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#7d6a52] sm:text-xs">
                     Formule demandée
                   </p>
 
-                  <p className="mt-2 text-base font-semibold text-[#111]">
+                  <p className="mt-1 text-sm font-semibold text-[#111] sm:text-base">
                     {selectedFormula.title}
                   </p>
 
-                  <p className="mt-1 text-sm text-neutral-500">
+                  <p className="mt-0.5 text-xs text-neutral-500 sm:text-sm">
                     {selectedFormula.price}
                   </p>
                 </motion.div>
@@ -346,19 +346,19 @@ function DevisPageContent() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+                className="mt-6 flex flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-3"
               >
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="rounded-full bg-[#171412] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#927b63]"
+                  className="w-full rounded-full bg-[#171412] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#927b63] sm:w-auto"
                 >
                   Envoyer une autre demande
                 </button>
 
                 <Link
                   href="/"
-                  className="rounded-full border border-neutral-200 bg-white/70 px-8 py-4 text-sm font-medium text-neutral-700 transition hover:border-[#a89278] hover:text-[#111]"
+                  className="w-full rounded-full border border-neutral-200 bg-white/70 px-6 py-3 text-sm font-medium text-neutral-700 transition hover:border-[#a89278] hover:text-[#111] sm:w-auto"
                 >
                   Retour à l’accueil
                 </Link>
@@ -368,15 +368,15 @@ function DevisPageContent() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.75 }}
-                className="mt-10 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500"
+                className="mt-6 flex flex-wrap items-center justify-center gap-3 text-[11px] text-neutral-500 sm:gap-4 sm:text-xs"
               >
                 <span className="flex items-center gap-2">
-                  <ShieldCheck size={15} className="text-[#7d6a52]" />
+                  <ShieldCheck size={14} className="text-[#7d6a52]" />
                   Données confidentielles
                 </span>
 
                 <span className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-[#7d6a52]" />
+                  <CheckCircle2 size={14} className="text-[#7d6a52]" />
                   Réponse sous 48h
                 </span>
               </motion.div>
