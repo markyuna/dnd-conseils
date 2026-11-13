@@ -2,7 +2,7 @@
 
 import type { MetadataRoute } from "next";
 
-import { seoConfig } from "@/lib/seo";
+import { getAbsoluteUrl } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,10 +10,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api", "/login"],
+        disallow: ["/admin", "/api/"],
       },
     ],
-    sitemap: `${seoConfig.siteUrl}/sitemap.xml`,
-    host: seoConfig.siteUrl,
+    sitemap: getAbsoluteUrl("/sitemap.xml"),
   };
 }
