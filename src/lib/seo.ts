@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 const rawSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.dnd-conseils.fr";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.dndconseils.fr";
 
 const siteUrl = rawSiteUrl.replace(/\/$/, "");
 
