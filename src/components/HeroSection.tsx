@@ -61,7 +61,7 @@ export default function HeroSection() {
             className="mx-auto mb-7 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/75 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#9a8065] shadow-[0_12px_35px_rgba(0,0,0,0.06)] backdrop-blur-xl lg:mx-0"
           >
             <ShieldCheck className="h-4 w-4" />
-            Conseil travaux indépendant
+            Pour les particuliers
           </motion.div>
 
           <motion.h1
@@ -72,11 +72,11 @@ export default function HeroSection() {
               duration: 0.85,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto max-w-5xl text-4xl font-semibold leading-[0.95] tracking-[-0.055em] text-[#111] sm:text-5xl md:text-6xl lg:mx-0 lg:text-[5.65rem]"
+            className="mx-auto max-w-5xl text-4xl font-semibold leading-[0.95] tracking-[-0.055em] text-[#111] sm:text-5xl md:text-6xl lg:mx-0 lg:text-[4.35rem]"
           >
-            Une méthode pour
+            Conseil travaux indépendant
             <span className="block bg-gradient-to-r from-[#8f7358] via-[#b49a7c] to-[#5f4937] bg-clip-text text-transparent">
-              maîtriser vos travaux.
+              pour réussir votre rénovation.
             </span>
           </motion.h1>
 
