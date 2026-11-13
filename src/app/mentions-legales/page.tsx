@@ -12,11 +12,15 @@ const sections = [
     id: "editeur",
     title: "1. Éditeur du site",
     items: [
-      ["Raison sociale", "DND Conseils"],
-      ["Statut", "Auto-entrepreneur"],
-      ["SIRET", "[À compléter]"],
-      ["Responsable de publication", "Denis — DND Conseils"],
-      ["Adresse", "134 Route de Glandelles, 77167 Bagneaux-sur-Loing"],
+      ["Dénomination sociale", "DND CONSEIL"],
+      ["Nom commercial", "DND Conseils"],
+      ["Forme juridique", "Société par actions simplifiée à associé unique (SASU)"],
+      ["Capital social", "1 000,00 €"],
+      ["RCS", "132 529 637 R.C.S. Melun"],
+      ["SIREN", "132 529 637"],
+      ["EUID", "FR7702.132529637"],
+      ["Siège social", "134 Route de Glandelles, 77167 Bagneaux-sur-Loing"],
+      ["Directeur de la publication", "Denis Nouaille-Degorce, Président"],
       ["Téléphone", "+33 6 04 52 24 05"],
       ["Email", "dndconseil75@gmail.com"],
       ["Site", "www.dndconseils.fr"],
@@ -34,17 +38,17 @@ const sections = [
   {
     id: "propriete",
     title: "3. Propriété intellectuelle",
-    text: "L'ensemble des contenus diffusés sur ce site (textes, visuels, logos, structure, organisation) est protégé par le droit de la propriété intellectuelle et appartient à DND Conseils ou à ses ayants droit. Toute reproduction, représentation, adaptation ou exploitation partielle ou totale des contenus, par quelque procédé que ce soit, sans autorisation préalable et écrite de DND Conseils, est strictement interdite et constituerait une contrefaçon au sens des articles L.335-2 et suivants du Code de la propriété intellectuelle.",
+    text: "L'ensemble des contenus diffusés sur ce site (textes, visuels, logos, structure, organisation) est protégé par le droit de la propriété intellectuelle et appartient à la société DND CONSEIL ou à ses ayants droit. Toute reproduction, représentation, adaptation ou exploitation partielle ou totale des contenus, par quelque procédé que ce soit, sans autorisation préalable et écrite de DND CONSEIL, est strictement interdite et constituerait une contrefaçon au sens des articles L.335-2 et suivants du Code de la propriété intellectuelle.",
   },
   {
     id: "responsabilite",
     title: "4. Responsabilité",
-    text: "Les informations publiées sur ce site sont fournies à titre indicatif et à des fins d'information générale. Elles ne constituent pas un conseil personnalisé et ne sauraient engager la responsabilité de DND Conseils en l'absence d'une mission formellement confiée. DND Conseils ne saurait être tenu responsable des dommages directs ou indirects résultant de l'utilisation du site ou de l'impossibilité d'y accéder, ni des erreurs ou omissions dans les contenus publiés.",
+    text: "Les informations publiées sur ce site sont fournies à titre indicatif et à des fins d'information générale. Elles ne constituent pas un conseil personnalisé et ne sauraient engager la responsabilité de DND CONSEIL en l'absence d'une mission formellement confiée. DND CONSEIL ne saurait être tenue responsable des dommages directs ou indirects résultant de l'utilisation du site ou de l'impossibilité d'y accéder, ni des erreurs ou omissions dans les contenus publiés.",
   },
   {
     id: "liens",
     title: "5. Liens hypertextes",
-    text: "Le site peut contenir des liens vers des sites tiers. DND Conseils ne contrôle pas le contenu de ces sites et n'en assume aucune responsabilité. La création de liens hypertextes pointant vers le site www.dnd-conseils.fr est soumise à autorisation préalable.",
+    text: "Le site peut contenir des liens vers des sites tiers. DND Conseils ne contrôle pas le contenu de ces sites et n'en assume aucune responsabilité. La création de liens hypertextes pointant vers le site www.dndconseils.fr est soumise à autorisation préalable.",
   },
   {
     id: "droit",
@@ -70,7 +74,7 @@ export default function MentionsLegalesPage() {
               Mentions légales
             </h1>
             <p className="mt-3 text-sm text-[#7a7068]">
-              Dernière mise à jour : juin 2025 · Site édité par DND Conseils
+              Dernière mise à jour : novembre 2026 · Site édité par DND CONSEIL (SASU)
             </p>
           </div>
 

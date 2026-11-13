@@ -11,7 +11,7 @@ const sections = [
   {
     id: "responsable",
     title: "1. Responsable du traitement",
-    text: "Le responsable du traitement des données personnelles collectées via ce site est :\n\nDND Conseils — Denis\nEmail : dndconseil75@gmail.com\nTéléphone : +33 6 04 52 24 05",
+    text: "Le responsable du traitement des données personnelles collectées via ce site est :\n\nDND CONSEIL (nom commercial : DND Conseils), SASU au capital de 1 000 €\nRCS Melun 132 529 637\nSiège social : 134 Route de Glandelles, 77167 Bagneaux-sur-Loing\nReprésentée par Denis Nouaille-Degorce, Président\nEmail : dndconseil75@gmail.com\nTéléphone : +33 6 04 52 24 05",
   },
   {
     id: "donnees",
@@ -32,12 +32,12 @@ const sections = [
   {
     id: "destinataires",
     title: "4. Destinataires des données",
-    text: "Les données collectées sont traitées uniquement par DND Conseils et ne sont jamais vendues, louées ou cédées à des tiers à des fins commerciales. Elles peuvent être transmises à des prestataires techniques strictement nécessaires au fonctionnement du service (hébergement, messagerie) dans le cadre d'accords de confidentialité appropriés.",
+    text: "Les données collectées sont traitées uniquement par DND CONSEIL et ne sont jamais vendues, louées ou cédées à des tiers à des fins commerciales. Elles sont accessibles, pour le strict besoin du service et en qualité de sous-traitants au sens de l'article 28 du RGPD, aux prestataires techniques suivants :\n\n• Vercel Inc. — hébergement du site\n• Supabase Inc. — base de données des demandes de contact\n• Resend (Plus Five Five, Inc.) — envoi des emails de notification et de confirmation",
   },
   {
     id: "transferts",
     title: "5. Transferts hors Union européenne",
-    text: "Le site est hébergé par Vercel Inc. (États-Unis). Ces transferts sont encadrés par les Clauses Contractuelles Types de la Commission européenne, conformément à l'article 46 du RGPD. Aucune autre donnée n'est transférée hors de l'Union européenne.",
+    text: "Certains prestataires (Vercel, Supabase et Resend) sont des sociétés établies aux États-Unis. Les transferts de données qui peuvent en résulter sont encadrés par le cadre de protection des données UE–États-Unis (Data Privacy Framework, art. 45 du RGPD) lorsque le prestataire y est certifié et, à défaut, par les Clauses Contractuelles Types de la Commission européenne (art. 46 du RGPD).",
   },
   {
     id: "droits",
@@ -55,12 +55,12 @@ const sections = [
   {
     id: "cookies",
     title: "7. Cookies et traceurs",
-    text: "Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement (session, sécurité). Aucun cookie publicitaire, de profilage ou de suivi tiers n'est déposé sans votre consentement. Si des outils d'analyse d'audience venaient à être ajoutés, une demande de consentement explicite vous serait présentée conformément à la délibération CNIL n° 2020-091.",
+    text: "Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement (session et sécurité de l'espace d'administration), exemptés de consentement. Aucun cookie publicitaire, de profilage ou de suivi tiers n'est déposé sans votre consentement. Si des outils d'analyse d'audience venaient à être ajoutés, une demande de consentement explicite vous serait présentée conformément à la délibération CNIL n° 2020-091.",
   },
   {
     id: "securite",
     title: "8. Sécurité",
-    text: "DND Conseils met en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données contre tout accès non autorisé, perte, altération ou divulgation. Les données transmises via le formulaire de contact sont acheminées via des connexions sécurisées (HTTPS/TLS).",
+    text: "DND CONSEIL met en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données contre tout accès non autorisé, perte, altération ou divulgation. Les données transmises via le formulaire de contact sont acheminées via des connexions sécurisées (HTTPS/TLS).",
   },
   {
     id: "cnil",
@@ -86,7 +86,7 @@ export default function ConfidentialitePage() {
               Politique de confidentialité
             </h1>
             <p className="mt-3 text-sm text-[#7a7068]">
-              Dernière mise à jour : juin 2025 · Conforme au Règlement (UE) 2016/679
+              Dernière mise à jour : novembre 2026 · Conforme au Règlement (UE) 2016/679
             </p>
           </div>
 
