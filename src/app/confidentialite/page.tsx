@@ -32,12 +32,12 @@ const sections = [
   {
     id: "destinataires",
     title: "4. Destinataires des données",
-    text: "Les données collectées sont traitées uniquement par DND CONSEIL et ne sont jamais vendues, louées ou cédées à des tiers à des fins commerciales. Elles sont accessibles, pour le strict besoin du service et en qualité de sous-traitants au sens de l'article 28 du RGPD, aux prestataires techniques suivants :\n\n• Vercel Inc. — hébergement du site\n• Supabase Inc. — base de données des demandes de contact\n• Resend (Plus Five Five, Inc.) — envoi des emails de notification et de confirmation",
+    text: "Les données collectées sont traitées uniquement par DND CONSEIL et ne sont jamais vendues, louées ou cédées à des tiers à des fins commerciales. Elles sont accessibles, pour le strict besoin du service et en qualité de sous-traitants au sens de l'article 28 du RGPD, aux prestataires techniques suivants :\n\n• Vercel Inc. — hébergement du site\n• Supabase Inc. — base de données des demandes de contact, hébergée dans l'Union européenne (Irlande)\n• Resend (Plus Five Five, Inc.) — envoi des emails de notification et de confirmation",
   },
   {
     id: "transferts",
     title: "5. Transferts hors Union européenne",
-    text: "Certains prestataires (Vercel, Supabase et Resend) sont des sociétés établies aux États-Unis. Les transferts de données qui peuvent en résulter sont encadrés par le cadre de protection des données UE–États-Unis (Data Privacy Framework, art. 45 du RGPD) lorsque le prestataire y est certifié et, à défaut, par les Clauses Contractuelles Types de la Commission européenne (art. 46 du RGPD).",
+    text: "Les demandes de contact sont stockées dans l'Union européenne (Irlande). Toutefois, l'hébergeur du site (Vercel) et le service d'envoi d'emails (Resend) sont des sociétés établies aux États-Unis. Les transferts de données qui peuvent en résulter sont encadrés par le cadre de protection des données UE–États-Unis (Data Privacy Framework, art. 45 du RGPD) lorsque le prestataire y est certifié et, à défaut, par les Clauses Contractuelles Types de la Commission européenne (art. 46 du RGPD).",
   },
   {
     id: "droits",
