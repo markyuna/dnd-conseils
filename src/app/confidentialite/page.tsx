@@ -1,11 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { generateSeo } from "@/lib/seo";
 
-export const metadata = {
-  title: "Politique de confidentialité | DND Conseils",
-  description: "Politique de confidentialité et traitement des données personnelles de DND Conseils, conformément au RGPD.",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = generateSeo({
+  title: "Politique de confidentialité",
+  description:
+    "Politique de confidentialité et traitement des données personnelles de DND Conseils, conformément au RGPD.",
+  path: "/confidentialite",
+  noIndex: true,
+});
 
 const sections = [
   {

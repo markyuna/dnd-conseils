@@ -1,17 +1,13 @@
 // src/app/layout.tsx
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Footer from "@/components/Footer";
 import HelpBot from "@/components/HelpBot";
 import JsonLd from "@/components/seo/JsonLd";
-import {
-  organizationSchema,
-  professionalServiceSchema,
-  websiteSchema,
-} from "@/lib/schema";
-import { generateSeo } from "@/lib/seo";
+import { siteGraphSchema } from "@/lib/schema";
+import { rootMetadata, seoConfig } from "@/lib/seo";
 
 import "./globals.css";
 
@@ -27,23 +23,11 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = generateSeo({
-  title: "Conseil indépendant en travaux et rénovation",
-  description:
-    "DND Conseils accompagne les particuliers avant leurs travaux de rénovation : analyse de projet, conseils personnalisés, étude gratuite et aide à la décision avant de s’engager.",
-  path: "/",
-  keywords: [
-    "DND Conseils",
-    "conseil travaux",
-    "conseil rénovation",
-    "accompagnement travaux",
-    "étude gratuite travaux",
-    "analyse devis travaux",
-    "rénovation appartement",
-    "rénovation maison",
-    "conseiller indépendant travaux",
-  ],
-});
+export const metadata: Metadata = rootMetadata;
+
+export const viewport: Viewport = {
+  themeColor: seoConfig.themeColor,
+};
 
 export default function RootLayout({
   children,
@@ -56,16 +40,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-screen bg-[#f8f5f2] text-[#1a1a1a]">
-        <JsonLd
-          data={[
-            organizationSchema(),
-            professionalServiceSchema(),
-            websiteSchema(),
-          ]}
-        />
+        <JsonLd data={siteGraphSchema()} />
 
         <div className="flex min-h-screen flex-col">
-          <main className="flex-1">{children}</main>
+          {/* Chaque page rend son propre <main> : ici un simple conteneur. */}
+          <div className="flex-1">{children}</div>
 
           <Footer />
         </div>

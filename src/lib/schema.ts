@@ -1,6 +1,11 @@
 // src/lib/schema.ts
+//
+// Données structurées schema.org (JSON-LD).
+// Les entités globales (entreprise, site, fondateur) sont reliées par des `@id`
+// stables afin que Google les comprenne comme un seul « graphe de connaissance ».
 
-import { getAbsoluteUrl, seoConfig } from "@/lib/seo";
+import { currentOfferIds, offers } from "@/lib/offers";
+import { businessInfo, getAbsoluteUrl, seoConfig } from "@/lib/seo";
 
 type BreadcrumbItem = {
   name: string;
@@ -12,60 +17,211 @@ type FaqItem = {
   answer: string;
 };
 
-export function organizationSchema() {
+export const schemaIds = {
+  organization: `${seoConfig.siteUrl}/#organization`,
+  website: `${seoConfig.siteUrl}/#website`,
+  founder: `${seoConfig.siteUrl}/#founder`,
+  logo: `${seoConfig.siteUrl}/#logo`,
+};
+
+function areaServedSchema() {
+  return businessInfo.areaServed.map((name) => {
+    if (name === "France") return { "@type": "Country", name };
+    if (name === "Paris") return { "@type": "City", name };
+    return { "@type": "AdministrativeArea", name };
+  });
+}
+
+function offerCatalogSchema() {
   return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: seoConfig.siteName,
-    url: seoConfig.siteUrl,
-    logo: getAbsoluteUrl("/logo.webp"),
-    description:
-      "DND Conseils accompagne les particuliers avant leurs travaux de rénovation avec un regard indépendant, structuré et stratégique.",
-    telephone: "+33604522405",
-    email: "dndconseil75@gmail.com",
-    sameAs: ["https://www.instagram.com/dnd_conseil/"],
+    "@type": "OfferCatalog",
+    name: "Formules et packs DND Conseils",
+    itemListElement: currentOfferIds.map((id) => {
+      const offer = offers[id];
+      const hasPrice = typeof offer.minPrice === "number";
+
+      return {
+        "@type": "Offer",
+        name: offer.title,
+        url: getAbsoluteUrl(`/devis?offre=${id}`),
+        itemOffered: {
+          "@type": "Service",
+          name: offer.title,
+          provider: { "@id": schemaIds.organization },
+        },
+        ...(hasPrice
+          ? {
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "EUR",
+                minPrice: offer.minPrice,
+                ...(offer.maxPrice ? { maxPrice: offer.maxPrice } : {}),
+                valueAddedTaxIncluded: false,
+              },
+            }
+          : {}),
+      };
+    }),
   };
 }
 
-export function professionalServiceSchema() {
+function organizationNode() {
   return {
-    "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": schemaIds.organization,
     name: seoConfig.siteName,
+    alternateName: businessInfo.legalName,
+    legalName: businessInfo.legalName,
     url: seoConfig.siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      "@id": schemaIds.logo,
+      url: getAbsoluteUrl("/logo.webp"),
+      width: 560,
+      height: 240,
+      caption: seoConfig.siteName,
+    },
     image: getAbsoluteUrl(seoConfig.defaultImage),
     description:
-      "Conseil indépendant pour particuliers avant travaux de rénovation, analyse de projet, étude gratuite et accompagnement à la décision.",
-    telephone: "+33604522405",
-    email: "dndconseil75@gmail.com",
-    sameAs: ["https://www.instagram.com/dnd_conseil/"],
-    areaServed: [
-      {
-        "@type": "Country",
-        name: "France",
-      },
-      {
-        "@type": "AdministrativeArea",
-        name: "Île-de-France",
-      },
-    ],
-    serviceType: [
-      "Conseil travaux",
-      "Accompagnement rénovation",
-      "Étude gratuite avant travaux",
-      "Analyse de devis travaux",
-      "Aide à la décision avant rénovation",
-    ],
+      "Conseiller travaux indépendant pour particuliers : analyse de devis, accompagnement rénovation, étude gratuite et aide à la décision avant travaux. Aucune commission, aucun partenariat avec des entreprises.",
+    slogan: "Une méthode pour maîtriser vos travaux.",
+    telephone: businessInfo.telephone,
+    email: businessInfo.email,
+    address: {
+      "@type": "PostalAddress",
+      ...businessInfo.address,
+    },
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "SIREN",
+      value: businessInfo.siren,
+    },
+    taxID: businessInfo.siren,
+    founder: { "@id": schemaIds.founder },
+    sameAs: businessInfo.sameAs,
+    areaServed: areaServedSchema(),
+    knowsLanguage: "fr",
     priceRange: "€€",
+    currenciesAccepted: "EUR",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: businessInfo.telephone,
+      email: businessInfo.email,
+      availableLanguage: ["French"],
+      areaServed: "FR",
+    },
+    knowsAbout: [
+      "Rénovation de maison",
+      "Rénovation d'appartement",
+      "Analyse de devis travaux",
+      "Accompagnement de projet de rénovation",
+      "Budget travaux",
+      "Suivi de chantier",
+    ],
+    hasOfferCatalog: offerCatalogSchema(),
   };
 }
 
-export function websiteSchema() {
+function websiteNode() {
+  return {
+    "@type": "WebSite",
+    "@id": schemaIds.website,
+    name: seoConfig.siteName,
+    alternateName: businessInfo.legalName,
+    url: seoConfig.siteUrl,
+    inLanguage: seoConfig.language,
+    publisher: { "@id": schemaIds.organization },
+  };
+}
+
+function founderNode() {
+  return {
+    "@type": "Person",
+    "@id": schemaIds.founder,
+    name: businessInfo.founder.name,
+    jobTitle: businessInfo.founder.jobTitle,
+    image: getAbsoluteUrl(businessInfo.founder.image),
+    url: getAbsoluteUrl("/a-propos"),
+    worksFor: { "@id": schemaIds.organization },
+  };
+}
+
+/** Graphe global injecté sur toutes les pages (layout racine). */
+export function siteGraphSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: seoConfig.siteName,
-    url: seoConfig.siteUrl,
+    "@graph": [organizationNode(), websiteNode(), founderNode()],
+  };
+}
+
+type WebPageInput = {
+  path: string;
+  name: string;
+  description: string;
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+};
+
+export function webPageSchema({
+  path,
+  name,
+  description,
+  type = "WebPage",
+}: WebPageInput) {
+  const url = getAbsoluteUrl(path);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: seoConfig.language,
+    isPartOf: { "@id": schemaIds.website },
+    about: { "@id": schemaIds.organization },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: getAbsoluteUrl(seoConfig.defaultImage),
+    },
+    ...(type === "AboutPage" ? { mainEntity: { "@id": schemaIds.founder } } : {}),
+  };
+}
+
+type ServiceInput = {
+  path: string;
+  name: string;
+  description: string;
+  serviceType: string;
+};
+
+export function serviceSchema({
+  path,
+  name,
+  description,
+  serviceType,
+}: ServiceInput) {
+  const url = getAbsoluteUrl(path);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name,
+    serviceType,
+    description,
+    url,
+    provider: { "@id": schemaIds.organization },
+    areaServed: areaServedSchema(),
+    audience: {
+      "@type": "PeopleAudience",
+      audienceType: "Particuliers",
+    },
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: getAbsoluteUrl("/devis"),
+      servicePhone: businessInfo.telephone,
+    },
   };
 }
 

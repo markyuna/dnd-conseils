@@ -1,11 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { generateSeo } from "@/lib/seo";
 
-export const metadata = {
-  title: "Mentions légales | DND Conseils",
-  description: "Mentions légales du site DND Conseils — éditeur, hébergement, propriété intellectuelle et responsabilité.",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = generateSeo({
+  title: "Mentions légales",
+  description:
+    "Mentions légales du site DND Conseils — éditeur, hébergement, propriété intellectuelle et responsabilité.",
+  path: "/mentions-legales",
+  noIndex: true,
+});
 
 const sections = [
   {

@@ -2,79 +2,54 @@
 
 import type { MetadataRoute } from "next";
 
-import { seoConfig } from "@/lib/seo";
+import { getAbsoluteUrl } from "@/lib/seo";
 import { seoServicePages } from "@/lib/seo-pages";
 
-type ChangeFrequency =
-  | "always"
-  | "hourly"
-  | "daily"
-  | "weekly"
-  | "monthly"
-  | "yearly"
-  | "never";
+type SitemapEntry = MetadataRoute.Sitemap[number];
 
-type SitemapRoute = {
-  path: string;
-  changeFrequency: ChangeFrequency;
-  priority: number;
-};
+/**
+ * Date de dernière modification des pages statiques.
+ * À mettre à jour lorsque leur contenu change réellement : Google n'utilise
+ * `lastmod` que s'il est fiable (une date « maintenant » à chaque build est ignorée).
+ */
+const STATIC_PAGES_UPDATED_AT = "2026-11-13";
 
-function createUrl(path: string) {
-  if (!path || path === "/") {
-    return seoConfig.siteUrl;
-  }
-
-  return `${seoConfig.siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
-}
-
-const staticRoutes: SitemapRoute[] = [
+const staticRoutes: SitemapEntry[] = [
   {
-    path: "/",
+    url: getAbsoluteUrl("/"),
+    lastModified: STATIC_PAGES_UPDATED_AT,
     changeFrequency: "weekly",
     priority: 1,
+    images: [getAbsoluteUrl("/images/og-dnd-conseils.jpg")],
   },
   {
-    path: "/a-propos",
+    url: getAbsoluteUrl("/devis"),
+    lastModified: STATIC_PAGES_UPDATED_AT,
     changeFrequency: "monthly",
-    priority: 0.8,
+    priority: 0.9,
   },
   {
-    path: "/devis",
-    changeFrequency: "weekly",
-    priority: 0.75,
+    url: getAbsoluteUrl("/a-propos"),
+    lastModified: STATIC_PAGES_UPDATED_AT,
+    changeFrequency: "monthly",
+    priority: 0.7,
+    images: [getAbsoluteUrl("/apropos/denis.webp")],
   },
 ];
 
-const seoRoutes: SitemapRoute[] = seoServicePages.map((page) => ({
-  path: `/${page.slug}`,
+const serviceRoutes: SitemapEntry[] = seoServicePages.map((page) => ({
+  url: getAbsoluteUrl(`/${page.slug}`),
+  lastModified: page.updatedAt,
   changeFrequency: "monthly",
-  priority: 0.72,
+  priority: 0.8,
 }));
 
-function uniqueRoutes(routes: SitemapRoute[]) {
+export default function sitemap(): MetadataRoute.Sitemap {
   const seen = new Set<string>();
 
-  return routes.filter((route) => {
-    const normalizedPath = route.path === "" ? "/" : route.path;
-
-    if (seen.has(normalizedPath)) {
-      return false;
-    }
-
-    seen.add(normalizedPath);
+  return [...staticRoutes, ...serviceRoutes].filter((entry) => {
+    if (seen.has(entry.url)) return false;
+    seen.add(entry.url);
     return true;
   });
-}
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-  const routes = uniqueRoutes([...staticRoutes, ...seoRoutes]);
-
-  return routes.map((route) => ({
-    url: createUrl(route.path),
-    lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
 }

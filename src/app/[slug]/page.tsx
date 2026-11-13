@@ -1,12 +1,18 @@
 // src/app/[slug]/page.tsx
 
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, CheckCircle2, MessageCircle } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
 import JsonLd from "@/components/seo/JsonLd";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  faqSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 import { generateSeo } from "@/lib/seo";
 import { getSeoServicePage, getRelatedServicePages, seoServicePages } from "@/lib/seo-pages";
 
@@ -20,7 +26,7 @@ export async function generateStaticParams() {
   return seoServicePages.map((page) => ({ slug: page.slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = getSeoServicePage(slug);
   if (!page) return {};
@@ -42,6 +48,17 @@ export default async function SeoServicePage({ params }: Props) {
     <>
       <JsonLd
         data={[
+          webPageSchema({
+            path: `/${page.slug}`,
+            name: `${page.metaTitle} | DND Conseils`,
+            description: page.description,
+          }),
+          serviceSchema({
+            path: `/${page.slug}`,
+            name: page.title,
+            description: page.description,
+            serviceType: page.serviceType,
+          }),
           breadcrumbSchema([
             { name: "Accueil", path: "/" },
             { name: page.title, path: `/${page.slug}` },
@@ -141,6 +158,29 @@ export default async function SeoServicePage({ params }: Props) {
                 </span>
                 <p className="text-sm leading-6 text-[#3a3028]">{benefit}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contenu détaillé */}
+        <section className="px-4 pb-20 sm:px-6">
+          <div className="mx-auto max-w-3xl space-y-14">
+            {page.sections.map((section) => (
+              <article key={section.heading}>
+                <h2 className="text-2xl font-semibold leading-tight tracking-[-0.035em] text-[#17130f] md:text-3xl">
+                  {section.heading}
+                </h2>
+                <div className="mt-5 space-y-4">
+                  {section.paragraphs.map((paragraph) => (
+                    <p
+                      key={paragraph.slice(0, 48)}
+                      className="text-base leading-8 text-[#5f544a]"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </section>

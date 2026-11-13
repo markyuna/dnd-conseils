@@ -24,6 +24,8 @@ RESEND_API_KEY=
 DND_FROM_EMAIL=                 # defaults to onboarding@resend.dev
 DND_ADMIN_EMAIL=                # defaults to dndconseils@gmail.com
 NEXT_PUBLIC_SITE_URL=           # canonical URL for SEO/OG
+GOOGLE_SITE_VERIFICATION=       # optional — Google Search Console meta tag token
+BING_SITE_VERIFICATION=         # optional — Bing Webmaster Tools meta tag token
 ```
 
 ## Architecture
@@ -44,7 +46,7 @@ NEXT_PUBLIC_SITE_URL=           # canonical URL for SEO/OG
 
 ### Key patterns
 
-**SEO**: All pages call `generateSeo()` from `src/lib/seo.ts` for `export const metadata`. Structured data (JSON-LD) is injected via `src/components/seo/JsonLd.tsx` using schemas from `src/lib/schema.ts`. To add a new SEO landing page, add an entry to `seoServicePages` in `src/lib/seo-pages.ts` — the `[slug]` dynamic route picks it up automatically (`dynamicParams = false`).
+**SEO**: The root layout uses `rootMetadata` (metadataBase, title template, verification — deliberately no canonical so children don't inherit `/`). Every indexable page must call `generateSeo()` from `src/lib/seo.ts` with its own `path` (client-component pages declare it in a sibling `layout.tsx`, e.g. `/a-propos`, `/devis`). Business NAP data lives in `businessInfo` (`src/lib/seo.ts`) and must match the legal notice/footer. Structured data (JSON-LD) is injected via `src/components/seo/JsonLd.tsx` using schemas from `src/lib/schema.ts`. The global JSON-LD graph (`siteGraphSchema`: ProfessionalService + WebSite + founder Person, linked by `@id`) is injected by the root layout. To add a new SEO landing page, add an entry to `seoServicePages` in `src/lib/seo-pages.ts` (including long-form `sections` and `updatedAt`) — the `[slug]` dynamic route and the sitemap pick it up automatically (`dynamicParams = false`).
 
 **Supabase — two clients**:
 - `src/lib/supabase.ts` — anon key, safe for client components
