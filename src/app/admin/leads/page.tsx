@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 
+import AdminNav from "@/components/admin/AdminNav";
 import Navbar from "@/components/Navbar";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { supabaseAdmin } from "@/lib/supabase-admin";
@@ -159,8 +160,12 @@ export default async function AdminLeadsPage() {
               </p>
             </div>
 
-            <div className="rounded-full bg-white px-5 py-3 text-sm font-medium text-[#151515] shadow-lg shadow-black/10">
-              {leads.length} demande{leads.length > 1 ? "s" : ""}
+            <div className="flex flex-wrap items-center gap-3">
+              <AdminNav active="leads" />
+
+              <div className="rounded-full bg-white px-5 py-3 text-sm font-medium text-[#151515] shadow-lg shadow-black/10">
+                {leads.length} demande{leads.length > 1 ? "s" : ""}
+              </div>
             </div>
           </header>
 

@@ -59,7 +59,7 @@ const sections = [
   {
     id: "cookies",
     title: "7. Cookies et traceurs",
-    text: "Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement (session et sécurité de l'espace d'administration), exemptés de consentement. Aucun cookie publicitaire, de profilage ou de suivi tiers n'est déposé sans votre consentement. Si des outils d'analyse d'audience venaient à être ajoutés, une demande de consentement explicite vous serait présentée conformément à la délibération CNIL n° 2020-091.",
+    text: "Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement (session et sécurité de l'espace d'administration), exemptés de consentement. Aucun cookie publicitaire, de profilage ou de suivi tiers n'est déposé sans votre consentement. Le site réalise une mesure d'audience interne et anonyme (pages vues, provenance, pays, type d'appareil), sans cookie, sans adresse IP conservée et sans recoupement entre sites ni entre jours, strictement limitée à la production de statistiques de fréquentation pour l'éditeur ; ces données sont conservées 13 mois maximum. Vous pouvez vous y opposer en activant l'option « Ne pas me suivre » (Do Not Track) de votre navigateur. Tout outil d'analyse tiers ou publicitaire nécessiterait votre consentement explicite, conformément à la délibération CNIL n° 2020-091.",
   },
   {
     id: "securite",

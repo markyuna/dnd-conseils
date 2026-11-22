@@ -1,5 +1,7 @@
 // src/services/contact.ts
 
+import { trackEvent } from "@/lib/track";
+
 type ContactRequestPayload = {
   name: string;
   email: string;
@@ -48,6 +50,8 @@ export async function createContactRequest(payload: ContactRequestPayload) {
         "Impossible d’envoyer la demande pour le moment."
     );
   }
+
+  trackEvent("lead_submitted");
 
   return data;
 }

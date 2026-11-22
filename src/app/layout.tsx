@@ -3,6 +3,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import PageViewTracker from "@/components/analytics/PageViewTracker";
 import Footer from "@/components/Footer";
 import HelpBot from "@/components/HelpBot";
 import JsonLd from "@/components/seo/JsonLd";
@@ -50,6 +51,7 @@ export default function RootLayout({
         </div>
 
         <HelpBot />
+        <PageViewTracker />
       </body>
     </html>
   );
