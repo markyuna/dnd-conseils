@@ -12,6 +12,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 type Row = { label: string; visitors?: number; pageviews?: number; count?: number };
+type FunnelStep = { step: string; label: string; visitors: number };
 type Summary = {
   pageviews: number;
   visitors: number;
@@ -135,6 +136,38 @@ function RankList({
   );
 }
 
+function FunnelChart({ steps }: { steps: FunnelStep[] }) {
+  const top = Math.max(steps[0]?.visitors ?? 0, 1);
+
+  return (
+    <ul className="space-y-4">
+      {steps.map((s, i) => {
+        const prev = i > 0 ? steps[i - 1].visitors : null;
+        const fromPrev = prev ? Math.round((s.visitors / prev) * 100) : null;
+        return (
+          <li key={s.step}>
+            <div className="mb-1 flex items-baseline justify-between gap-3 text-sm">
+              <span className="text-[#303030]">{s.label}</span>
+              <span className="tabular-nums text-[#17130f]">
+                <strong className="font-semibold">{nf(s.visitors)}</strong>
+                {fromPrev !== null && (
+                  <span className="ml-2 text-xs text-black/45">{fromPrev} % de l’étape précédente</span>
+                )}
+              </span>
+            </div>
+            <div className="h-3 overflow-hidden rounded-full bg-[#f6f2ee]">
+              <div
+                className="h-full rounded-full bg-[#17130f]"
+                style={{ width: `${Math.max((s.visitors / top) * 100, s.visitors ? 2 : 0)}%` }}
+              />
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 function DailyChart({ data }: { data: Summary["by_day"] }) {
   const max = Math.max(...data.map((d) => d.pageviews), 1);
   const dense = data.length > 45;
@@ -227,7 +260,7 @@ export default async function AdminTraficPage({
   const to = new Date();
   const from = new Date(to.getTime() - days * 24 * 60 * 60 * 1000);
 
-  const [summaryRes, leadsRes] = await Promise.all([
+  const [summaryRes, leadsRes, funnelRes] = await Promise.all([
     supabaseAdmin.rpc("analytics_summary", {
       p_from: from.toISOString(),
       p_to: to.toISOString(),
@@ -236,10 +269,15 @@ export default async function AdminTraficPage({
       .from("contact_requests")
       .select("id", { count: "exact", head: true })
       .gte("created_at", from.toISOString()),
+    supabaseAdmin.rpc("analytics_funnel", {
+      p_from: from.toISOString(),
+      p_to: to.toISOString(),
+    }),
   ]);
 
   const summary = summaryRes.data as Summary | null;
   const leads = leadsRes.count ?? 0;
+  const funnel = (funnelRes.data as FunnelStep[] | null) ?? null;
 
   return (
     <>
@@ -309,6 +347,12 @@ export default async function AdminTraficPage({
               <Card title="Évolution">
                 <DailyChart data={summary.by_day} />
               </Card>
+
+              {funnel && (
+                <Card title="Tunnel de conversion">
+                  <FunnelChart steps={funnel} />
+                </Card>
+              )}
 
               <div className="grid gap-6 lg:grid-cols-2">
                 <Card title="Pages les plus vues">
